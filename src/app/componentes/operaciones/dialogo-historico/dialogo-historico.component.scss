@@ -1,0 +1,23 @@
+.itm-input {
+  flex: 1;
+}
+
+.itm-card-list {
+  margin: 1.2rem 1rem;
+
+  .itm-actualizacion {
+    display: flex;
+    align-items: center;
+    margin-top: 1.2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    padding-bottom: 1rem;
+
+    .itm-input {
+      flex: 1;
+    }
+
+    .itm-btn {
+      margin-left: 1rem;
+    }
+  }
+}

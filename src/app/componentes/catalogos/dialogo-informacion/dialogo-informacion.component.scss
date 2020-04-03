@@ -1,0 +1,42 @@
+.wrapper {
+  margin: 1rem 0;
+}
+
+.inner-wrapper {
+  display: grid;
+  grid-row-gap: 1rem;
+}
+
+.itm-tecnicos,
+.itm-carac {
+  display: flex;
+  align-items: baseline;
+
+  .itm-input {
+    flex: 1;
+    margin-right: 0.75rem;
+  }
+}
+
+.nRow {
+  max-width: 10rem;
+}
+
+.actionsRow {
+  max-width: 5rem;
+}
+
+.estados-list {
+  max-height: 15rem;
+  overflow: auto;
+}
+
+.nombreRow {
+  display: grid;
+}
+
+.caraTitulo {
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}

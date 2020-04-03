@@ -1,0 +1,42 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Soporte Técnico</mat-card-title>
+    </mat-card-header>
+    <div class="wrapper">
+        <mat-divider>
+        </mat-divider>
+        <div class="sec-datos">
+            En Armstrong entendemos lo frustrante que es que algo falle, por eso intentamos ofrecer un servicio de soporte de calidad. 
+            Porque es en esos momentos dónde nos lo jugamos todo. Si conseguimos dejarte satisfecho cuando algo no funciona, 
+            seguramente recuperarás las ganas de seguir usando nuestros servicios.
+        </div>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div>
+    <mat-carousel
+        timings="250ms ease-in"
+        [autoplay]="true"
+        interval="1500"
+        color="accent"
+        maxWidth="auto"
+        proportion="30"
+        slides="3"
+        [loop]="true"
+        [hideArrows]="false"
+        [hideIndicators]="false"
+        [useKeyboard]="true"
+        [useMouseWheel]="false"
+        orientation="ltr"
+    >
+     <mat-carousel-slide
+        #matCarouselSlide
+        *ngFor="let slide of cards; let i = index"
+        [image]="slide.img" 
+        overlayColor="#00000040"
+        [hideOverlay]="false"
+     ></mat-carousel-slide>
+    </mat-carousel>
+  </div>
+</mat-card>

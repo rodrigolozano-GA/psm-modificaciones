@@ -1,0 +1,267 @@
+<h1 mat-dialog-title>Descripción de Cotización</h1>
+<div mat-dialog-content>
+
+    <div class="wrapper">
+
+        <h6>Datos Generales</h6>
+
+        <div class="sec-folio">
+
+            <mat-form-field class="itm-folio">
+                <input matInput placeholder="Folio" value="" disabled="true" [(value)]="cotizacion.folio" >
+            </mat-form-field>
+
+            <mat-form-field class="itm-estatus">
+                <mat-select placeholder="Estatus" name="item" [(ngModel)]="estatus" (selectionChange)="guardarCotizacion($event)" [disabled]="estatusName != 'nuevo'">
+                    <mat-option *ngFor="let estatus of estatusList" [value]="estatus.id">
+                   {{estatus.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="itm-cliente">
+                <mat-select placeholder="Cliente" name="cliente" class="" disabled="true" [(value)]="cotizacion.cliente_id">
+                    <mat-option *ngFor="let cliente of clientesList" [value]="cliente.id">
+                        {{cliente.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="itm-sucursal">
+                <mat-select placeholder="Sucursal" name="sucursal" class="itm-sucursal" disabled="true" [(value)]="cotizacion.sucursal_id">
+                    <mat-option *ngFor="let sucursal of sucursalesList" [value]="sucursal.id">
+                        {{sucursal.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+        </div>
+
+        <mat-divider>
+        </mat-divider>
+
+        <div class="sec-servicios">
+
+            <h6 class="mt-3">Descripción de producto</h6>
+
+            <mat-card class="mat-elevation-z8 mb-4 itm-lista p-0">
+                <mat-table #tableTras [dataSource]="dataSourceServ" class="list lista-traslados">
+
+                    <ng-container cdkColumnDef="codigo">
+                        <mat-header-cell *cdkHeaderCellDef  class="codigoRow"> Código </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="codigoRow">
+                            <span class="mobile-label">Código:</span>
+                            {{row.codigo}} </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef> </mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="concepto">
+                        <mat-header-cell *cdkHeaderCellDef > Concepto </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Concepto:</span>
+                            {{row.concepto}} </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="cantidad">
+                        <mat-header-cell *cdkHeaderCellDef  class="cantidadRow"> Cantidad
+                        </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="cantidadRow">
+                            <span class="mobile-label">Cantidad:</span>
+                            {{row.cantidad}}
+                        </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="precio">
+                        <mat-header-cell *cdkHeaderCellDef  class="precioURow"> P. Unitario
+                        </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="precioURow">
+                            <span class="mobile-label">P. Unitario:</span>
+                            {{row.precio | currency}}
+                        </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef>Total:</mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="importe">
+                        <mat-header-cell *cdkHeaderCellDef  class="importeRow"> Importe
+                        </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="importeRow">
+                            <span class="mobile-label">Importe:</span>
+                            {{row.precio * row.cantidad | currency}}
+                        </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef>{{getTotalProductos() | currency}}</mat-footer-cell>
+                    </ng-container>
+
+                    <mat-header-row *cdkHeaderRowDef="displayedColumnsServ"></mat-header-row>
+                    <mat-row *cdkRowDef="let row; columns: displayedColumnsServ ">
+                    </mat-row>
+                    <mat-footer-row *cdkFooterRowDef="displayedColumnsServ; sticky: true"></mat-footer-row>
+                </mat-table>
+            </mat-card>
+
+
+        </div>
+
+        <mat-divider>
+        </mat-divider>
+
+        <div class="sec-traslados">
+
+            <h6 class="mt-3">Traslados</h6>
+
+            <mat-card class="mat-elevation-z8 mb-4 itm-lista p-0">
+
+                <mat-table [dataSource]="dataSourceTras" class="lista-traslados">
+
+                    <ng-container cdkColumnDef="costo">
+                        <mat-header-cell *cdkHeaderCellDef > Costo por Km </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Costo por Km:</span>
+                            {{row.costokm | currency}} </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="origen">
+                        <mat-header-cell *cdkHeaderCellDef > Origen </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Origen:</span>
+                            {{row.origen}} </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="destino">
+                        <mat-header-cell *cdkHeaderCellDef > Destino </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Destino:</span>
+                            {{row.destino}} </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="distancia">
+                        <mat-header-cell *cdkHeaderCellDef > Distancia </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Distancia:</span>
+                            {{row.distancia}}Km </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="casetas">
+                        <mat-header-cell *cdkHeaderCellDef > Casetas </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Casetas:</span>
+                            {{row.casetas}} </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef>Total:</mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="importe">
+                        <mat-header-cell *cdkHeaderCellDef > Importe </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Importe:</span>
+                            {{row.costokm * row.distancia | currency}} </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef>{{getTotalTraslados() | currency}}</mat-footer-cell>
+                    </ng-container>
+
+
+                    <mat-header-row *cdkHeaderRowDef="displayedColumnsTras"></mat-header-row>
+                    <mat-row *cdkRowDef="let row; columns: displayedColumnsTras ">
+                    </mat-row>
+                    <mat-footer-row *cdkFooterRowDef="displayedColumnsTras; sticky: true"></mat-footer-row>
+                </mat-table>
+            </mat-card>
+
+        </div>
+
+        <mat-divider>
+        </mat-divider>
+
+        <div class="sec-viaticos">
+
+            <h6 class="mt-3">Viáticos</h6>
+
+            <mat-card class="mat-elevation-z8 itm-lista mt-3 mb-3 p-0">
+                <mat-table  [dataSource]="dataSource" class="lista-viaticos">
+
+                    <ng-container cdkColumnDef="origen">
+                        <mat-header-cell *cdkHeaderCellDef > Origen </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Origen:</span>
+                            {{row.origen}} </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="destino">
+                        <mat-header-cell *cdkHeaderCellDef > Destino </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Destino:</span>
+                            {{row.destino}} </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="alimentos">
+                        <mat-header-cell *cdkHeaderCellDef > Alimentos </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Alimentos:</span>
+                            {{row.viaticoAlimentos | currency}} </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="hospedaje">
+                        <mat-header-cell *cdkHeaderCellDef > Hospedaje </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Hospedaje:</span>
+                            {{row.viaticoHospedaje | currency}} </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="personas">
+                        <mat-header-cell *cdkHeaderCellDef > Personas </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Personas:</span>
+                            {{row.personas}} </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="dias">
+                        <mat-header-cell *cdkHeaderCellDef > Días </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Días:</span>
+                            {{row.dias}} </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="noches">
+                        <mat-header-cell *cdkHeaderCellDef > Noches </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Noches:</span>
+                            {{row.noches}} </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef>Total:</mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="importe">
+                        <mat-header-cell *cdkHeaderCellDef > Importe </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Importe:</span>
+                            {{ ((row.viaticoAlimentos + row.viaticoHospedaje)* row.personas)*row.dias | currency}}
+                        </mat-cell>
+                        <mat-footer-cell *cdkFooterCellDef>{{getTotalViaticos() | currency}}</mat-footer-cell>
+                    </ng-container>
+
+                    <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+                    </mat-row>
+                    <mat-footer-row *cdkFooterRowDef="displayedColumns; sticky: true"></mat-footer-row>
+                </mat-table>
+            </mat-card>
+
+
+        </div>
+
+    </div>
+
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-raised-button color="accent" (click)="generarPDF()">DESCARGAR PDF</button>
+    <button mat-raised-button matDialogClose color="primary" class="ml-auto">CANCELAR</button>
+</div>

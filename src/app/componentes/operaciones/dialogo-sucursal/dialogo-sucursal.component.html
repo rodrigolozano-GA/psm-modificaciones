@@ -1,0 +1,70 @@
+<h1 mat-dialog-title>Sucursal {{nombre}} </h1>
+<div mat-dialog-content>
+
+    <div class="wrapper" [formGroup]="generalForm">
+        <mat-tab-group mat-stretch-tabs>
+            <mat-tab label="Información General">
+                <div class="tab-general">
+
+                    <!-- <mat-form-field class="itm-numero">
+                        <input matInput placeholder="N°"  formControlName="numero" disabled readonly>
+                    </mat-form-field>
+
+                    <mat-form-field class="itm-nombre">
+                        <input matInput placeholder="Nombre" formControlName="nombre" disabled readonly>
+                    </mat-form-field> -->
+
+                    <mat-form-field class="itm-direccion">
+                        <input matInput placeholder="Dirección" formControlName="direccion" disabled readonly>
+                    </mat-form-field>
+
+                    <div class="itm-mapa">
+                        <agm-map class="mapa" [latitude]="lat" [longitude]="lng">
+                            <agm-marker [latitude]="latMark" [longitude]="lngMark"></agm-marker>
+                        </agm-map>
+                    </div>
+
+                </div>
+            </mat-tab>
+            <mat-tab label="Inventario">
+                <div class="tab-inventario">
+
+                    <mat-accordion class="itm-mat-list" *ngFor="let item of inventarioList">
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <label class="itm-clave">Clave: {{item.clave}}</label>
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    <label class="itm-cantidad">Cantidad: {{item.cantidad}}</label>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+                            <p class="itm-nombre">
+                                <b>Equipo</b>
+                                <span>{{item.nombre}}</span>
+                            </p>
+
+                            <p class="itm-tipo">
+                                <b>Tipo de Equipo</b>
+                                <span>{{item.tipo}}</span>
+                            </p>
+
+                            <mat-list class="">
+                                <mat-list-item *ngFor="let cara of item.caracteristicas" class="itm-caracteristica">
+                                    <h2 matLine> <b>{{cara.titulo}}</b> </h2>
+                                    <p matLine>{{cara.valor}}</p>
+                                    <mat-divider></mat-divider>
+                                </mat-list-item>
+                            </mat-list>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-raised-button matDialogClose color="primary" class="ml-auto">CERRAR</button>
+</div>

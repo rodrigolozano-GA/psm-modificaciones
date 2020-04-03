@@ -1,0 +1,76 @@
+.actionsRow {
+  max-width: 10rem;
+}
+
+.citaRow {
+  max-width: 7rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.diasRow {
+  max-width: 5rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.cdk-column-folio {
+  max-width: 8rem;
+}
+
+.verde {
+  color: white !important;
+  background-color: green;
+  border-radius: 2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 0.8rem;
+}
+
+.amarillo {
+  color: #000 !important;
+  background-color: #ffeb3b;
+  border-radius: 2rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 0.8rem;
+}
+
+.rojo {
+  color: #fff !important;
+  background-color: red;
+  border-radius: 2rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 0.8rem;
+}
+/*# sourceMappingURL=mis-servicios.component.css.map */

@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Envío de Actas</h1>
+<div mat-dialog-content>
+    <div class="wrapper">
+        <mat-table #table matSort [dataSource]="dataSource">
+
+            <ng-container cdkColumnDef="numero">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="folioRow"> Número Acta </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="folioRow">
+                    <span class="mobile-label">Número Acta:</span>
+                    {{row.numacta}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="folio">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="folioRow"> Número de Servicio
+                </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="folioRow">
+                    <span class="mobile-label">Número de Servicio:</span>
+                    {{row.servicio}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="sucursal">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Sucursal </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Sucursal:</span>
+                    {{row.cliente}} - {{row.numero_sucursal}} - {{row.sucursal}}
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+            </mat-row>
+        </mat-table>
+    </div>
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button matDialogClose color="primary" class="ml-auto">CANCELAR</button>
+    <button mat-raised-button (click)="enviar()" color="primary">ENVIAR</button>
+</div>

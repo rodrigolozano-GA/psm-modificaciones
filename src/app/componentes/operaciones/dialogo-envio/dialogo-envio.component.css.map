@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACT,SAAS,EAAE,IAAI;CAChB",
+    "sources": [
+        "dialogo-envio.component.scss"
+    ],
+    "names": [],
+    "file": "dialogo-envio.component.css"
+}

@@ -1,0 +1,65 @@
+<h1 mat-dialog-title>Registro de nuevo servicio </h1>
+<div mat-dialog-content>
+
+    <div class="wrapper">
+
+        <div class="sec-servicios">
+
+            <mat-card class="mat-elevation-z0 card-servicios">
+                <mat-form-field class="w-100 inp-codigo">
+                    <input matInput placeholder="Buscar por código" (keyup)="busqueda($event.target.value)" value="">
+                </mat-form-field>
+                <mat-table #tableTras matSort [dataSource]="dataSourceServ" class="list lista-traslados">
+
+                    <ng-container cdkColumnDef="check">
+                        <mat-header-cell *cdkHeaderCellDef class="checkRow"></mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="checkRow">
+                            <mat-checkbox color="primary" (click)="$event.stopPropagation()" [(ngModel)]="row.checked"
+                                (change)="$event ? selectionServ.toggle(row) : null" [checked]="row.checked">
+                            </mat-checkbox>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="concepto">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header class="conceptoRow"> Servicio </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="conceptoRow"> {{row.concepto}} </mat-cell>
+                    </ng-container>
+
+                <!--
+                    
+                    <ng-container cdkColumnDef="disponible">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header class="disponibleRow"> Disponible </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="disponibleRow">0 {{mapaCantidades.get(row.id)}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="utilizar">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header class="conceptoRow"> Por utilizar </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="conceptoRow"> X{{row.utilizar}} </mat-cell>
+                    </ng-container>
+
+                -->
+
+                    <ng-container cdkColumnDef="actions">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header class="cantidadRow"> Cantidad </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="cantidadRow">
+
+                            <mat-form-field class="w-100" floatLabel="never">
+                                <input type="number" matInput placeholder="Cantidad" value="" [(ngModel)]="row.cantidad" [disabled]="!selectionServ.isSelected(row)" pattern="^0*[1-9][0-9]*([0-9]+)?" required>
+                            </mat-form-field>
+
+
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *cdkHeaderRowDef="displayedColumnsServ"></mat-header-row>
+                    <mat-row *cdkRowDef="let row; columns: displayedColumnsServ ">
+                    </mat-row>
+                </mat-table>
+            </mat-card>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button matDialogClose color="primary" class="ml-auto">CANCELAR</button>
+    <button mat-raised-button (click)="registrar()" color="primary">AGREGAR</button>
+</div>

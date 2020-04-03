@@ -1,0 +1,47 @@
+/* Theme for the ripple elements.*/
+/* stylelint-disable material/no-prefixes */
+/* stylelint-enable */
+.white-icons {
+  color: #fff !important;
+}
+
+.color-icons {
+  color: #2b297e !important;
+}
+
+.logo-navbar {
+  height: 80%;
+  width: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  background-color: #fff;
+  -webkit-clip-path: circle(48% at 50.5% 50%);
+          clip-path: circle(48% at 50.5% 50%);
+}
+
+.mat-list-base {
+  padding-top: 0;
+}
+
+.mat-list-base .btn-link {
+  height: 40px;
+}
+
+.mat-list-item.active {
+  background-color: rgba(43, 41, 126, 0.54) !important;
+  color: #fff;
+}
+
+.mat-list-item.active .mat-icon-button {
+  color: #fff;
+}
+
+.btn-link:hover,
+.btn-link:visited,
+.btn-link:active,
+.btn-link:focus {
+  text-decoration: none !important;
+}
+/*# sourceMappingURL=navbar-top.component.css.map */

@@ -1,0 +1,20 @@
+<ng-container *ngIf="loged; then Home; else Login"></ng-container>
+
+<ng-template #Home>
+  <div class="layout">
+    <app-navbar-top class="topbar" (eventToggle)="sidemenu.toggle();" (eventLogOut)="getLogOut($event)"></app-navbar-top>
+    <mat-sidenav-container class="sec-content">
+      <mat-sidenav #sidemenu [opened]="screenWidth > 940" [mode]="(screenWidth > 940) ? 'side' : 'over'"
+        [disableClose]="(screenWidth > 940) ? 'true' : 'false'">
+        <app-sidenavbar [parent]="sidemenu" [wid]="screenWidth"></app-sidenavbar>
+      </mat-sidenav>
+      <mat-sidenav-content class="body-render">
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</ng-template>
+
+<ng-template #Login>
+  <app-login (eventLogin)="getLogin($event)"></app-login>
+</ng-template>

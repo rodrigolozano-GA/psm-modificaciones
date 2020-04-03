@@ -1,0 +1,12 @@
+.estatus-teme-ico {
+  max-height: 2rem;
+  max-width: 2rem;
+}
+
+.colorRow {
+  max-width: 3rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+/*# sourceMappingURL=estatus.component.css.map */

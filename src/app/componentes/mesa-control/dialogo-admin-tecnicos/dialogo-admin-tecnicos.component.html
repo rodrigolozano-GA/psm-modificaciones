@@ -1,0 +1,96 @@
+<h1 mat-dialog-title>{{titulo}}</h1>
+<div mat-dialog-content>
+    <div class="inner-wrapper" [formGroup]="generalForm">
+
+        <mat-form-field class="w-100 mt-3 itm-input">
+            <mat-select placeholder="Técnico Principal" formControlName="tecnico_principal">
+
+                <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+                <mat-option>
+                    <ngx-mat-select-search [placeholderLabel]="'Busca un Técnico'"
+                        [noEntriesFoundLabel]="'No se encontraron registros'" [formControl]="tecnicosOPFilteringCtrl"
+                        [searching]="searching" (keyup)="LlenarFilto(1, $event.target.value)">
+                    </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let tecnico of filteredTecnicosOPList | async" [value]="tecnico">
+                    {{tecnico.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="itm-tecnicos">
+
+            <mat-form-field class="w-100 mt-3 itm-input">
+                <mat-select placeholder="Técnicos auxiliares" [multiple]="true" formControlName="tecnicos">
+
+                    <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+                    <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Busca Tecnicos'"
+                            [noEntriesFoundLabel]="'No se encontraron registros'" [formControl]="tecnicosOFilteringCtrl"
+                            [searching]="searching" (keyup)="LlenarFilto(2, $event.target.value)">
+                        </ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let tecnico of filteredTecnicosOList | async" [value]="tecnico">
+                        {{tecnico.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button mat-mini-fab color="primary" class="itm-btn" matTooltip="Agregar Técnicos"
+                (click)="selectTecnicos()">
+                <i class="fas fa-plus action-icon action-icon-button"></i>
+            </button>
+
+        </div>
+
+        <mat-divider>
+        </mat-divider>
+
+        <mat-form-field class="w-100">
+            <input matInput placeholder="Buscar" (keyup)="busqueda($event.target.value)" value="">
+        </mat-form-field>
+
+        <mat-table #tableTecn="matSort" matSort [dataSource]="dataTecnicos" class="list-tecnicos ">
+
+            <ng-container cdkColumnDef="nempleado">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="nRow">N° Trabajador
+                </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="nRow">
+                    <span class="mobile-label">N° Trabajador:</span>
+                    {{row.nempleado}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="nombre">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="nombreRow">Técnico
+                </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="nombreRow">
+                    <span class="mobile-label">Técnico:</span>
+                    {{row.nombre}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="actions">
+                <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="actionsRow">
+                    <span class="mobile-label">Acciones:</span>
+
+                    <button mat-icon-button color="warn" class="ml-auto" matTooltip="Quitar Técnico" (click)="removeTech(row)">
+                        <i class="far fa-trash-alt action-icon"></i>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="tecnColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: tecnColumns ">
+            </mat-row>
+        </mat-table>
+        <mat-paginator #tecPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+        </mat-paginator>
+
+    </div>
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button matDialogClose color="primary" class="ml-auto">CANCELAR</button>
+    <button mat-raised-button (click)="guardar()" color="primary">GUARDAR</button>
+</div>

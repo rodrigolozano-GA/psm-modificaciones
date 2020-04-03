@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,IAAI,CAAC;EACD,SAAS,EAAE,MAAM;EACjB,KAAK,EAAE,IAAI;CACd",
+    "sources": [
+        "overlay.component.scss"
+    ],
+    "names": [],
+    "file": "overlay.component.css"
+}

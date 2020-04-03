@@ -1,0 +1,6 @@
+.wrapper {
+  display: -ms-grid;
+  display: grid;
+  grid-row-gap: 0.5rem;
+}
+/*# sourceMappingURL=dialogo-calificar.component.css.map */

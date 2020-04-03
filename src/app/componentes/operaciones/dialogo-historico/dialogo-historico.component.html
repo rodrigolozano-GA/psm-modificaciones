@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Histórico</h1>
+<div mat-dialog-content>
+
+    <div class="wrapper" [formGroup]="generalForm">
+
+        <mat-card class="itm-card-list mat-elevation-z0 m-0">
+            <mat-card-content>
+                <div class="itm-actualizacion">
+                    <mat-form-field class="itm-input">
+                        <input matInput placeholder="Escribir una actualizacion" formControlName="actualizacion">
+                        <mat-error
+                            *ngIf="(generalGetter('actualizacion').dirty || generalGetter('actualizacion').touched) && generalGetter('actualizacion').invalid && generalGetter('actualizacion').errors.required">
+                            Campo requerido
+                        </mat-error>
+                    </mat-form-field>
+
+                    <button matSuffix mat-flat-button color="primary" class="itm-btn"
+                        (click)="actualizar()">ACTUALIZAR</button>
+                </div>
+
+                <mat-table matSort [dataSource]="dataActl" class="itm-lista" #tableActl="matSort">
+
+                    <ng-container cdkColumnDef="mensaje">
+                        <mat-header-cell *cdkHeaderCellDef class="nombreRow"></mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="nombreRow">
+                            {{row.descripcion}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- <mat-header-row *cdkHeaderRowDef="chatColumns"></mat-header-row> -->
+                    <mat-row *cdkRowDef="let row; columns: chatColumns ">
+                    </mat-row>
+                </mat-table>
+                <mat-paginator #ActlPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                </mat-paginator>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-raised-button matDialogClose class="ml-auto" color="primary">CERRAR</button>
+</div>

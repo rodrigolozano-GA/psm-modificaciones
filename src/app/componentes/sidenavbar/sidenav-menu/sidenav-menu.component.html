@@ -1,0 +1,24 @@
+<div>
+    <!-- Menu principal -->
+    <mat-action-list #section class="mat-dropdown-list">
+        <button mat-list-item (click)="toggleLink()">
+            <mat-icon color="primary" class="icon-menu"><i [ngClass]="icon"
+                    class="fa-rem d-flex justify-content-center align-items-center h-100"></i>
+            </mat-icon>
+            <mat-label class="dropdown-label" class="menu-title">{{tittle}}</mat-label>
+            <mat-icon matListIcon class="dropdown-icon">arrow_drop_down</mat-icon>
+        </button>
+    </mat-action-list>
+
+    <!-- Submenus -->
+    <ul #listdp class="menu-toggle-list oculto">
+        <li *ngFor="let menu of child; let first = first">
+            <mat-divider *ngIf="first">
+            </mat-divider>
+            <app-sidenav-link [link]="menu" [pparent]="mparent" [pwid]="mwid"></app-sidenav-link>
+            <mat-divider>
+            </mat-divider>
+        </li>
+    </ul>
+</div>
+<!--[ngClass]="{'oculto': !active}"-->

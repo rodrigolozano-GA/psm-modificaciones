@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,QAAQ,CAAC;EACL,OAAO,EAAE,IAAI;EACb,YAAY,EAAE,MAAM;CACvB",
+    "sources": [
+        "dialogo-solicitud-actas.component.scss"
+    ],
+    "names": [],
+    "file": "dialogo-solicitud-actas.component.css"
+}

@@ -1,0 +1,484 @@
+<h1 mat-dialog-title>{{titulo}}</h1>
+<div mat-dialog-content>
+
+  <div class="wrapper" [formGroup]="generalForm">
+    <div *ngIf="pCatalogo == 'E'">
+
+      <mat-form-field class="w-100">
+        <mat-select placeholder="Tipo" name="" formControlName="tipo_id">
+          <mat-option *ngFor="let tipo of listaTipos" [value]="tipo.id">
+            {{tipo.nombre}}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="(generalGetter('tipo_id').dirty || generalGetter('tipo_id').touched) && generalGetter('tipo_id').invalid && generalGetter('tipo_id').errors.required">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <input matInput #esNombre placeholder="Nombre del estatus" maxlength="45" formControlName="nombre">
+        <mat-hint align="end">{{esNombre.value?.length || 0}}/45</mat-hint>
+        <mat-error
+          *ngIf="(generalGetter('nombre').dirty || generalGetter('nombre').touched) && generalGetter('nombre').invalid && generalGetter('nombre').errors.required">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <input matInput #esColor placeholder="Color del estatus" type="color" formControlName="color">
+        <mat-error
+          *ngIf="(generalGetter('color').dirty || generalGetter('color').touched) && generalGetter('color').invalid">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="estatus" color="primary" aria-label="Estatus del estatus"
+        *ngIf="this.data.accion">Estatus
+      </mat-slide-toggle>
+
+    </div>
+
+    <div *ngIf="pCatalogo == 'G'">
+
+      <mat-form-field class="w-100">
+        <input matInput #gsNombre placeholder="Nombre del gasto" maxlength="20" formControlName="nombre">
+        <mat-hint align="end">{{gsNombre.value?.length || 0}}/20</mat-hint>
+        <mat-error
+          *ngIf="(generalGetter('nombre').dirty || generalGetter('nombre').touched) && generalGetter('nombre').invalid && generalGetter('nombre').errors.required">
+          Campo requerido
+        </mat-error>
+        <mat-error
+          *ngIf="(generalGetter('nombre').dirty || generalGetter('nombre').touched) && generalGetter('nombre').invalid && generalGetter('nombre').errors.maxlength">
+          Máximo 20 caracteres
+        </mat-error>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="deducible">Deducible</mat-checkbox>
+
+    </div>
+
+    <div *ngIf="pCatalogo == 'Z'">
+
+      <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="General">
+
+          <mat-form-field class="w-100 mt-3">
+            <mat-select placeholder="Tipo de Servicio" name="item" formControlName="tipoServicio_id"
+              (selectionChange)="obtenerEstado($event)" [disabled]="this.data.accion ? true : false">
+              <mat-option *ngFor="let tipo of serviciosList" [value]="tipo.id">
+                {{tipo.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="w-100">
+            <mat-select placeholder="Coordinador" formControlName="coordinador_id">
+              <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+              <mat-option>
+                <ngx-mat-select-search [placeholderLabel]="'Busca un Coordinador'"
+                  [noEntriesFoundLabel]="'No se encontraron registros'" [formControl]="coordinadorFilteringCtrl"
+                  [searching]="searching" (keydown.enter)="filtrarPor(5, $event.target.value)">
+                </ngx-mat-select-search>
+              </mat-option>
+              <mat-option *ngFor="let coordinador of filteredCoordinadores | async" [value]="coordinador.id">
+                {{coordinador.nombre}}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="(generalGetter('coordinador_id').dirty || generalGetter('coordinador_id').touched) && generalGetter('coordinador_id').invalid && generalGetter('coordinador_id').errors.required">
+              Campo requerido
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-100">
+            <input matInput #znNombre placeholder="Nombre de la zona" maxlength="45" formControlName="nombre">
+            <mat-hint align="end">{{znNombre.value?.length || 0}}/45</mat-hint>
+            <mat-error
+              *ngIf="(generalGetter('nombre').dirty || generalGetter('nombre').touched) && generalGetter('nombre').invalid && generalGetter('nombre').errors.required">
+              Campo requerido
+            </mat-error>
+          </mat-form-field>
+
+          <mat-slide-toggle formControlName="estatus" color="primary" aria-label="Estatus del estatus"
+            *ngIf="this.data.accion">Estatus
+          </mat-slide-toggle>
+
+
+        </mat-tab>
+        <mat-tab label="Técnicos">
+
+          <div class="inner-wrapper">
+            <div class="itm-tecnicos">
+
+              <mat-form-field class="w-100 mt-3 itm-input">
+                <mat-select placeholder="Técnicos" formControlName="tecnicos" [multiple]="true">
+
+                  <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+                  <mat-option>
+                    <ngx-mat-select-search [placeholderLabel]="'Busca Técnicos'"
+                      [noEntriesFoundLabel]="'No se encontraron registros'" [formControl]="tecnicosOFilteringCtrl"
+                      [searching]="searching" (keydown.enter)="filtrarPor(6, $event.target.value)">
+                    </ngx-mat-select-search>
+                  </mat-option>
+                  <mat-option *ngFor="let tecnico of filteredTecnicosOList | async" [value]="tecnico">
+                    {{tecnico.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <button mat-mini-fab color="primary" class="itm-btn" matTooltip="Agregar Técnicos"
+                (click)="selectTecnicos()">
+                <i class="fas fa-plus action-icon action-icon-button"></i>
+              </button>
+
+            </div>
+
+            <mat-divider>
+            </mat-divider>
+
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Buscar" (keyup)="busqueda($event.target.value)" value="">
+            </mat-form-field>
+
+            <mat-table #tableTecn="matSort" matSort [dataSource]="dataTecnicos" class="list-tecnicos ">
+
+              <ng-container cdkColumnDef="numero">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="nRow">N° Trabajador
+                </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="nRow">
+                  <span class="mobile-label">N° Trabajador:</span>
+                  {{row.nempleado}}
+                </mat-cell>
+              </ng-container>
+
+              <ng-container cdkColumnDef="nombre">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="nombreRow">Técnico
+                </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="nombreRow">
+                  <span class="mobile-label">Técnico:</span>
+                  {{row.nombre}}
+                </mat-cell>
+              </ng-container>
+
+              <ng-container cdkColumnDef="actions">
+                <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="actionsRow">
+                  <span class="mobile-label">Acciones:</span>
+
+                  <button mat-icon-button color="warn" class="ml-auto" matTooltip="Quitar Técnico"
+                    (click)="deteleFrom(row)">
+                    <i class="far fa-trash-alt action-icon"></i>
+                  </button>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *cdkHeaderRowDef="tecnColumns"></mat-header-row>
+              <mat-row *cdkRowDef="let row; columns: tecnColumns ">
+              </mat-row>
+            </mat-table>
+            <mat-paginator #tecPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+            </mat-paginator>
+
+          </div>
+
+        </mat-tab>
+        <mat-tab label="Estados">
+          <mat-list class="estados-list">
+            <mat-list-item *ngFor="let estado of listEstados">
+              {{estado.nombre}}
+
+              <mat-checkbox (change)="estado.estatus = estado.estatus ? 0 : 1" [checked]="estado.estatus" class="ml-auto"></mat-checkbox>
+            </mat-list-item>
+          </mat-list>
+        </mat-tab>
+      </mat-tab-group>
+
+    </div>
+
+    <div *ngIf="pCatalogo == 'D'">
+
+      <mat-form-field class="w-100">
+        <input matInput #tdNombre placeholder="Nombre del Tipo de documento" maxlength="45" formControlName="nombre">
+        <mat-hint align="end">{{tdNombre.value?.length || 0}}/45</mat-hint>
+        <mat-error
+          *ngIf="(generalGetter('nombre').dirty || generalGetter('nombre').touched) && generalGetter('nombre').invalid">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="estatus" color="primary" aria-label="Estatus del estatus"
+        *ngIf="this.data.accion">Estatus
+      </mat-slide-toggle>
+
+    </div>
+
+    <div *ngIf="pCatalogo == 'S'">
+
+      <mat-form-field class="w-100">
+        <input matInput #tsNombre placeholder="Nombre del Tipo de servicio" maxlength="45" formControlName="nombre">
+        <mat-hint align="end">{{tsNombre.value?.length || 0}}/45</mat-hint>
+        <mat-error
+          *ngIf="(generalGetter('nombre').dirty || generalGetter('nombre').touched) && generalGetter('nombre').invalid">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="estatus" color="primary" aria-label="Estatus del estatus"
+        *ngIf="this.data.accion">Estatus
+      </mat-slide-toggle>
+
+    </div>
+
+    <div *ngIf="pCatalogo == 'TE'">
+
+      <mat-form-field class="w-100">
+        <input matInput #tesNombre placeholder="Nombre del Tipo de Estatus" maxlength="45" formControlName="nombre">
+        <mat-hint align="end">{{tesNombre.value?.length || 0}}/45</mat-hint>
+        <mat-error
+          *ngIf="(generalGetter('nombre').dirty || generalGetter('nombre').touched) && generalGetter('nombre').invalid">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="estatus" color="primary" aria-label="Estatus del estatus"
+        *ngIf="this.data.accion">Estatus
+      </mat-slide-toggle>
+
+    </div>
+
+    <div *ngIf="pCatalogo == 'ME'">
+
+      <mat-form-field class="w-100">
+        <mat-select placeholder="Tipo de Estatus" name="" formControlName="tipoEstatus_id"
+          (selectionChange)="selectTipoEstatus($event)">
+          <mat-option *ngFor="let estatus of listaTipos" [value]="estatus.id">
+            {{estatus.nombre}}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="(generalGetter('tipoEstatus_id').dirty || generalGetter('tipoEstatus_id').touched) && generalGetter('tipoEstatus_id').invalid">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-select placeholder="Estatus" name="" formControlName="estatus_id">
+          <mat-option *ngFor="let estatus of listaEstatus" [value]="estatus.id">
+            {{estatus.nombre}}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="(generalGetter('estatus_id').dirty || generalGetter('estatus_id').touched) && generalGetter('estatus_id').invalid">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <input matInput #mesNombre placeholder="Nombre del Motivo de Estatus" maxlength="45" formControlName="nombre">
+        <mat-hint align="end">{{mesNombre.value?.length || 0}}/45</mat-hint>
+        <mat-error
+          *ngIf="(generalGetter('nombre').dirty || generalGetter('nombre').touched) && generalGetter('nombre').invalid">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="estatus" color="primary" aria-label="Estatus del estatus"
+        *ngIf="this.data.accion">Estatus
+      </mat-slide-toggle>
+
+    </div>
+
+    <div *ngIf="pCatalogo == 'C'">
+
+      <mat-form-field class="w-100">
+        <mat-select placeholder="Empleado" formControlName="empleado_id" [disabled]="this.data.accion ? true : false">
+
+          <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+          <mat-option>
+            <ngx-mat-select-search [placeholderLabel]="'Busca un Empleado'"
+              [noEntriesFoundLabel]="'No se encontraron registros'" [formControl]="empleadoFilteringCtrl"
+              [searching]="searching" (ngModelChange)="filtrarPor(3, $event)">
+            </ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let empleado of filteredEmpleados | async" [value]="empleado.id">
+            {{empleado.nombre}}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="(generalGetter('empleado_id').dirty || generalGetter('empleado_id').touched) && generalGetter('empleado_id').invalid">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="estatus" color="primary" aria-label="Estatus del estatus"
+        *ngIf="this.data.accion">Estatus
+      </mat-slide-toggle>
+
+
+    </div>
+
+    <div *ngIf="pCatalogo == 'TC'">
+
+      <mat-form-field class="w-100">
+        <mat-select placeholder="Empleado" formControlName="empleado_id" [disabled]="this.data.accion ? true : false">
+          <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+          <mat-option>
+            <ngx-mat-select-search [placeholderLabel]="'Busca un Empleado'"
+              [noEntriesFoundLabel]="'No se encontraron registros'" [formControl]="tecnicoFilteringCtrl"
+              [searching]="searching" (ngModelChange)="filtrarPor(6, $event)">
+            </ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let empleado of filteredTecnicos | async" [value]="empleado.id">
+            {{empleado.nombre}}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="(generalGetter('empleado_id').dirty || generalGetter('empleado_id').touched) && generalGetter('empleado_id').invalid">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-select formControlName="zona_id" placeholder="Zona">
+          <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+          <mat-option>
+            <ngx-mat-select-search [placeholderLabel]="'Busca una Zona'"
+              [noEntriesFoundLabel]="'No se encontraron registros'" [formControl]="zonaFilteringCtrl"
+              [searching]="searching" (ngModelChange)="filtrarPor(7, $event)">
+            </ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let zona of filteredZonas | async" [value]="zona.id">
+            {{zona.nombre}}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="(generalGetter('zona_id').dirty || generalGetter('zona_id').touched) && generalGetter('zona_id').invalid">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="estatus" color="primary" aria-label="Estatus del estatus"
+        *ngIf="this.data.accion">Estatus
+      </mat-slide-toggle>
+
+    </div>
+
+    <div *ngIf="pCatalogo == 'EQ'">
+
+      <mat-form-field class="w-100">
+        <input matInput #gsNombre placeholder="Nombre del equipo" maxlength="20" formControlName="nombre">
+        <mat-hint align="end">{{gsNombre.value?.length || 0}}/45</mat-hint>
+        <mat-error
+          *ngIf="(generalGetter('nombre').dirty || generalGetter('nombre').touched) && generalGetter('nombre').invalid && generalGetter('nombre').errors.required">
+          Campo requerido
+        </mat-error>
+        <mat-error
+          *ngIf="(generalGetter('nombre').dirty || generalGetter('nombre').touched) && generalGetter('nombre').invalid && generalGetter('nombre').errors.maxlength">
+          Máximo 45 caracteres
+        </mat-error>
+      </mat-form-field>
+
+      <div class="itm-carac">
+        <mat-form-field class="itm-input">
+          <input matInput placeholder="Agregar carácteristica" aria-label="caracteristica" [matAutocomplete]="auto"
+            formControlName="caracteristica">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let caracteristica of filteredCaracteristicas" [value]="caracteristica.caracteristica">
+              {{caracteristica.caracteristica}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <button mat-mini-fab color="primary" class="itm-btn" matTooltip="Agregar carácteristica"
+          (click)="agregarCaracteristica()">
+          <i class="fas fa-plus action-icon action-icon-button"></i>
+        </button>
+      </div>
+
+      <mat-form-field class="w-100">
+        <textarea matInput cdkAutosizeMaxRows="3" cdkAutosizeMinRows="3" cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize" placeholder="Observaciones" formControlName="observaciones"></textarea>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="estatus" color="primary" aria-label="Estatus del estatus"
+        *ngIf="this.data.accion">Estatus
+      </mat-slide-toggle>
+
+      <mat-table #table matSort [dataSource]="dataCaracteristica">
+
+        <ng-container cdkColumnDef="nombre">
+          <mat-header-cell *cdkHeaderCellDef> Caracteristica </mat-header-cell>
+          <mat-cell *cdkCellDef="let row" class="nombreRow">
+            <span class="mobile-label">Caracteristica:</span>
+            <span class="caraTitulo">{{row.caracteristica}} </span>
+            <p matLine>{{row.observaciones}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="actions">
+          <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+          <mat-cell *cdkCellDef="let row" class="actionsRow">
+            <span class="mobile-label">Acciones:</span>
+            <button mat-icon-button color="warn" (click)="eliminarCaracteristica(row)"><i
+                class="far fa-trash-alt action-icon"></i></button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *cdkHeaderRowDef="caracteristicasColumns"></mat-header-row>
+        <mat-row *cdkRowDef="let row; columns: caracteristicasColumns ">
+        </mat-row>
+      </mat-table>
+      <mat-paginator #CaracPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </div>
+
+    <div *ngIf="pCatalogo == 'MD'">
+
+      <mat-form-field class="w-100">
+        <input matInput #gsNombre placeholder="Nombre del medio" maxlength="20" formControlName="nombre">
+        <mat-hint align="end">{{gsNombre.value?.length || 0}}/45</mat-hint>
+        <mat-error
+          *ngIf="(generalGetter('nombre').dirty || generalGetter('nombre').touched) && generalGetter('nombre').invalid && generalGetter('nombre').errors.required">
+          Campo requerido
+        </mat-error>
+        <mat-error
+          *ngIf="(generalGetter('nombre').dirty || generalGetter('nombre').touched) && generalGetter('nombre').invalid && generalGetter('nombre').errors.maxlength">
+          Máximo 45 caracteres
+        </mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="estatus" color="primary" aria-label="Estatus del estatus"
+        *ngIf="this.data.accion">Estatus
+      </mat-slide-toggle>
+
+    </div>
+
+    <div *ngIf="pCatalogo == 'FA'">
+
+      <mat-form-field class="w-100">
+        <input matInput #gsNombre placeholder="Nombre del formato de acta" maxlength="45" formControlName="nombre">
+        <mat-hint align="end">{{gsNombre.value?.length || 0}}/45</mat-hint>
+        <mat-error
+          *ngIf="(generalGetter('nombre').dirty || generalGetter('nombre').touched) && generalGetter('nombre').invalid && generalGetter('nombre').errors.required">
+          Campo requerido
+        </mat-error>
+        <mat-error
+          *ngIf="(generalGetter('nombre').dirty || generalGetter('nombre').touched) && generalGetter('nombre').invalid && generalGetter('nombre').errors.maxlength">
+          Máximo 45 caracteres
+        </mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="estatus" color="primary" aria-label="Estatus del estatus"
+        *ngIf="this.data.accion">Estatus
+      </mat-slide-toggle>
+
+    </div>
+
+  </div>
+
+</div>
+<div mat-dialog-actions class="d-flex">
+  <button mat-button matDialogClose color="primary" class="ml-auto">CANCELAR</button>
+  <button mat-raised-button color="primary" (click)="guardarEdicion()">GUARDAR</button>
+</div>

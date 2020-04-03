@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Reportar gastos seleccionados</h1>
+<div mat-dialog-content>
+    <div class="wrapper">
+        <mat-table #table matSort [dataSource]="dataSource">
+
+            <ng-container cdkColumnDef="folio">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="folioRow"> Folio </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="folioRow">
+                    <span class="mobile-label">Folio:</span>
+                    {{row.folio}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="fecha">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Fecha:</span>
+                    {{row.fecha}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="tipoGasto">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Tipo de Gasto </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Tipo de Gasto:</span>
+                    {{row.tipoGasto}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="empleado">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Empleado </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Empleado:</span>
+                    {{row.nempleado}} - {{row.empleado}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="estatus">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Estatus </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Estatus:</span>
+                    {{row.estatus}} </mat-cell>
+            </ng-container>
+
+
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+            </mat-row>
+        </mat-table>
+    </div>
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button matDialogClose color="primary" class="ml-auto">CANCELAR</button>
+    <button mat-raised-button (click)="reportar()" color="primary">REPORTAR</button>
+</div>

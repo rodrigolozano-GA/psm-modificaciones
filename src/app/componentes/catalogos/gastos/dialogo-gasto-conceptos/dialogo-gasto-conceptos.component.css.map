@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,WAAW,EAAE,cAAc;CAC9B;;AAED,AAAA,UAAU,CAAC;EACT,OAAO,EAAE,eAAe;EACxB,qBAAqB,EAAE,OAAO;CAC/B;;AAKD,AAAA,cAAc,CAAC;EACX,YAAY,EAAE,QAAQ;CACzB",
+    "sources": [
+        "dialogo-gasto-conceptos.component.scss"
+    ],
+    "names": [],
+    "file": "dialogo-gasto-conceptos.component.css"
+}

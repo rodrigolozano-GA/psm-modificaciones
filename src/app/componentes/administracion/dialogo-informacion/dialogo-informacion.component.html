@@ -1,0 +1,445 @@
+<h1 mat-dialog-title class="d-flex">
+    Seguimiento a Servicio
+</h1>
+<div mat-dialog-content>
+
+    <div class="wrapper">
+
+        <div class="sec-act" [formGroup]="generalForm">
+
+            <mat-form-field class="itm-fecha">
+                <input matInput [matDatepicker]="fProgramada" placeholder="Fecha Programada" [disabled]="accion == 3"
+                    (click)="fProgramada.open()" formControlName="fecha_programada"
+                    (dateChange)="cambioFechaProgramada($event)">
+                <mat-datepicker-toggle matSuffix [for]="fProgramada"></mat-datepicker-toggle>
+                <mat-datepicker #fProgramada></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="itm-estatus">
+                <mat-select placeholder="Estatus" name="item" formControlName="estatus_id" [disabled]="this.id_mo == 43">
+                    <mat-option *ngFor="let item of estatusList" [value]="item.id" (click)="selectEstatus(item)"
+                    [hidden]="(this.id_mo == 38 && item.id ==37) ||((this.id_mo == 39 || this.id_mo == 40) && (item.id ==37 || item.id ==38))">
+                    {{item.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <mat-accordion [formGroup]="panelForm">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Información General
+                    </mat-panel-title>
+                    <mat-panel-description>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <div class="sec-general">
+
+                    <mat-form-field class="itm-folio">
+                        <input matInput placeholder="Folio" disabled="true" formControlName="folio">
+                    </mat-form-field>
+
+                    <mat-form-field class="itm-actas">
+                        <input matInput placeholder="Cantidad de actas y folios" disabled="true"
+                            formControlName="actas">
+                    </mat-form-field>
+
+                    <mat-form-field class="itm-cliente">
+                        <input matInput placeholder="Cliente" disabled="true" formControlName="cliente">
+                    </mat-form-field>
+
+                    <div class="itm-sucursal">
+                        <mat-form-field class="itm-input">
+                            <input matInput placeholder="Sucursal" disabled="true" formControlName="sucursal">
+                        </mat-form-field>
+
+                        <button mat-mini-fab color="primary" class="itm-btn" (click)="dialogoSucursal()">
+                            <mat-icon>
+                                <i
+                                    class="fas fa-info fa-rem d-flex justify-content-center align-items-center h-100"></i>
+                            </mat-icon>
+                        </button>
+                    </div>
+
+                    <mat-form-field class="itm-servicios">
+                        <input matInput placeholder="Tipo de Servicio" disabled="true" formControlName="servicio">
+                    </mat-form-field>
+
+                    <mat-form-field class="itm-coordinador">
+                        <input matInput placeholder="Coordinador" disabled="true" formControlName="coordinador">
+                    </mat-form-field>
+
+                    <mat-form-field class="itm-zona">
+                        <input matInput placeholder="Zona" disabled="true" formControlName="zona">
+                    </mat-form-field>
+
+                    <mat-form-field class="itm-ot">
+                        <input matInput placeholder="OT" #OT [disabled]="accion == 3" formControlName="ot">
+                    </mat-form-field>
+
+                    <mat-form-field class="itm-ticket">
+                        <input matInput placeholder="Ticket" #TC [disabled]="accion == 3" formControlName="tc">
+                    </mat-form-field>
+
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-divider>
+        </mat-divider>
+
+        <div class="sec-tabs mat-elevation-z0">
+            <mat-tab-group mat-stretch-tabs (selectedTabChange)="obtActualizaciones($event)">
+                <mat-tab label="General">
+                    <div class="tab-general">
+
+                        <mat-card-header class="itm-title">
+                            <mat-card-title>Lista de Servicios</mat-card-title>
+                            <button mat-mini-fab color="primary" class="itm-btn right" matTooltip="Agregar Servicios"
+                                (click)="addServicios()">
+                                <i class="fas fa-plus action-icon action-icon-button"></i>
+                            </button>
+                        </mat-card-header>
+
+                        <mat-card class="mat-elevation-z8 m-3 itm-lista-servicios p-0">
+
+                            <mat-table #tableTras [dataSource]="dataSourceServ" class="list lista-servicios">
+
+                                <ng-container cdkColumnDef="codigo">
+                                    <mat-header-cell *cdkHeaderCellDef class="codigoRow"> Código </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="codigoRow">
+                                        <span class="mobile-label">Código:</span>
+                                        {{row.codigo}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container cdkColumnDef="concepto">
+                                    <mat-header-cell *cdkHeaderCellDef> Concepto </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row">
+                                        <span class="mobile-label">Concepto:</span>
+                                        {{row.concepto}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container cdkColumnDef="cantidad">
+                                    <mat-header-cell *cdkHeaderCellDef class="cantidadRow"> Cantidad
+                                    </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="cantidadRow">
+                                        <span class="mobile-label">Cantidad:</span>
+                                        {{row.cantidad}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container cdkColumnDef="precio">
+                                    <mat-header-cell *cdkHeaderCellDef class="precioURow"> P. Unitario
+                                    </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="precioURow">
+                                        <span class="mobile-label">P. Unitario:</span>
+                                        ${{row.precio}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container cdkColumnDef="importe">
+                                    <mat-header-cell *cdkHeaderCellDef class="importeRow"> Importe
+                                    </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="importeRow">
+                                        <span class="mobile-label">Importe:</span>
+                                        ${{row.precio * row.cantidad}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container cdkColumnDef="empleado">
+                                    <mat-header-cell *cdkHeaderCellDef class="empleadoRow"> Empleado
+                                    </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="empleadoRow">
+                                        <span class="mobile-label">Empleado:</span>
+                                        {{ row.empleado }}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container cdkColumnDef="actions">
+                                    <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="actionsRow">
+                                        <span class="mobile-label">Acciones:</span>
+                                        <button mat-icon-button color="warn" class="ml-auto" matTooltip="Quitar Servicio" (click)="deteleFrom(row)">
+                                            <i class="far fa-trash-alt action-icon"></i>
+                                        </button>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *cdkHeaderRowDef="displayedColumnsServ"></mat-header-row>
+                                <mat-row *cdkRowDef="let row; columns: displayedColumnsServ ">
+                                </mat-row>
+                            </mat-table>
+
+                        </mat-card>
+
+                        <mat-form-field class="itm-descripcion">
+                            <textarea matInput cdkAutosizeMaxRows="3" cdkAutosizeMinRows="3" cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize" placeholder="Descripción del problema" disabled="true"
+                                [value]="datosFolio.descripcion"></textarea>
+                        </mat-form-field>
+
+                        <mat-form-field class="itm-servicio">
+                            <textarea matInput cdkAutosizeMaxRows="5" cdkAutosizeMinRows="5" cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize" placeholder="Servicio realizado" disabled="true"
+                                [value]="datosFolio.observaciones"></textarea>
+                        </mat-form-field>
+
+                    </div>
+                </mat-tab>
+                
+                <mat-tab label="Técnicos" [disabled]="accion == 3">
+                    <div class="tab-tecnicos">
+
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>Lista de Técnicos asignados</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content class="mat-elevation-z8">
+
+                                <mat-table #tableTecn="matSort" matSort [dataSource]="dataTecnicos"
+                                    class="list-tecnicos ">
+
+                                    <ng-container cdkColumnDef="tipo">
+                                        <mat-header-cell *cdkHeaderCellDef mat-sort-header class="tipoRow">Tipo
+                                        </mat-header-cell>
+                                        <mat-cell *cdkCellDef="let row" class="tipoRow">
+                                            <span class="mobile-label">Tipo:</span>
+                                            <mat-icon color="primary" matTooltip="Principal" *ngIf="row.tipo"><i
+                                                    class="fas fa-users action-icon"></i></mat-icon>
+                                            <mat-icon color="accent" matTooltip="Auxiliar" class="icn-auxiliar"
+                                                *ngIf="!row.tipo"><i class="fas fa-user action-icon"></i></mat-icon>
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container cdkColumnDef="nombre">
+                                        <mat-header-cell *cdkHeaderCellDef mat-sort-header class="nombreRow">Técnico
+                                        </mat-header-cell>
+                                        <mat-cell *cdkCellDef="let row" class="nombreRow">
+                                            <span class="mobile-label">Técnico:</span>
+                                            {{row.nombre}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container cdkColumnDef="actions">
+                                        <mat-header-cell *cdkHeaderCellDef class="actionsRow">
+                                            <button mat-icon-button color="primary" class="ml-auto"
+                                                matTooltip="Administrar técnicos"
+                                                (click)="dialogoTecnicos('Administración de Técnicos')"
+                                                [disabled]="estatusName != 'en proceso' && estatusName != 'realizado'">
+                                                <i class="far fa-users-cog action-icon"></i>
+                                            </button>
+                                        </mat-header-cell>
+                                        <mat-cell *cdkCellDef="let row" class="actionsRow">
+                                            <span class="mobile-label">Acciones:</span>
+
+                                            <button mat-icon-button color="primary" class="ml-auto"
+                                                matTooltip="Ver técnico" (click)="dialogoTecnico(row)">
+                                                <i class="far fa-id-card-alt action-icon"></i>
+                                            </button>
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *cdkHeaderRowDef="tecnColumns"></mat-header-row>
+                                    <mat-row *cdkRowDef="let row; columns: tecnColumns ">
+                                    </mat-row>
+                                </mat-table>
+                                <mat-paginator #tecPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                                </mat-paginator>
+                            </mat-card-content>
+                        </mat-card>
+
+                    </div>
+                </mat-tab>
+                <mat-tab label="Documentos" [disabled]="accion == 3">
+                    <div class="tab-documentos" [formGroup]="nuevodocumentoForm">
+
+                        <mat-form-field class="itm-tipo">
+                            <mat-select placeholder="Tipo de documento" name="item" formControlName="tipo"
+                                [disabled]="estatusName != 'en proceso' && estatusName !='realizado'">
+                                <mat-option *ngFor="let item of documentosList" [value]="item.id">
+                                    {{item.nombre}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <div class="itm-sec-archivo">
+                            <div class="itm-archivo">
+                                <mat-form-field class="itm-input">
+                                    <input matInput placeholder="Seleccione un documento" [value]="fileName" readonly>
+                                    <input type="file" name="solicitud" #aSolicitud hidden="true"
+                                        formControlName="documento" (change)="fileChange($event)">
+                                </mat-form-field>
+
+                                <button matSuffix mat-flat-button color="primary" (click)="aSolicitud.click()"
+                                    class="itm-btn" [disabled]="estatusName != 'en proceso' && estatusName != 'realizado'">
+                                    Seleccionar archivo
+                                </button>
+                            </div>
+                            <div class="itm-subir">
+                                <button matSuffix mat-icon-button color="primary" class="itm-btn" (click)="subirDoc()"
+                                    matTooltip="Subir Archivo" [disabled]="estatusName != 'en proceso' && estatusName != 'realizado'">
+                                    <i class="far fa-file-upload action-icon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <mat-card-header class="itm-title">
+
+                            <mat-card-title>Lista de documentos</mat-card-title>
+                            
+                            <div class="itm-zip">
+                                <button matSuffix mat-icon-button color="primary" class="itm-btn" (click)="descargarZip()"
+                                    matTooltip="Descargar documentos en ZIP" >
+                                    <i class="far fa-file-archive  fa-2x"></i>
+                                </button>
+                            </div>
+
+                        </mat-card-header>
+
+                        <mat-card class="itm-lista mat-elevation-z8">
+                            <mat-card-content>
+
+                                <mat-table matSort [dataSource]="dataDocumentos" class="list-tecnicos"
+                                    #tableDocs="matSort">
+
+                                    <ng-container cdkColumnDef="nombre">
+                                        <mat-header-cell *cdkHeaderCellDef mat-sort-header class="nombreRow">Nombre
+                                        </mat-header-cell>
+                                        <mat-cell *cdkCellDef="let row" class="nombreRow">
+                                            <span class="mobile-label">Nombre:</span>
+                                            {{ row.nombre.split('/')[2] }}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container cdkColumnDef="tipo">
+                                        <mat-header-cell *cdkHeaderCellDef mat-sort-header class="">Tipo
+                                        </mat-header-cell>
+                                        <mat-cell *cdkCellDef="let row" class="">
+                                            <span class="mobile-label">Tipo:</span>
+                                            {{row.tipo}}
+                                        </mat-cell>
+                                    </ng-container>
+
+
+                                    <ng-container cdkColumnDef="actions">
+                                        <mat-header-cell *cdkHeaderCellDef class="docActionsRow"> </mat-header-cell>
+                                        <mat-cell *cdkCellDef="let row" class="docActionsRow">
+                                            <span class="mobile-label">Acciones:</span>
+
+                                            <button mat-icon-button color="primary" class="ml-auto"
+                                                matTooltip="Descargar documento" (click)="descargarDocs(row)">
+                                                <i class="far fa-file-download action-icon"></i>
+                                            </button>
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *cdkHeaderRowDef="docsColumns"></mat-header-row>
+                                    <mat-row *cdkRowDef="let row; columns: docsColumns ">
+                                    </mat-row>
+                                </mat-table>
+                                <mat-paginator #docPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                                </mat-paginator>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Actualización" [disabled]="accion == 3">
+                    <ng-template mat-tab-label>
+                        <span matBadge="{{ numActualiza ? numActualiza : '' }}" matBadgeColor="warn" matBadgeOverlap="false"
+                            matBadgeSize="small">Actualización</span>
+                    </ng-template>
+                    <div class="tab-actualizacion" [formGroup]="actualizacionForm">
+                        <mat-card class="itm-card-list mat-elevation-z8">
+                            <mat-card-content>
+                                <div class="itm-actualizacion">
+                                    <mat-form-field class="itm-input">
+                                        <input matInput placeholder="Escribir una actualización" [value]=""
+                                            formControlName="actualizacion">
+                                        <mat-error
+                                            *ngIf="(actualizacionGetter('actualizacion').dirty || actualizacionGetter('actualizacion').touched) && actualizacionGetter('actualizacion').invalid && actualizacionGetter('actualizacion').errors.required">
+                                            Campo requerido
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <button matSuffix mat-flat-button color="primary" class="itm-btn"
+                                        (click)="envioActualizacion()">ACTUALIZAR</button>
+                                </div>
+
+                                <mat-table matSort [dataSource]="dataActl" class="itm-lista" #tableActl="matSort">
+                                    <ng-container cdkColumnDef="descripcion">
+                                        <mat-header-cell *cdkHeaderCellDef> Descripción </mat-header-cell>
+                                        <mat-cell *cdkCellDef="let row">
+                                            <span class="mobile-label">Descripción:</span>
+                                            {{row.descripcion}} 
+                                        </mat-cell>
+                                    </ng-container>
+                                    <ng-container cdkColumnDef="fecha">
+                                        <mat-header-cell *cdkHeaderCellDef> Fecha </mat-header-cell>
+                                        <mat-cell *cdkCellDef="let row">
+                                            <span class="mobile-label">Fecha:</span>
+                                            {{row.fecha}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container cdkColumnDef="hace">
+                                        <mat-header-cell *cdkHeaderCellDef></mat-header-cell>
+                                        <mat-cell *cdkCellDef="let row">
+                                            <span class="mobile-label"></span>
+                                            {{row.tiempo}}
+                                        </mat-cell>
+                                    </ng-container>
+                                    <!--
+                                    <ng-container cdkColumnDef="mensaje">
+                                        <mat-header-cell *cdkHeaderCellDef class="nombreRow"></mat-header-cell>
+                                        <mat-cell *cdkCellDef="let row" class="nombreRow">
+                                        {{row.descripcion}}
+                                        </mat-cell>
+                                    </ng-container>
+                                -->
+                                    <mat-header-row *cdkHeaderRowDef="actlColumns"></mat-header-row> 
+                                    <mat-row *cdkRowDef="let row; columns: actlColumns ">
+                                    </mat-row>
+                                </mat-table>
+                                <mat-paginator #ActlPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                                </mat-paginator>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+
+                </mat-tab>
+                <mat-tab label="Actividad" [disabled]="accion == 3">
+
+                    <mat-card class="itm-card-list mat-elevation-z8 m-3">
+                        <mat-card-content>
+                            <mat-table matSort [dataSource]="dataActividad" class="itm-lista" #tableActiv="matSort">
+
+                                <ng-container cdkColumnDef="mensaje">
+                                    <mat-header-cell *cdkHeaderCellDef class="actividadRow"></mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="actividadRow">
+                                        <mat-icon color="primary" class="d-flex"><i
+                                                class="far fa-clock action-icon"></i></mat-icon>
+                                       {{row.actividad}}&nbsp;{{row.fecha}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- <mat-header-row *cdkHeaderRowDef="chatColumns"></mat-header-row> -->
+                                <mat-row *cdkRowDef="let row; columns: chatColumns ">
+                                </mat-row>
+                            </mat-table>
+                            <mat-paginator #ActivPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                            </mat-paginator>
+                        </mat-card-content>
+                    </mat-card>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+
+    </div>
+
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button matDialogClose class="ml-auto" color="primary">CERRAR</button>
+    <button mat-raised-button class="ml-3" color="primary" (click)="actualizaEstatusFolio(null,0)">GUARDAR</button>
+</div>

@@ -1,0 +1,188 @@
+/* You can add global styles to this file, and also import other style files */
+// @import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../node_modules/@angular/cdk/overlay-prebuilt.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "./_variables.scss";
+
+body {
+  background-color: #fff;
+  display: grid;
+  grid-template-rows: 100vh;
+  overflow: hidden;
+
+  label {
+    margin-bottom: 0 !important;
+  }
+
+  button,
+  a {
+    outline: none !important;
+  }
+
+  .p-relative {
+    position: relative !important;
+  }
+
+  .cursor {
+    cursor: pointer;
+  }
+
+  .icon-input {
+    font-size: 1rem;
+  }
+
+  //
+  .fa-rem {
+    font-size: 1rem;
+  }
+
+  .action-icon {
+    font-size: 1.2rem;
+  }
+
+  .link {
+    color: $primary;
+    font-weight: bold;
+    text-decoration: underline;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .action-icon-button {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  // Estilos de snackbars => notificaciones
+  .mat-simple-snackbar {
+    justify-content: center;
+  }
+
+  .snack-error {
+    background-color: $warn !important;
+    color: #fff !important;
+  }
+
+  .snack-ok {
+    background-color: $green-md !important;
+    color: #fff !important;
+  }
+
+  .snack-validation {
+    background-color: $yellow-md !important;
+    color: #000 !important;
+  }
+
+  .snack-info {
+    background-color: $blue-md !important;
+    color: #000 !important;
+  }
+
+  // Estilos para los tamaños de los dialogos
+  .dialog-info {
+    min-width: 40vw;
+  }
+
+  .dialog-cotizacion {
+    min-width: 65%;
+  }
+
+  .dialog-traslados,
+  .dialog-viaticos,
+  .dialog-actas,
+  .dialog-valida {
+    min-width: 40vw;
+  }
+
+  .dialog-servicios,
+  .dialog-tecnico,
+  .dialog-sucursal,
+  .dialog-conceptos,
+  .dialog-dividir,
+  .dialog-reportar,
+  .dialog-detalle {
+    min-width: 50vw;
+  }
+
+  .dialog-gasto {
+    min-width: 80vw;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  //Estilos input conceptos de Gastos
+  .inp-concepto {
+    > .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+  }
+
+  // Estilos para las tablas en movil
+  .mobile-label {
+    display: none;
+  }
+
+  @media (max-width: 730.98px) {
+    .mobile-label {
+      // width: 80px;
+      display: inline-block;
+      font-weight: bold;
+      align-self: flex-start;
+    }
+
+    .mat-header-row {
+      display: none;
+    }
+
+    .mat-row {
+      display: grid;
+      padding: 8px 24px;
+
+      .mat-cell {
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 100%;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .mat-column-actions {
+        align-items: flex-end;
+      }
+    }
+  }
+}
+
+//background de la lista de eventos en el calendario
+.cal-month-view .cal-open-day-events {
+  background-color: #fff !important;
+  color: #000;
+  box-shadow: none;
+  max-height: 10rem;
+  overflow-y: auto !important;
+}

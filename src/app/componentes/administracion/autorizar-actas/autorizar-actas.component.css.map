@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAC;EACV,SAAS,EAAE,IAAI;CAChB;;AAED,AAAA,UAAU,CAAC;EACT,SAAS,EAAE,IAAI;CAChB",
+    "sources": [
+        "autorizar-actas.component.scss"
+    ],
+    "names": [],
+    "file": "autorizar-actas.component.css"
+}

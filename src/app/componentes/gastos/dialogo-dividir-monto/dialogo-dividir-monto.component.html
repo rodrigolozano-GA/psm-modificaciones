@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Dividir monto entre folios</h1>
+<div mat-dialog-content>
+    <div class="wrapper">
+        <mat-list>
+            <!-- <h3 matSubheader>Folio</h3> -->
+            <span matSubheader class="d-flex">
+                <span class="itm-tiulo">Folio</span>
+                <span class="itm-total ml-auto">Monto a dividir: {{ datosMonto.MontoTotal | currency }}</span>
+            </span>
+            <mat-list-item *ngFor="let folio of listFolios" class="itm-folios">
+                <span class="itm-folio">{{folio.folio}}</span>
+                <span class="itm-monto">
+                    <mat-form-field floatLabel="never" appearance="outline" class="inp-concepto">
+                        <input matInput placeholder="Monto" [(ngModel)]="folio.monto" type="number" class="text-right"
+                            [disabled]="data.accion" (blur)="actualizaCantidad()" pattern="^\s*(?=.*[0-9])\d*(?:\.\d{1,2})?\s*" min="0">
+                        <span matPrefix>$&nbsp;</span>
+                    </mat-form-field>
+                    <mat-divider>
+                    </mat-divider>
+                </span>
+            </mat-list-item>
+            <mat-list-item class="itm-folios">
+                <span class="itm-folio ml-auto">Total:</span>
+                <span class="itm-monto ml-3">
+                    <mat-form-field floatLabel="never" appearance="outline" class="inp-concepto">
+                        <input matInput placeholder="Monto" [(ngModel)]="totalMontoSuma" type="number" class="text-right" readonly>
+                        <span matPrefix>$&nbsp;</span>
+                    </mat-form-field>
+                </span>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button (click)="cancelar()" color="primary" class="ml-auto">{{ datosMonto.hasOwnProperty('registro') ? 'ACEPTAR' : 'CANCELAR' }}</button>
+    <button mat-raised-button *ngIf="!datosMonto.hasOwnProperty('registro')" (click)="guardar()" color="primary">GUARDAR</button>
+</div>

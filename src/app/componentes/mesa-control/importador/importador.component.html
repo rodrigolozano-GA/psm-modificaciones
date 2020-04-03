@@ -1,0 +1,107 @@
+<mat-card class="mat-elevation-z8">
+  
+    <mat-card-header class="d-flex">
+        <mat-card-title class="ml-0">Importador de Servicios</mat-card-title>
+    </mat-card-header>
+   
+    <mat-card-content class="">
+ 
+      <div>
+        <input id="input" type="file" accept=".xlsx" (click)="charge()" #fileUploader>
+        <button matSuffix mat-icon-button color="primary" class="itm-btn" style="float: right;" (click)="procesar()"
+        matTooltip="Procesar">
+         <i class="far fa-file-upload fa-2x"></i>
+        </button>
+        <button matSuffix mat-icon-button color="primary" class="itm-btn" style="float: right;" (click)="limpiar()"
+            matTooltip="Cancelar">
+            <i class="far fa-trash-alt  fa-2x"></i>
+        </button>
+        
+      </div>
+      <br>
+      <div *ngIf="showTable" class="example-container mat-elevation-z8">
+          <br><br>
+          <mat-table #table matSort [dataSource]="dataSource">
+
+            <ng-container cdkColumnDef="medio">
+                <mat-header-cell *cdkHeaderCellDef class="medioRow"> Medio </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="medioRow">
+                    <span class="mobile-label">Medio:</span>
+                    {{row.medio}}
+                </mat-cell>
+            </ng-container>
+      
+            <ng-container cdkColumnDef="cliente">
+                <mat-header-cell *cdkHeaderCellDef class="clienteRow"> Cliente </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="clienteRow">
+                    <span class="mobile-label">Cliente:</span>
+                    {{row.cliente}}
+                </mat-cell>
+            </ng-container>
+      
+            <ng-container cdkColumnDef="sucursal">
+              <mat-header-cell *cdkHeaderCellDef class="sucursalRow"> Sucursal </mat-header-cell>
+              <mat-cell *cdkCellDef="let row" class="sucursalRow">
+                  <span class="mobile-label">Sucursal:</span>
+                  {{row.sucursal}}
+              </mat-cell>
+            </ng-container>
+      
+            <ng-container cdkColumnDef="tipoServ">
+              <mat-header-cell *cdkHeaderCellDef class="servicioRow"> Servicio </mat-header-cell>
+              <mat-cell *cdkCellDef="let row" class="servicioRow">
+                  <span class="mobile-label">Servicio:</span>
+                  {{row.tiposervicio}}
+              </mat-cell>
+            </ng-container>
+      
+            <ng-container cdkColumnDef="coordinador">
+              <mat-header-cell *cdkHeaderCellDef class="coordinadorRow"> Coordinador </mat-header-cell>
+              <mat-cell *cdkCellDef="let row" class="coordinadorRow">
+                  <span class="mobile-label">Coordinador:</span>
+                  {{row.coordinador}}
+              </mat-cell>
+            </ng-container>
+      
+            <ng-container cdkColumnDef="ot">
+              <mat-header-cell *cdkHeaderCellDef class="otRow"> Ot </mat-header-cell>
+              <mat-cell *cdkCellDef="let row" class="otRow">
+                  <span class="mobile-label">Ot:</span>
+                  {{row.ot}}
+              </mat-cell>
+            </ng-container>
+      
+            <ng-container cdkColumnDef="ticket">
+              <mat-header-cell *cdkHeaderCellDef class="ticRow"> Ticket </mat-header-cell>
+              <mat-cell *cdkCellDef="let row" class="ticRow">
+                  <span class="mobile-label">Ticket:</span>
+                  {{row.ticket}}
+              </mat-cell>
+            </ng-container>
+      
+            <ng-container cdkColumnDef="descripcion">
+              <mat-header-cell *cdkHeaderCellDef class="desRow"> Descripcion </mat-header-cell>
+              <mat-cell *cdkCellDef="let row" class="desRow">
+                  <span class="mobile-label">Descripcion :</span>
+                  {{row.descripcion}}
+              </mat-cell>
+            </ng-container>
+      
+            <ng-container cdkColumnDef="observacion">
+              <mat-header-cell *cdkHeaderCellDef class="obsRow"> Observaciones </mat-header-cell>
+              <mat-cell *cdkCellDef="let row" class="obsRow">
+                  <span class="mobile-label">Observaciones:</span>
+                  {{row.observaciones}}
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+            </mat-row>
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div> 
+        <br>
+
+    </mat-card-content>
+</mat-card>

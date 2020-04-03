@@ -1,0 +1,32 @@
+.nombreRow {
+  &.inner {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+
+    .numero {
+      display: grid;
+    }
+
+    .estatus {
+      display: grid;
+    }
+
+    .tipo {
+      display: grid;
+    }
+
+    .descripcion {
+      display: grid;
+      grid-row: 3;
+      grid-column: 1 / span 2;
+      max-width: 30rem;
+    }
+  }
+}
+
+.titulo {
+  font-weight: bold;
+}

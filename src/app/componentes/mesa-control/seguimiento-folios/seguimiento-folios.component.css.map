@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACT,SAAS,EAAE,MAAM;CAClB;;AAED,AAAA,WAAW,CAAC;EACV,SAAS,EAAE,IAAI;CAChB;;AAED,AAAA,SAAS,CAAC;EACR,SAAS,EAAE,KAAK;CACjB",
+    "sources": [
+        "seguimiento-folios.component.scss"
+    ],
+    "names": [],
+    "file": "seguimiento-folios.component.css"
+}

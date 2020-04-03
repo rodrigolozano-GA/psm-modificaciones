@@ -1,0 +1,400 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Nueva cotización</mat-card-title>
+    </mat-card-header>
+    <div class="wrapper" [formGroup]="generalForm">
+
+        <div class="sec-folio">
+
+            <mat-form-field class="itm-folio">
+                <input matInput placeholder="Folio" [value]="hoy" [disabled]="true" formControlName="folio">
+            </mat-form-field>
+    <!--        
+            <mat-form-field class="itm-cliente">
+                <mat-select formControlName="cliente_id" placeholder="Cliente" (selectionChange)="selectSucursal($event)">
+                    <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Busca un Cliente'"
+                            [noEntriesFoundLabel]="'No se encontraron registros'" [formControl]="clienteFilteringCtrl"
+                            [searching]="searching" (keydown.enter)="filtrarPor(1, $event.target.value)">
+                        </ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let cliente of filteredClientes | async" [value]="cliente.id" (click)="selectRegistro(cliente, 1)">
+                        {{cliente.nombre}}
+                    </mat-option>
+                    </mat-select> 
+                    <mat-error
+                        *ngIf="(generalGetter('cliente_id').dirty || generalGetter('cliente_id').touched) && generalGetter('cliente_id').invalid && generalGetter('cliente_id').errors.required">
+                        Campo requerido
+                </mat-error>
+            </mat-form-field>-->
+<!--Rlf ----------------------------------------------------------------------------------------------------------------------------------->            
+            <mat-form-field class="itm-cliente">
+                    <mat-select formControlName="cliente_id" placeholder="Cliente" #singleSelect>
+                      <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Busca un Cliente'" [formControl]="clientFilterCtrl"
+                            [noEntriesFoundLabel]="'No se encontraron registros'" (keyup)="filtrarPor(1, $event.target.value)">
+                        </ngx-mat-select-search>
+                      </mat-option>
+                
+                      <mat-option *ngFor="let cliente of filteredClientes | async" [value]="cliente.id" 
+                      (click)="selectRegistro(cliente, 1, 1)">
+                        {{cliente.nombre}}
+                      </mat-option>
+                    </mat-select>
+            </mat-form-field>
+<!--Rlf----------------------------------------------------------------------------------------------------------------------------------->
+            <mat-form-field class="itm-sucursal">
+                <!-- <mat-select placeholder="Sucursal" name="sucursal" class="itm-sucursal">
+                    <mat-option *ngFor="let sucursal of sucursalesList" [value]="sucursal.id">
+                        {{sucursal.nombre}}
+                    </mat-option>
+                </mat-select> -->
+
+                <mat-select formControlName="sucursal_id" placeholder="Sucursal">
+                    <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+                    <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Busca una Sucursal'"
+                            [noEntriesFoundLabel]="'No se encontraron registros'" [formControl]="sucursalFilteringCtrl"
+                            [searching]="searching" (keyup)="filterSuc($event.target.value)">
+                        </ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let sucursal of filteredSucursales | async" [value]="sucursal.id" 
+                    (click)="detalleSucursal(sucursal)">
+                        {{sucursal.nombre}}
+                    </mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="(generalGetter('sucursal_id').dirty || generalGetter('sucursal_id').touched) && generalGetter('sucursal_id').invalid && generalGetter('sucursal_id').errors.required">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+
+        <mat-divider>
+        </mat-divider>
+
+        <div class="sec-servicios">
+
+            <h6 class="mt-3">Servicios y/o Refacciones</h6>
+
+            <mat-form-field class="w-100">
+                <!-- <mat-select placeholder="Tipo de servicio" name="tipo">
+                    <mat-option *ngFor="let tipo of tipoServiciosList" [value]="tipo.id">
+                        {{tipo.nombre}}
+                    </mat-option>
+                </mat-select> -->
+                <mat-select formControlName="tipoServicio_id" placeholder="Tipo de servicio">
+                    <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+                    <!-- <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Busca un tipo de servicio'"
+                            [noEntriesFoundLabel]="'No se encontraron registros'" [formControl]="servicioFilteringCtrl"
+                            [searching]="searching" (input)="filtrarPor(3, $event.target.value)">
+                        </ngx-mat-select-search>
+                    </mat-option> -->
+                    <mat-option *ngFor="let servicio of serviciosList" [value]="servicio.id" (click)="selectRegistro(servicio, 2)">
+                        {{servicio.nombre}}
+                    </mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="(generalGetter('tipoServicio_id').dirty || generalGetter('tipoServicio_id').touched) && generalGetter('tipoServicio_id').invalid && generalGetter('tipoServicio_id').errors.required">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>
+
+            <div class="d-flex">
+                <button mat-raised-button class="ml-auto" color="primary" (click)="nuevoProducto()">Agregar producto
+                    <mat-icon><i class="fas fa-plus action-icon action-icon-button"></i></mat-icon></button>
+            </div>
+
+
+            <mat-card class="card-servicios">
+
+                <mat-table #tableTras [dataSource]="dataSourceServ" class="list lista-traslados">
+
+                    <ng-container cdkColumnDef="codigo">
+                        <mat-header-cell *cdkHeaderCellDef class="codigoRow"> Código </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="codigoRow">
+                            <span class="mobile-label">Código:</span>
+                            {{row.codigo}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="concepto">
+                        <mat-header-cell *cdkHeaderCellDef> Concepto </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Concepto:</span>
+                            {{row.concepto}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="cantidad">
+                        <mat-header-cell *cdkHeaderCellDef class="cantidadRow"> Cantidad
+                        </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="cantidadRow">
+                            <span class="mobile-label">Cantidad:</span>
+                            {{row.cantidad}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="precio">
+                        <mat-header-cell *cdkHeaderCellDef class="precioURow"> P. Unitario
+                        </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="precioURow">
+                            <span class="mobile-label">P. Unitario:</span>
+                            ${{row.precio}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="importe">
+                        <mat-header-cell *cdkHeaderCellDef class="importeRow"> Importe
+                        </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="importeRow">
+                            <span class="mobile-label">Importe:</span>
+                            {{row.precio * row.cantidad | currency}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="actions">
+                        <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="actionsRow">
+                            <span class="mobile-label">Acciones:</span>
+                            <button mat-icon-button color="warn" (click)="deteleFrom(row, 1)"><i
+                                    class="far fa-trash-alt action-icon"></i></button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *cdkHeaderRowDef="displayedColumnsServ"></mat-header-row>
+                    <mat-row *cdkRowDef="let row; columns: displayedColumnsServ ">
+                    </mat-row>
+                </mat-table>
+               
+                <mat-error class="center-alerta"
+                    *ngIf="(generalGetter('servicios').dirty || generalGetter('servicios').touched) && generalGetter('servicios').invalid && generalGetter('servicios').errors.required">
+                    Agregue Productos o Servicios a cotizar
+                </mat-error>
+            
+            </mat-card>
+
+        </div>
+
+        <mat-divider>
+        </mat-divider>
+
+      <!-------------------- TRASLADOS -------------------------->
+        <div class="sec-traslados">
+
+            <h6 class="mt-3">Traslados</h6>
+
+            <mat-form-field class="itm-km">
+                <input matInput placeholder="Costo por Km" type="number"  class="text-right"  min="0" formControlName="costokm" >
+                <span matPrefix>$&nbsp;</span>
+
+                <!--<mat-error
+                    *ngIf="(generalGetter('costokm').dirty || generalGetter('costokm').touched) && generalGetter('costokm').invalid && generalGetter('costokm').errors.required">
+                    Campo requerido
+                </mat-error>-->
+            </mat-form-field>
+
+            <button color="primary" class="btn-traslado ml-auto" mat-raised-button (click)="registroTraslado()">Agregar
+                traslado <mat-icon><i class="fas fa-plus action-icon action-icon-button"></i></mat-icon></button>
+
+
+            <mat-card class="mat-elevation-z8 mb-4 itm-lista p-0 card-traslados">
+
+                <mat-table #tableTras [dataSource]="dataSourceTras" class="lista-traslados">
+
+                    <ng-container cdkColumnDef="costo">
+                        <mat-header-cell *cdkHeaderCellDef> Costo por Km </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Costo por Km:</span>
+                            {{row.costokm | currency }} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="origen">
+                        <mat-header-cell *cdkHeaderCellDef> Origen </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Origen:</span>
+                            {{row.origen}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="destino">
+                        <mat-header-cell *cdkHeaderCellDef> Destino </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Destino:</span>
+                            {{row.destino}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="distancia">
+                        <mat-header-cell *cdkHeaderCellDef> Distancia </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Distancia:</span>
+                            {{row.distancia}}Km </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="casetas">
+                        <mat-header-cell *cdkHeaderCellDef> Casetas </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Casetas:</span>
+                            {{row.casetas}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="costoCasetas">
+                        <mat-header-cell *cdkHeaderCellDef> Costo Casetas </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Costo Casetas:</span>
+                            {{row.casetas * objCostos.costoCasetas | currency}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="importe">
+                        <mat-header-cell *cdkHeaderCellDef> Importe </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Importe:</span>
+                            {{row.costokm * row.distancia | currency}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="actions">
+                        <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="actionsRow">
+                            <span class="mobile-label">Acciones:</span>
+                            <button mat-icon-button color="warn" class="ml-auto" (click)="deteleFrom(row, 2)"><i
+                                    class="far fa-trash-alt action-icon"></i></button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *cdkHeaderRowDef="displayedColumnsTras"></mat-header-row>
+                    <mat-row *cdkRowDef="let row; columns: displayedColumnsTras ">
+                    </mat-row>
+                </mat-table>
+                <!--<mat-error class="center-alerta"
+                    *ngIf="(generalGetter('traslados').dirty || generalGetter('traslados').touched) && generalGetter('traslados').invalid && generalGetter('traslados').errors.required">
+                    Agregue traslados a cotizar
+                </mat-error>-->
+            </mat-card>
+        </div>
+
+        <mat-divider>
+        </mat-divider>
+
+
+        <!---   VIATICOS --->
+
+        <div class="sec-viaticos">
+
+            <h6 class="mt-3">Viáticos</h6>
+
+            <div class="sec-config">
+
+                <mat-form-field class="itm-alimentos">
+                    <input matInput placeholder="Viático para alimentos" type="number" class="text-right"
+                        formControlName="viaticoAlimento">
+                    <span matPrefix>$&nbsp;</span>
+                    <!--<mat-error
+                        *ngIf="(generalGetter('viaticoAlimento').dirty || generalGetter('viaticoAlimento').touched) && generalGetter('viaticoAlimento').invalid && generalGetter('viaticoAlimento').errors.required">
+                        Campo requerido
+                    </mat-error>-->
+                </mat-form-field>
+
+                <mat-form-field class="itm-hospedaje">
+                    <input matInput placeholder="Viático para hospedaje" type="number" class="text-right"
+                        formControlName="viaticoHospedaje">
+                    <span matPrefix>$&nbsp;</span>
+                    <!--<mat-error
+                        *ngIf="(generalGetter('viaticoHospedaje').dirty || generalGetter('viaticoHospedaje').touched) && generalGetter('viaticoHospedaje').invalid && generalGetter('viaticoHospedaje').errors.required">
+                        Campo requerido
+                    </mat-error>-->
+                </mat-form-field>
+            </div>
+
+
+            <button class="ml-auto mt-2 " color="primary" mat-raised-button (click)="registroViatico()">Agregar
+                Viaticos <mat-icon><i class="fas fa-plus action-icon action-icon-button"></i></mat-icon></button>
+
+            <mat-card class="mat-elevation-z8 itm-lista mt-3 mb-3 p-0 card-viaticos">
+                <mat-table #table matSort [dataSource]="dataSource" class="lista-viaticos">
+
+                    <ng-container cdkColumnDef="origen">
+                        <mat-header-cell *cdkHeaderCellDef> Origen </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Origen:</span>
+                            {{row.origen}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="destino">
+                        <mat-header-cell *cdkHeaderCellDef> Destino </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Destino:</span>
+                            {{row.destino}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="alimentos">
+                        <mat-header-cell *cdkHeaderCellDef class="numerogRow"> Alimentos </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="numerogRow">
+                            <span class="mobile-label">Alimentos:</span>
+                            {{row.viaticoAlimento | currency}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="hospedaje">
+                        <mat-header-cell *cdkHeaderCellDef class="numerogRow"> Hospedaje </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="numerogRow">
+                            <span class="mobile-label">Hospedaje:</span>
+                            {{row.viaticoHospedaje | currency}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="personas">
+                        <mat-header-cell *cdkHeaderCellDef class="numeroRow"> Personas </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="numeroRow">
+                            <span class="mobile-label">Personas:</span>
+                            {{row.personas}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="dias">
+                        <mat-header-cell *cdkHeaderCellDef class="numeroRow"> Días </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="numeroRow">
+                            <span class="mobile-label">Días:</span>
+                            {{row.dias}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="noches">
+                        <mat-header-cell *cdkHeaderCellDef class="numeroRow"> Noches </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="numeroRow">
+                            <span class="mobile-label">Noches:</span>
+                            {{row.noches}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="importe">
+                        <mat-header-cell *cdkHeaderCellDef> Importe </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Importe:</span>
+                           <!--{{ ((row.viaticoAlimento + row.viaticoHospedaje)* row.personas)*row.dias | currency}}-->
+                            {{((row.viaticoAlimento*row.dias*row.personas)+(row.viaticoHospedaje*row.noches*row.personas)) | currency}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="actions">
+                        <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="actionsRow">
+                            <span class="mobile-label">Acciones:</span>
+                            <button mat-icon-button color="warn" class="ml-auto" (click)="deteleFrom(row, 3)"><i
+                                    class="far fa-trash-alt action-icon"></i></button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+                    </mat-row>
+                </mat-table>
+                <!--<mat-error class="center-alerta"
+                    *ngIf="(generalGetter('viaticos').dirty || generalGetter('viaticos').touched) && generalGetter('viaticos').invalid && generalGetter('viaticos').errors.required">
+                    Agregue viáticos
+                </mat-error>-->
+            </mat-card>
+
+
+        </div>
+
+        <div class="d-flex">
+            <button mat-raised-button color="accent" (click)="previsualizar()" class="ml-auto">PREVISUALIZAR</button>
+            <button mat-raised-button color="primary" (click)="generarPdf()" class="ml-3">GENERAR PDF</button>
+        </div>
+
+    </div>
+</mat-card>

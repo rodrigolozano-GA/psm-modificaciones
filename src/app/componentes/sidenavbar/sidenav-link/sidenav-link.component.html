@@ -1,0 +1,9 @@
+<mat-action-list>
+    <button mat-list-item routerLink="{{link.state}}" routerLinkActive="active" (click)="toggleParent()" class="btn-link">
+        <button mat-icon-button color="primary">
+            <mat-icon><i [ngClass]="link.icon" class="fa-rem d-flex justify-content-center align-items-center h-100"></i>
+            </mat-icon>
+        </button>
+        <label class="mb-0 cursor">{{link.name}}</label>
+    </button>
+</mat-action-list>

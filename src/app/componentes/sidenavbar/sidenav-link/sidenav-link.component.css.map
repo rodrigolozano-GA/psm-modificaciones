@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "mappings": "AEy1CA,mCAAmC;AA8hDnC,4CAA4C;AAwC5C,sBAAsB;AF75FtB,AAAA,cAAc,CAAC;EACX,WAAW,EAAE,CAAC;CAKjB;;AAND,AAGI,cAHU,CAGV,SAAS,CAAC;EACN,MAAM,EAAE,IAAI;CACf;;AAGL,AAII,cAJU,AAIT,OAAO,CAAC;EACL,gBAAgB,EAAE,uBAAuB,CAAC,UAAU;EACpD,KAAK,EAAE,IAAI;CAKd;;AAXL,AAQQ,cARM,AAIT,OAAO,CAIJ,gBAAgB,CAAC;EACb,KAAK,EAAE,IAAI;CACd;;AAKT,AAAA,SAAS,AAAA,MAAM,EAAE,SAAS,AAAA,QAAQ,EAAE,SAAS,AAAA,OAAO,EAAE,SAAS,AAAA,MAAM,CAAC;EAClE,eAAe,EAAE,eAAe;CACnC",
+    "sources": [
+        "sidenav-link.component.scss",
+        "../../../../_variables.scss",
+        "../../../../../node_modules/@angular/material/_theming.scss",
+        "../../../../_palettes.scss"
+    ],
+    "names": [],
+    "file": "sidenav-link.component.css"
+}

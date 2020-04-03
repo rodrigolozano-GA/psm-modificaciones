@@ -1,0 +1,160 @@
+<mat-card>
+  <mat-card-content>
+  <h4>Importador de Servicios</h4>
+  <input id="input" type='file' accept=".xls, .xlsx"><br>
+  <mat-divider></mat-divider>
+    <br>
+  
+  <div *ngIf="showTable" class="example-container mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" style="overflow-x:scroll;">
+      <ng-container cdkColumnDef="fechaProgramada">
+        <mat-header-cell *cdkHeaderCellDef> Fecha Programada </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+            <span class="mobile-label">Fecha Programada:</span>
+            {{row.fecha_programada_folio}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="medio">
+          <mat-header-cell *cdkHeaderCellDef> Medio </mat-header-cell>
+          <mat-cell *cdkCellDef="let row">
+              <span class="mobile-label">Medio:</span>
+              {{row.medio_id}}
+          </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="cliente">
+          <mat-header-cell *cdkHeaderCellDef> Cliente </mat-header-cell>
+          <mat-cell *cdkCellDef="let row">
+              <span class="mobile-label">Cliente:</span>
+              {{row.cliente_id}}
+          </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="sucursal">
+        <mat-header-cell *cdkHeaderCellDef> Sucursal </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+            <span class="mobile-label">Sucursal:</span>
+            {{row.sucursal_id}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="tipoServ">
+        <mat-header-cell *cdkHeaderCellDef> Servicio </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+            <span class="mobile-label">Servicio:</span>
+            {{row.tiposervicio_id}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="coordinador">
+        <mat-header-cell *cdkHeaderCellDef > Coordinador </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+            <span class="mobile-label">Coordinador:</span>
+            {{row.coordinador_id}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="ot">
+        <mat-header-cell *cdkHeaderCellDef > Ot </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+            <span class="mobile-label">Ot:</span>
+            {{row.ot}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="ticket">
+        <mat-header-cell *cdkHeaderCellDef> Ticket </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+            <span class="mobile-label">Ticket:</span>
+            {{row.ticket}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="descripcion">
+        <mat-header-cell *cdkHeaderCellDef> Descripcion </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+            <span class="mobile-label">Descripcion :</span>
+            {{row.descripcion}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="observacion">
+        <mat-header-cell *cdkHeaderCellDef> Observaciones </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+            <span class="mobile-label">Observaciones:</span>
+            {{row.observaciones}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="refacciones">
+        <mat-header-cell *cdkHeaderCellDef> Refacciones </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+            <span class="mobile-label">Refacciones:</span>
+            <table>
+              <tr *ngFor="let refac of row.refacciones">
+                <td>{{refac.codigo}}-{{refac.concepto}}</td>
+                <td>{{refac.cantidad}}</td>
+                <td>{{refac.precio}}</td>
+                <td>{{refac.importe}}</td>
+              </tr>
+            </table>
+        </mat-cell>
+      </ng-container>
+<!--
+  
+    <mat-table [dataSource]="dataSource">
+      <ng-container cdkColumnDef="codigo">
+        <mat-header-cell *cdkHeaderCellDef> Codigo </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+            <span class="mobile-label">Codigo:</span>
+            {{row.codigo}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="concepto">
+        <mat-header-cell *cdkHeaderCellDef> Concepto </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+            <span class="mobile-label">Concepto:</span>
+            {{row.concepto}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="cantidad">
+        <mat-header-cell *cdkHeaderCellDef> Cantidad </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+            <span class="mobile-label">Cantidad:</span>
+            {{row.cantidad}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="precio">
+        <mat-header-cell *cdkHeaderCellDef> Precio </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+            <span class="mobile-label">Precio:</span>
+            {{row.precio}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="importe">
+        <mat-header-cell *cdkHeaderCellDef> Importe </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+            <span class="mobile-label">Importe:</span>
+            {{row.importe}}
+        </mat-cell>
+      </ng-container> 
+    </mat-table>
+    -->
+      <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+      </mat-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</mat-card-content>
+</mat-card>
+
+<div class="d-flex">
+  <button mat-raised-button color="accent" class="ml-auto" (click)="cargar()">EMPEZAR</button>
+  <button mat-button matDialogClose color="primary" class="ml-auto">CERRAR</button>
+</div>

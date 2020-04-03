@@ -1,0 +1,90 @@
+<mat-card class="mat-elevation-z8">
+    <mat-card-header class="d-flex">
+        <mat-card-title class="ml-0">Autorizar solicitud de Actas</mat-card-title>
+        <button mat-icon-button color="primary" class="ml-auto" matTooltip="Calificar seleccionados"
+            [disabled]="!selection.selected.length" (click)="dialogoCalificar()"><i
+                class="fas fa-unlock-alt action-icon"></i></button>
+        <button mat-icon-button color="primary" (click)="exportAsExcel()"
+            matTooltip="Descargar archivo excel"><i class="far fa-file-download action-icon"></i></button>
+        <button mat-icon-button color="primary" matTooltip="Actualizar" (click)="ActualizarTabla()"><i
+                class="far fa-sync action-icon"></i></button>
+    </mat-card-header>
+    <mat-card-content class="">
+
+        <mat-form-field class="w-100">
+            <input matInput placeholder="Buscar" (keyup)="busqueda($event.target.value)" value="">
+        </mat-form-field>
+
+        <mat-table #table matSort [dataSource]="dataSource">
+
+            <ng-container cdkColumnDef="select">
+                <mat-header-cell *cdkHeaderCellDef class="selectRow"></mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="selectRow">
+                    <mat-checkbox color="primary" (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="folio">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Folio </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Folio:</span>
+                    {{row.folio}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="solicitante">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Solicitante </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Solicitante:</span>
+                    {{row.solicitante}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="tecnico">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Técnico </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Técnico:</span>
+                    {{row.tecnico}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="formato">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Formato </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Formato:</span>
+                    {{row.formato}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="actas">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> #Actas </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">#Actas:</span>
+                    {{row.actas}}
+                </mat-cell>
+            </ng-container>
+
+
+            <ng-container cdkColumnDef="actions">
+                <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="actionsRow">
+                    <span class="mobile-label">Acciones:</span>
+                    <!--[matTooltip]="row.estatus ? 'Activo': 'Desactivado'"-->
+                    <button mat-icon-button color="primary" class="ml-auto" matTooltip="Calificar"
+                        (click)="dialogoMotivos(row)">
+                        <i class="far fa-vote-yea action-icon"></i>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+            </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </mat-card-content>
+
+</mat-card>

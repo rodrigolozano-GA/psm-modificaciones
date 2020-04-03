@@ -1,0 +1,30 @@
+@import '../node_modules/@angular/material/_theming.scss';
+@import './_palettes.scss';
+
+// Variables del tema Armstrong
+$primary-palette: mat-palette($md-psmprimary);
+$accent-palette: mat-palette($md-psmaccent);
+$warn-palette: mat-palette($md-psmwarn);
+
+$primary: mat-color($primary-palette);
+$accent: mat-color($accent-palette);
+$warn: mat-color($warn-palette); 
+
+// Variables de otros temas para los snackbar
+$green-palette: mat-palette($mat-green);
+$blue-palette: mat-palette($mat-blue);
+$yellow-palette: mat-palette($mat-amber, 300);
+
+$green-md: mat-color($green-palette);
+$blue-md: mat-color($blue-palette);
+$yellow-md: mat-color($yellow-palette);
+
+//Variables para la sidevar
+$primary-light-palette: mat-palette($md-psmprimary,A100);
+
+$primary-light: mat-color($primary-light-palette);
+
+// Colores de Armstrong
+$gris-psm: rgb(135,134,134);
+$rojo-psm: rgb(220,7,20);
+$indigo-psm: rgb(43,41,126);

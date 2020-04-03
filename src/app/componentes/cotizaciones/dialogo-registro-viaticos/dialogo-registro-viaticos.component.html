@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Registro de nuevo viático </h1>
+<div mat-dialog-content>
+
+    <div class="wrapper" [formGroup]="generalForm">
+        <div class="sec-datos">
+            <mat-form-field class="itm-personas">
+                <input matInput placeholder="Personas" type="number" value="" formControlName="personas">
+                <mat-error
+                    *ngIf="(generalGetter('personas').dirty || generalGetter('personas').touched) && generalGetter('personas').invalid && generalGetter('personas').errors.required">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="itm-dias">
+                <input matInput placeholder="Días" type="number" value="" formControlName="dias">
+                <mat-error
+                    *ngIf="(generalGetter('dias').dirty || generalGetter('dias').touched) && generalGetter('dias').invalid && generalGetter('dias').errors.required">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="itm-noches">
+                <input matInput placeholder="Noches" type="number" value="" formControlName="noches">
+                <mat-error
+                    *ngIf="(generalGetter('noches').dirty || generalGetter('noches').touched) && generalGetter('noches').invalid && generalGetter('noches').errors.required">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="itm-traslado">
+                <mat-select placeholder="Traslado asociado" formControlName="origendestino">
+                    <mat-option *ngFor="let item of trasladosList" [value]="item">
+                        {{item.origen}} - {{item.destino}} - ${{item.costokm}} p/Km
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="(generalGetter('origendestino').dirty || generalGetter('origendestino').touched) && generalGetter('origendestino').invalid && generalGetter('origendestino').errors.required">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button matDialogClose color="primary" class="ml-auto">CANCELAR</button>
+    <button mat-raised-button (click)="registrar()" color="primary">AGREGAR</button>
+</div>

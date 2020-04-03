@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,mBAAmB,CAAC;EAClB,SAAS,EAAE,IAAI;CAChB;;AAED,AAAA,wBAAwB;AACxB,sBAAsB;AACtB,uBAAuB;AACvB,iBAAiB,CAAC;EAChB,SAAS,EAAE,IAAI;EACf,eAAe,EAAE,MAAM;CACxB;;AAED,AAAA,mBAAmB,CAAC;EAClB,UAAU,EAAE,MAAM;EAClB,eAAe,EAAE,MAAM;CACxB",
+    "sources": [
+        "administracion-actas.component.scss"
+    ],
+    "names": [],
+    "file": "administracion-actas.component.css"
+}

@@ -1,0 +1,36 @@
+.wrapper {
+  margin: 1rem 0;
+}
+
+.inner-wrapper {
+  display: -ms-grid;
+  display: grid;
+  grid-row-gap: 1rem;
+}
+
+.itm-tecnicos,
+.itm-carac {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.itm-tecnicos .itm-input,
+.itm-carac .itm-input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin-right: 0.75rem;
+}
+
+.nRow {
+  max-width: 10rem;
+}
+
+.actionsRow {
+  max-width: 5rem;
+}
+/*# sourceMappingURL=dialogo-admin-tecnicos.component.css.map */

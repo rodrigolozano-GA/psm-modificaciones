@@ -1,0 +1,76 @@
+<h1 mat-dialog-title>Registro de nuevo traslado </h1>
+<div mat-dialog-content>
+
+    <div class="wrapper" [formGroup]="generalForm">
+        <div class="sec-traslados">
+            <mat-form-field class="itm-origen">
+
+                <input matInput placeholder="Origen" aria-label="origen" [matAutocomplete]="auto"
+                    formControlName="origen">
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="seleccion($event)">
+                    <mat-option *ngFor="let origen of filteredOrigenes | async" [value]="origen">
+                        {{origen.origen}}
+                    </mat-option>
+                    <!--<mat-optgroup label="Registros anteriores" *ngIf="localList.length">
+                        <mat-option *ngFor="let item of localList" [value]="item">
+                            {{item.origen}} - {{item.destino}} - {{item.distancia}}Km - {{item.casetas}} casetas
+                        </mat-option>
+                    </mat-optgroup>-->
+                </mat-autocomplete>
+                <mat-error
+                    *ngIf="(generalGetter('origen').dirty || generalGetter('origen').touched) && generalGetter('origen').invalid && generalGetter('origen').errors.required">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="itm-destino">
+                
+                <input matInput placeholder="Destino" aria-label="destino" [matAutocomplete]="autoDestino"
+                    formControlName="destino">
+                <mat-autocomplete #autoDestino="matAutocomplete" (optionSelected)="seleccionDestino($event)">
+                    <mat-option *ngFor="let destino of filteredDestinos | async" [value]="destino">
+                        {{destino.destino}}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-error
+                    *ngIf="(generalGetter('destino').dirty || generalGetter('destino').touched) && generalGetter('destino').invalid && generalGetter('destino').errors.required">
+                    Campo requerido
+                </mat-error>
+                
+            </mat-form-field>
+
+            <mat-form-field class="itm-distancia">
+                <input type="number" min="0" matInput placeholder="Distancia" value="" class="text-right" formControlName="distancia">
+                <span matSuffix> &nbsp;Km</span>
+                <mat-error
+                    *ngIf="(generalGetter('distancia').dirty || generalGetter('distancia').touched) && generalGetter('distancia').invalid && generalGetter('distancia').errors.required">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="itm-casetas">
+                <input type="number" min="0" matInput placeholder="Casetas" value="" class="text-right" formControlName="casetas">
+                <mat-error
+                    *ngIf="(generalGetter('casetas').dirty || generalGetter('casetas').touched) && generalGetter('casetas').invalid && generalGetter('casetas').errors.required">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>
+
+            <!--<mat-form-field class="itm-casetas">
+                <mat-select placeholder="Casetas" name="casetas" formControlName="casetas">
+                    <mat-option *ngFor="let item of [1-100]" [value]="item">
+                        {{item}}
+                    </mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="(generalGetter('casetas').dirty || generalGetter('casetas').touched) && generalGetter('casetas').invalid && generalGetter('casetas').errors.required">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>-->
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button matDialogClose color="primary" class="ml-auto">CANCELAR</button>
+    <button mat-raised-button (click)="registrar()" color="primary">AGREGAR</button>
+</div>

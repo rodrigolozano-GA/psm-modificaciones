@@ -1,0 +1,200 @@
+/* You can add global styles to this file, and also import other style files */
+@import url(c:\Users\GArmstrong\Documents\Proyecto\PSM\frontend-psm\psm-app\node_modules\@angular\cdk\overlay-prebuilt.css);
+@import url(c:\Users\GArmstrong\Documents\Proyecto\PSM\frontend-psm\psm-app\node_modules\angular-calendar\css\angular-calendar.css);
+/* Theme for the ripple elements.*/
+/* stylelint-disable material/no-prefixes */
+/* stylelint-enable */
+body {
+  background-color: #fff;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 100vh;
+      grid-template-rows: 100vh;
+  overflow: hidden;
+  /* width */
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
+}
+
+body label {
+  margin-bottom: 0 !important;
+}
+
+body button,
+body a {
+  outline: none !important;
+}
+
+body .p-relative {
+  position: relative !important;
+}
+
+body .cursor {
+  cursor: pointer;
+}
+
+body .icon-input {
+  font-size: 1rem;
+}
+
+body .fa-rem {
+  font-size: 1rem;
+}
+
+body .action-icon {
+  font-size: 1.2rem;
+}
+
+body .link {
+  color: #2b297e;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+body .link:hover {
+  cursor: pointer;
+}
+
+body .action-icon-button {
+  font-size: 0.8rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+}
+
+body .mat-simple-snackbar {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body .snack-error {
+  background-color: #dc0714 !important;
+  color: #fff !important;
+}
+
+body .snack-ok {
+  background-color: #4caf50 !important;
+  color: #fff !important;
+}
+
+body .snack-validation {
+  background-color: #ffd54f !important;
+  color: #000 !important;
+}
+
+body .snack-info {
+  background-color: #2196f3 !important;
+  color: #000 !important;
+}
+
+body .dialog-info {
+  min-width: 40vw;
+}
+
+body .dialog-cotizacion {
+  min-width: 65%;
+}
+
+body .dialog-traslados,
+body .dialog-viaticos,
+body .dialog-actas,
+body .dialog-valida {
+  min-width: 40vw;
+}
+
+body .dialog-servicios,
+body .dialog-tecnico,
+body .dialog-sucursal,
+body .dialog-conceptos,
+body .dialog-dividir,
+body .dialog-reportar,
+body .dialog-detalle {
+  min-width: 50vw;
+}
+
+body .dialog-gasto {
+  min-width: 80vw;
+}
+
+body ::-webkit-scrollbar {
+  width: 10px;
+}
+
+body ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+body ::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+body ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+body .inp-concepto > .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+body .mobile-label {
+  display: none;
+}
+
+@media (max-width: 730.98px) {
+  body .mobile-label {
+    display: inline-block;
+    font-weight: bold;
+    -ms-flex-item-align: start;
+        align-self: flex-start;
+  }
+  body .mat-header-row {
+    display: none;
+  }
+  body .mat-row {
+    display: -ms-grid;
+    display: grid;
+    padding: 8px 24px;
+  }
+  body .mat-row .mat-cell {
+    padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  body .mat-row .mat-column-actions {
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+  }
+}
+
+.cal-month-view .cal-open-day-events {
+  background-color: #fff !important;
+  color: #000;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  max-height: 10rem;
+  overflow-y: auto !important;
+}
+/*# sourceMappingURL=styles.css.map */

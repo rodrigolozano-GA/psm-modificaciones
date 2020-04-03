@@ -1,0 +1,70 @@
+.mapa {
+  height: 100%;
+}
+
+.sec-datos {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  grid-column-gap: 1rem;
+  margin-top: 1rem;
+}
+
+.sec-datos .divider {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1 / span 2;
+}
+
+.sec-ubicacion {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto 1fr;
+      grid-template-rows: auto 1fr;
+  height: 15rem;
+  margin: 1rem 0;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1 / span 2;
+}
+
+.sec-inventario {
+  display: -ms-grid;
+  display: grid;
+  margin-top: 1rem;
+}
+
+.sec-inventario .inventario .itm-nombre {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+.sec-inventario .inventario .itm-cantidad {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.cantidad-row {
+  max-width: 8rem;
+}
+
+.sec-actas {
+  display: -ms-grid;
+  display: grid;
+  grid-row-gap: 1rem;
+  padding-top: 1rem;
+}
+
+.sec-cuenta {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  margin-top: 1rem;
+}
+/*# sourceMappingURL=dialogo-tecnico.component.css.map */

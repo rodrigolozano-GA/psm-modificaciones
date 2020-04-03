@@ -1,0 +1,19 @@
+.numeroRow {
+  max-width: 7.5rem;
+}
+
+.actionsRow {
+  max-width: 6rem;
+}
+
+.folioRow {
+  max-width: 13rem;
+}
+
+.tipoServicioRow {
+  max-width: 15;
+}
+.clienteRow {
+  max-width: 80rem;
+}
+/*# sourceMappingURL=seguimiento-folios.component.css.map */

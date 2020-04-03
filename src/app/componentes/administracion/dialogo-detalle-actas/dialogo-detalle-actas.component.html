@@ -1,0 +1,78 @@
+<h1 mat-dialog-title>Detalle de Actas</h1>
+<div mat-dialog-content>
+
+    <div class="wrapper">
+
+        <mat-table #tableTecn="matSort" matSort [dataSource]="dataSource" class=" ">
+
+            <ng-container cdkColumnDef="consecutivo">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="consecutivoRow">N°
+                </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="consecutivoRow">
+                    <span class="mobile-label">N°</span>
+                    {{row.consecutivo}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="acta">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="actaRow">Acta
+                </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="actaRow">
+                    <span class="mobile-label">Acta</span>
+                    {{row.numacta}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="folio">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="folioRow">Folio
+                </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="folioRow">
+                    <span class="mobile-label">Folio</span>
+                    {{row.folio}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="motivo">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="motivoRow">Motivo
+                </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="motivoRow">
+                    <span class="mobile-label">Motivo:</span>
+                    {{row.motivo}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="estatus">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="nombreRow">Estatus
+                </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="nombreRow">
+                    <span class="mobile-label">Estatus:</span>
+                    <mat-checkbox [checked]="row.estatus ? true : false" disabled disableRipple="true"></mat-checkbox>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="actions">
+                <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="actionsRow">
+                    <span class="mobile-label">Acciones:</span>
+
+                    <button mat-flat-button color="primary" class="ml-auto" [disabled]="row.estatus ? true : false" (click)="dialogoValidar(row)">
+                        Validar
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+            </mat-row>
+        </mat-table>
+        <mat-paginator #tecPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+        </mat-paginator>
+
+
+
+    </div>
+
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-raised-button color="primary" class="ml-auto" matDialogClose>CERRAR</button>
+</div>

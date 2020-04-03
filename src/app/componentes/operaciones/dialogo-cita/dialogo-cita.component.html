@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Fecha de cita</h1>
+<div mat-dialog-content>
+    <mat-form-field class="w-100" [formGroup]="generalForm">
+        <input matInput [matDatepicker]="picker" placeholder="Fecha de la cita" formControlName="fecha" (click)="picker.open()">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button class="ml-auto" color="primary" matDialogClose>CERRAR</button>
+    <button mat-raised-button  color="primary" (click)="actualizaFechaFolio()">GUARDAR</button>
+</div>

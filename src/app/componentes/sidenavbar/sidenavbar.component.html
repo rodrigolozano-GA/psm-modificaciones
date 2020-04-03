@@ -1,0 +1,7 @@
+<ul class="side-menu">
+    <li class="parent-list-item" *ngFor="let menu of menu">
+        <app-sidenav-link *ngIf="menu.type === 'link'" [link]="menu" [pparent]="parent" [pwid]="wid"></app-sidenav-link>
+        <app-sidenav-menu *ngIf="menu.type === 'toggle'" [icon]="menu.icon" [tittle]="menu.name" [child]="menu.pages"
+            (dactive)="cambiarActivo($event)" [mparent]="parent" [mwid]="wid"></app-sidenav-menu>
+    </li>
+</ul>

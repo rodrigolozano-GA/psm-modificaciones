@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+}
+
+.centerme {
+  min-width:150px;
+}
+
+mat-card img{
+    opacity: 0.2;
+    object-fit: cover;
+    width: 60%; 
+    height: 30%;
+  }

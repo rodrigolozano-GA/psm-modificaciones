@@ -1,0 +1,68 @@
+.actionsRow {
+  max-width: 7rem;
+}
+
+.citaRow {
+  max-width: 7rem;
+  justify-content: center;
+}
+
+.diasRow {
+  max-width: 5rem;
+  justify-content: center;
+}
+
+.colCliente {
+  max-width: 25;
+}
+.colEstatus{
+  max-width: 10rem;
+}
+
+.tipoServicio {
+  max-width: 8rem;
+}
+
+
+.cdk-column-folio {
+  max-width: 10rem;
+}
+
+.cdk-column-estatus {
+  max-width: 12rem;
+}
+.verde {
+  color: white !important;
+  background-color: green;
+  border-radius: 2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.amarillo {
+  color: #000 !important;
+  background-color: #ffeb3b;
+  border-radius: 2rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.rojo {
+  color: #fff !important;
+  background-color: red;
+  border-radius: 2rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,EAAE,WAAW,CAAC;EACpB,SAAS,EAAE,IAAI;CAClB",
+    "sources": [
+        "seguimiento-gastos.component.scss"
+    ],
+    "names": [],
+    "file": "seguimiento-gastos.component.css"
+}

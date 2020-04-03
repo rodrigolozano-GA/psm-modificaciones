@@ -1,0 +1,132 @@
+.wrapper {
+  display: -ms-grid;
+  display: grid;
+  grid-row-gap: 1rem;
+}
+
+.wrapper .sec-folio {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 1rem;
+}
+
+.wrapper .sec-folio .itm-folio {
+  -ms-grid-column: 2;
+  grid-column: 2;
+  -ms-grid-row: 1;
+  grid-row: 1;
+}
+
+.wrapper .sec-folio .itm-estatus {
+  -ms-grid-column: 3;
+  grid-column: 3;
+  -ms-grid-row: 1;
+  grid-row: 1;
+}
+
+.wrapper .sec-folio .itm-tipo-gasto {
+  -ms-grid-column: 1;
+  grid-column: 1;
+  -ms-grid-row: 1;
+  grid-row: 1;
+}
+
+.wrapper .sec-folio .itm-no-empleado {
+  -ms-grid-column: 1;
+  grid-column: 1;
+  -ms-grid-row: 3;
+  grid-row: 3;
+}
+
+.wrapper .sec-folio .itm-nombre-empleado {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 2;
+  grid-column: 2 / span 2;
+  -ms-grid-row: 3;
+  grid-row: 3;
+}
+
+.wrapper .sec-folio .sec-ubicacion {
+  -ms-grid-row: 4;
+  grid-row: 4;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-column: 1 / span 3;
+  height: 13rem;
+}
+
+.wrapper .sec-folio .sec-ubicacion .mapa {
+  height: 100%;
+}
+
+.wrapper .sec-ods {
+  display: -ms-grid;
+  display: grid;
+  grid-row-gap: 1rem;
+}
+
+.wrapper .sec-servicios {
+  display: -ms-grid;
+  display: grid;
+  grid-row-gap: 1rem;
+}
+
+.wrapper .sec-conceptos {
+  display: -ms-grid;
+  display: grid;
+  grid-row-gap: 1rem;
+}
+
+.wrapper .sec-conceptos .conceptos-inner {
+  display: -ms-grid;
+  display: grid;
+  grid-row-gap: 1rem;
+}
+
+.actionsRow {
+  max-width: 4rem;
+}
+
+.card-servicios {
+  height: 20rem;
+  overflow: hidden;
+  padding: 0;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto auto;
+      grid-template-rows: auto auto;
+}
+
+.card-servicios .list {
+  height: 100%;
+  overflow: auto;
+}
+
+.card-servicios .list .list-item {
+  padding: 0 1rem;
+  margin-top: 0.7rem;
+}
+
+.card-servicios .list .list-item:first-child {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.card-servicios .list .list-item:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.codigoRow {
+  max-width: 10rem;
+}
+
+.cantidadRow {
+  max-width: 7rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+/*# sourceMappingURL=dialogo-gasto.component.css.map */

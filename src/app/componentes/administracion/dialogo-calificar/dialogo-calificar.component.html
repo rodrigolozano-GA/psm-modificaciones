@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Calificar Petición </h1>
+<div mat-dialog-content>
+
+    <div class="wrapper" [formGroup]="generalForm">
+        <mat-form-field class="itm-traslado w-100">
+            <mat-select placeholder="Seleccione estatus" formControlName="estatus" (selectionChange)="obtAdvertencias()">
+                <mat-option *ngFor="let estatus of estatusList" [value]="estatus.id" (click)="estatusNombre=estatus.nombre">
+                    {{estatus.nombre}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="(generalGetter('estatus').dirty || generalGetter('estatus').touched) && generalGetter('estatus').invalid && generalGetter('estatus').errors.required">
+                Campo requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-divider>
+        </mat-divider>
+
+        <label mat-dialog-title class="lblAdvertensia">Advertencias</label>
+
+        <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let adver of adverList">{{adver}}</mat-list-item>
+        </mat-list>
+    </div>
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button matDialogClose color="primary" class="ml-auto">CANCELAR</button>
+    <button mat-raised-button (click)="guardar()" color="primary">GUARDAR</button>
+</div>

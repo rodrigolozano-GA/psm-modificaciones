@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAA;EACP,MAAM,EAAE,IAAI;CACf;;AAED,AAAA,UAAU,CAAC;EACP,WAAW,EAAE,IAAI;CACpB",
+    "sources": [
+        "dialogo-dividir-monto.component.scss"
+    ],
+    "names": [],
+    "file": "dialogo-dividir-monto.component.css"
+}

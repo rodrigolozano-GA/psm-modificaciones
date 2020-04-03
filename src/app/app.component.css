@@ -1,0 +1,13 @@
+.layout {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto 1fr;
+      grid-template-rows: auto 1fr;
+  height: 100%;
+}
+
+.layout .body-render {
+  padding: 1rem;
+  overflow: auto;
+}
+/*# sourceMappingURL=app.component.css.map */

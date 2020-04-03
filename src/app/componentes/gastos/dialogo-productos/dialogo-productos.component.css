@@ -1,0 +1,182 @@
+.wrapper .sec-folio {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+  grid-column-gap: 1rem;
+}
+
+.wrapper .sec-folio .itm-cliente {
+  -ms-grid-row: 2;
+      grid-row-start: 2;
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.wrapper .sec-folio .itm-sucursal {
+  -ms-grid-row: 2;
+      grid-row-start: 2;
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.wrapper .sec-servicios .card-servicios {
+  height: 20rem;
+  overflow: hidden;
+  padding: 0;
+  margin-bottom: 1rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto 1fr;
+      grid-template-rows: auto 1fr;
+}
+
+.wrapper .sec-servicios .card-servicios .inp-codigo {
+  padding: 1rem 1rem 0 1rem;
+}
+
+.wrapper .sec-servicios .card-servicios .list {
+  height: 100%;
+  overflow: auto;
+}
+
+.wrapper .sec-servicios .card-servicios .list .list-item {
+  padding: 0 1rem;
+  margin-top: 0.7rem;
+}
+
+.wrapper .sec-servicios .card-servicios .list .list-item:first-child {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.wrapper .sec-servicios .card-servicios .list .list-item:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.wrapper .sec-servicios .card-servicios .inp-cantidad {
+  width: 5rem;
+}
+
+.wrapper .sec-traslados {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: auto auto auto auto auto;
+      grid-template-rows: auto auto auto auto auto;
+  grid-column-gap: 1rem;
+}
+
+.wrapper .sec-traslados .itm-origen {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  -ms-grid-row: 2;
+      grid-row-start: 2;
+}
+
+.wrapper .sec-traslados .itm-destino {
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  -ms-grid-row: 2;
+      grid-row-start: 2;
+}
+
+.wrapper .sec-traslados .itm-distancia {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  -ms-grid-row: 3;
+      grid-row-start: 3;
+}
+
+.wrapper .sec-traslados .itm-casetas {
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  -ms-grid-row: 3;
+      grid-row-start: 3;
+}
+
+.wrapper .sec-traslados .btn-traslado {
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  -ms-grid-row: 4;
+      grid-row-start: 4;
+}
+
+.wrapper .sec-traslados .itm-lista {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 3;
+  -ms-grid-row: 5;
+      grid-row-start: 5;
+  margin-top: 1rem;
+  height: 20rem;
+  overflow: hidden;
+}
+
+.wrapper .sec-traslados .itm-lista .lista-traslados {
+  height: 100%;
+  overflow: auto;
+}
+
+.wrapper .sec-viaticos {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.wrapper .sec-viaticos .sec-config {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  grid-column-gap: 1rem;
+}
+
+.wrapper .sec-viaticos .sec-datos {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 1rem;
+}
+
+.wrapper .sec-viaticos .itm-lista {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 3;
+  -ms-grid-row: 5;
+      grid-row-start: 5;
+  margin-top: 1rem;
+  height: 20rem;
+  overflow: hidden;
+}
+
+.wrapper .sec-viaticos .itm-lista .lista-viaticos {
+  height: 100%;
+  overflow: auto;
+}
+
+.wrapper .inp-cantidad {
+  width: 3rem;
+}
+
+.actionsRow {
+  max-width: 2.5rem;
+}
+
+.checkRow {
+  max-width: 5rem;
+}
+
+.cantidadRow {
+  max-width: 8rem;
+}
+/*# sourceMappingURL=dialogo-productos.component.css.map */

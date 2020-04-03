@@ -1,0 +1,60 @@
+.tab-general {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 1rem;
+  grid-column-gap: 1rem;
+
+  .itm-direccion {
+    grid-column: 1 / span 2;
+  }
+
+  .itm-mapa {
+    height: 15rem;
+    display: grid;
+    grid-column: 1 / span 2;
+
+    .mapa {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+.tab-inventario {
+  padding: 1rem;
+  display: grid;
+  grid-row-gap: 2rem;
+
+  .itm-lista {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    .itm-cantidad {
+      grid-column: 3 / span 2;
+    }
+
+    .itm-nombre {
+      grid-column: 1 / span 4;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .itm-tipo {
+      grid-column: 1 / span 4;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .itm-mat-list {
+      grid-column: 1 / span 4;
+
+      .lista-titulo {
+        grid-column: 1 / span 2;
+      }
+
+      .itm-caracteristica {
+        height: 3rem;
+      }
+    }
+  }
+}

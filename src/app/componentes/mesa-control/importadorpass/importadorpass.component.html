@@ -1,0 +1,23 @@
+<mat-card class="mat-elevation-z8">
+  
+    <mat-card-header class="d-flex">
+        <mat-card-title class="ml-0">Importador de pwd y encryptado</mat-card-title>
+    </mat-card-header>
+   
+    <mat-card-content class="">
+ 
+      <div>
+        <input id="input" type="file" accept=".xlsx" (click)="charge()" #fileUploader>
+        <button matSuffix mat-icon-button color="primary" class="itm-btn" style="float: right;" (click)="procesar()"
+        matTooltip="Procesar">
+         <i class="far fa-file-upload fa-2x"></i>
+        </button>
+        <button matSuffix mat-icon-button color="primary" class="itm-btn" style="float: right;" (click)="limpiar()"
+            matTooltip="Cancelar">
+            <i class="far fa-trash-alt  fa-2x"></i>
+        </button>
+        
+      </div>
+
+    </mat-card-content>
+</mat-card>

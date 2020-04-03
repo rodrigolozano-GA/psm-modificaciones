@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,SAAS,EAAE,MAAM;CACpB;;AAED,AAAA,WAAW,CAAC;EACR,SAAS,EAAE,IAAI;CAClB;;AAED,AAAA,SAAS,CAAC;EACN,SAAS,EAAE,KAAK;CACnB",
+    "sources": [
+        "seguimiento-cotizaciones.component.scss"
+    ],
+    "names": [],
+    "file": "seguimiento-cotizaciones.component.css"
+}

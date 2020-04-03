@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Servicios activos de la sucursal </h1>
+<div mat-dialog-content>
+
+    <div class="wrapper">
+
+        <mat-card-content>
+
+            <mat-form-field class="w-100">
+                <input matInput placeholder="Buscar" (keyup)="busqueda($event.target.value)" value="">
+            </mat-form-field>
+
+            <mat-table matSort [dataSource]="dataServicios" class="list-servicios" #tableServ="matSort">
+
+                <ng-container cdkColumnDef="No">
+                    <mat-header-cell *cdkHeaderCellDef class="nombreRow"></mat-header-cell>
+                    <mat-cell *cdkCellDef="let row" class="nombreRow inner">
+                        <span class="numero">
+                            <span class="titulo">Número</span>
+                            <span>N° {{row.numero}}</span>
+                        </span>
+                        <span class="estatus">
+                            <span class="titulo">Estatus</span>
+                            <span>{{row.estatus}}</span>
+                        </span>
+                        <span class="tipo">
+                            <span class="titulo">Tipo de servicio</span>
+                            <span>{{row.servicio}}</span>
+                        </span>
+                        <span class="descripcion">
+                            <span class="titulo">Descripción del problema</span>
+                            <span>{{row.descripcion}}</span>
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-row *cdkRowDef="let row; columns: servColumns ">
+                </mat-row>
+            </mat-table>
+            <mat-paginator #servPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </mat-card-content>
+
+    </div>
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-raised-button matDialogClose class="ml-auto" color="primary">CERRAR</button>
+</div>

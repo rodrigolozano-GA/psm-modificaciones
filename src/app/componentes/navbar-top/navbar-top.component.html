@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">
+    <img src="assets/img/A_fondoblanco.svg" alt="Grupo Armstrong Logo" class="logo-navbar">
+    <button mat-icon-button class="white-icons ml-3" color="accent" (click)="toggleSidenav()">
+        <mat-icon><i class="fas fa-bars fa-rem d-flex justify-content-center align-items-center h-100"></i></mat-icon>
+    </button>
+    <!-- <button mat-flat-button color="accent" [matMenuTriggerFor]="menuCatalogos">Catálogos <i class="fas fa-caret-down ml-2"></i></button>
+    <mat-menu #menuCatalogos="matMenu">
+        <button mat-menu-item [routerLink]="[ '/Catalogos/Estatus' ]" routerLinkActive="active"><i class="far fa-file-check mr-2 fa-rem"></i> Estatus</button>
+        <button mat-menu-item [routerLink]="[ '/Catalogos/TiposDocumentos' ]" routerLinkActive="active"><i class="far fa-file-check mr-2 fa-rem"></i> Tipos de Documentos</button>
+        <button mat-menu-item [routerLink]="[ '/Catalogos/TiposServicios' ]" routerLinkActive="active"><i class="far fa-file-check mr-2 fa-rem"></i> Tipos de Servicios</button>
+        <button mat-menu-item [routerLink]="[ '/Catalogos/Zonas' ]" routerLinkActive="active"><i class="far fa-file-check mr-2 fa-rem"></i> Zonas</button>
+        <button mat-menu-item [routerLink]="[ '/Catalogos/Gastos' ]" routerLinkActive="active"><i class="far fa-file-check mr-2 fa-rem"></i> Gastos</button>
+    </mat-menu>
+
+    <button mat-flat-button color="accent" [matMenuTriggerFor]="menuCotizaciones">Cotizaciones <i class="fas fa-caret-down ml-2"></i></button>
+    <mat-menu #menuCotizaciones="matMenu">
+        <button mat-menu-item [routerLink]="[ '/Catalogos/Estatus' ]" routerLinkActive="active"><i class="far fa-file-check mr-2 fa-rem"></i> Nueva Cotización</button>
+        <button mat-menu-item [routerLink]="[ '/Catalogos/TiposDocumentos' ]" routerLinkActive="active"><i class="far fa-file-check mr-2 fa-rem"></i> Seguimiento Cotizaciones</button>
+    </mat-menu> -->
+
+    <!-- <button mat-flat-button color="primary" [matMenuTriggerFor]="menuUsuario" class="ml-auto"><mat-icon><i class="fas fa-user fa-rem d-flex align-items-center h-100"></i></mat-icon> Usuario <i class="fas fa-caret-down ml-2"></i></button> -->
+    <button mat-raised-button color="accent" class="white-icons" [matMenuTriggerFor]="menuUsuario" class="ml-auto">
+        <mat-icon><i class="fas fa-user fa-rem d-flex justify-content-center align-items-center h-100"></i></mat-icon>
+        {{ username | async  }}
+    </button>
+    <mat-menu #menuUsuario="matMenu">
+        <button mat-menu-item>{{ username | async }}-</button>
+        <button mat-menu-item color="primary"><i class="fas fa-question-circle color-icons fa-rem mr-2"></i>
+            AYUDA</button>
+        <button mat-menu-item color="primary" (click)="go()"><i class="far fa-info-circle color-icons fa-rem mr-2"></i>
+            SOPORTE</button>
+        <button mat-menu-item color="primary" (click)="eLogOut()"><i
+                class="fas fa-power-off color-icons fa-rem mr-2"></i> CERRAR
+            SESIÓN</button>
+    </mat-menu>
+</mat-toolbar>

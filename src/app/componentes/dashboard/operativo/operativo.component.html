@@ -1,0 +1,132 @@
+<mat-card class="mat-elevation-z8">
+    <div class="container-fluid">
+        <div class="row" *ngIf="ELEMENT_DATA.length !=0">
+         
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon" style="background-color:thistle">
+                        <div class="card-icon">
+                            <i class="material-icons">add_circle_outline</i>
+                        </div>
+                        <p class="card-category">Nuevo</p>
+                        <h3 class="card-title">{{ELEMENT_DATA[0].cantidad}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats"><!--
+                            <i class="material-icons text-danger">warning</i>
+                            <a href="javascript:void(0)">Ver detalles</a>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon" style="background-color: lightblue;">
+                        <div class="card-icon">
+                            <i class="material-icons">schedule</i>
+                        </div>
+                        <p class="card-category">En proceso</p>
+                        <h3 class="card-title">{{ELEMENT_DATA[1].cantidad}}</h3>
+                    </div>
+                   <div class="card-footer">
+                         <!--<div class="stats">
+                            <i class="material-icons">work_outline</i> Ver detalles
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon" style="background-color: lightcoral;">
+                        <div class="card-icon">
+                            <i class="material-icons">cancel_schedule_send</i>
+                        </div>
+                        <p class="card-category">Cancelado</p>
+                        <h3 class="card-title">{{ELEMENT_DATA[2].cantidad}}</h3>
+                    </div>
+                    <div class="card-footer">
+                       <!-- <div class="stats">
+                            <i class="material-icons">local_offer</i> Ver detalles
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6" >
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon" style="background-color: lightgreen;">
+                        <div class="card-icon">
+                            <i class="material-icons">done</i>
+                        </div>
+                        <p class="card-category">Realizado</p>
+                        <h3 class="card-title">{{ELEMENT_DATA[3].cantidad}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <!--<div class="stats">
+                            <i class="material-icons">update</i> Ver detalles
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row" *ngIf="ELEMENT_DATA.length !=0">
+       
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon" style="background-color: moccasin;">
+                        <div class="card-icon">
+                            <i class="material-icons">done_all</i>
+                        </div>
+                        <p class="card-category">Validado</p>
+                        <h3 class="card-title">{{ELEMENT_DATA[4].cantidad}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <!--<div class="stats">
+                            <i class="material-icons">update</i> Ver detalles
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon" style="background-color: slategray;">
+                        <div class="card-icon">
+                            <i class="material-icons">report_problem</i>
+                        </div>
+                        <p class="card-category">Reportado</p>
+                        <h3 class="card-title">{{ELEMENT_DATA[5].cantidad}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <!--<div class="stats">
+                            <i class="material-icons">update</i> Ver detalles
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon" style="background-color:lavender">
+                        <div class="card-icon">
+                            <i class="material-icons">speed</i>
+                        </div>
+                        <p class="card-category">Prueba</p>
+                        <h3 class="card-title">{{ELEMENT_DATA[6].cantidad}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <!--<div class="stats">
+                            <i class="material-icons">update</i> Ver detalles
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-card>
+      

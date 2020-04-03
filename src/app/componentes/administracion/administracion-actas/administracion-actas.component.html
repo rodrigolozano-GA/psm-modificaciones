@@ -1,0 +1,279 @@
+<mat-card class="mat-elevation-z8">
+    <mat-card-header class="d-flex">
+        <mat-card-title class="ml-0">Administración de Actas</mat-card-title>
+        <button mat-icon-button color="primary" (click)="exportAsExcel()" class="ml-auto"
+            matTooltip="Descargar archivo excel"><i class="far fa-file-download action-icon"></i></button>
+        <button mat-icon-button color="primary" matTooltip="Actualizar" (click)="ActualizarTabla()"><i 
+            class="far fa-sync action-icon"></i></button>
+    </mat-card-header>
+    <mat-card-content>
+        
+        <mat-tab-group>
+            <mat-tab label="Completos">
+                <mat-form-field class="w-100">
+                    <input matInput placeholder="Buscar" (keyup)="busqueda($event.target.value,1)" value="">
+                </mat-form-field> 
+                <mat-table #table1 matSort [dataSource]="dataSourceComplete">
+
+                    <ng-container cdkColumnDef="empleado">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Empleado </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Empleado:</span>
+                            {{row.nombre}}
+                        </mat-cell>
+                    </ng-container>
+        
+                    <ng-container cdkColumnDef="formato">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Formato </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Formato:</span>
+                            {{row.formato}}
+                        </mat-cell>
+                    </ng-container>
+        
+                    <ng-container cdkColumnDef="acta_inicial">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Acta Inicial </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Acta Inicial:</span>
+                            {{row.acta_inicial}}
+                        </mat-cell>
+                    </ng-container>
+        
+                    <ng-container cdkColumnDef="acta_final">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Acta Final </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Acta Final:</span>
+                            {{row.acta_final}}
+                        </mat-cell>
+                    </ng-container>
+        
+                    <ng-container cdkColumnDef="comprobadas">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Comprobadas </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Comprobadas:</span>
+                            {{row.comprobadas}}
+                        </mat-cell>
+                    </ng-container>
+        
+                    <ng-container cdkColumnDef="total">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Total </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Total:</span>
+                            {{row.total}}
+                        </mat-cell>
+                    </ng-container>
+        
+                    <ng-container cdkColumnDef="estatus">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Estatus </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Estatus:</span>
+                            {{row.estatus}}
+                        </mat-cell>
+                    </ng-container>
+        
+                    <ng-container cdkColumnDef="actions">
+                        <mat-header-cell *cdkHeaderCellDef> </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Acciones:</span>
+                            <button mat-icon-button color="primary" class="ml-auto" matTooltip="Ver detalle"
+                                (click)="dialogoVerDetalle(row)">
+                                <i class="far fa-newspaper action-icon"></i>
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+        
+                    <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+                    </mat-row>
+                </mat-table>
+                <mat-paginator #paginator
+                      [pageSize]="5"
+                      [pageSizeOptions]="[5, 10, 20]"
+                      showFirstLastButtons
+                      >
+                </mat-paginator>
+            </mat-tab>
+            <mat-tab label="Incompletos">
+
+                <mat-form-field class="w-100">
+                    <input matInput placeholder="Buscar" (keyup)="busqueda($event.target.value,2)" value="">
+                </mat-form-field> 
+                 
+                <mat-table #table2 matSort [dataSource]="dataSourceIncomplete">
+
+                    <ng-container cdkColumnDef="empleado">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Empleado </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Empleado:</span>
+                            {{row.nombre}}
+                        </mat-cell>
+                    </ng-container>
+        
+                    <ng-container cdkColumnDef="formato">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Formato </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Formato:</span>
+                            {{row.formato}}
+                        </mat-cell>
+                    </ng-container>
+        
+                    <ng-container cdkColumnDef="acta_inicial">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Acta Inicial </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Acta Inicial:</span>
+                            {{row.acta_inicial}}
+                        </mat-cell>
+                    </ng-container>
+        
+                    <ng-container cdkColumnDef="acta_final">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Acta Final </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Acta Final:</span>
+                            {{row.acta_final}}
+                        </mat-cell>
+                    </ng-container>
+        
+                    <ng-container cdkColumnDef="comprobadas">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Comprobadas </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Comprobadas:</span>
+                            {{row.comprobadas}}
+                        </mat-cell>
+                    </ng-container>
+        
+                    <ng-container cdkColumnDef="total">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Total </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Total:</span>
+                            {{row.total}}
+                        </mat-cell>
+                    </ng-container>
+        
+                    <ng-container cdkColumnDef="estatus">
+                        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Estatus </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Estatus:</span>
+                            {{row.estatus}}
+                        </mat-cell>
+                    </ng-container>
+        
+                    <ng-container cdkColumnDef="actions">
+                        <mat-header-cell *cdkHeaderCellDef> </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Acciones:</span>
+                            <button mat-icon-button color="primary" class="ml-auto" matTooltip="Ver detalle"
+                                (click)="dialogoVerDetalle(row)">
+                                <i class="far fa-newspaper action-icon"></i>
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+        
+                    <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+                    </mat-row>
+                </mat-table>
+                <mat-paginator #paginator2
+                      [pageSize]="5"
+                      [pageSizeOptions]="[5, 10, 20]"
+                      showFirstLastButtons
+                      >
+                </mat-paginator>
+            </mat-tab>
+          </mat-tab-group>
+    </mat-card-content>
+</mat-card>
+
+<!--
+<mat-card class="mat-elevation-z8">
+    <mat-card-header class="d-flex">
+        <mat-card-title class="ml-0">Administración de Actas</mat-card-title>
+        <button mat-icon-button color="primary" (click)="exportAsExcel()" class="ml-auto"
+            matTooltip="Descargar archivo excel"><i class="far fa-file-download action-icon"></i></button>
+        <button mat-icon-button color="primary" matTooltip="Actualizar" (click)="ActualizarTabla()"><i
+                class="far fa-sync action-icon"></i></button>
+    </mat-card-header>
+    <mat-card-content class="">
+
+        <mat-form-field class="w-100">
+            <input matInput placeholder="Buscar" (keyup)="busqueda($event.target.value)" value="">
+        </mat-form-field>
+
+        <mat-table #table matSort [dataSource]="dataSource">
+
+            <ng-container cdkColumnDef="empleado">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Empleado </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Empleado:</span>
+                    {{row.nombre}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="formato">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Formato </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Formato:</span>
+                    {{row.formato}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="acta_inicial">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Acta Inicial </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Acta Inicial:</span>
+                    {{row.acta_inicial}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="acta_final">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Acta Final </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Acta Final:</span>
+                    {{row.acta_final}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="comprobadas">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Comprobadas </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Comprobadas:</span>
+                    {{row.comprobadas}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="total">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Total </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Total:</span>
+                    {{row.total}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="estatus">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Estatus </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Estatus:</span>
+                    {{row.estatus}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="actions">
+                <mat-header-cell *cdkHeaderCellDef> </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Acciones:</span>
+                    <button mat-icon-button color="primary" class="ml-auto" matTooltip="Ver detalle"
+                        (click)="dialogoVerDetalle(row)">
+                        <i class="far fa-newspaper action-icon"></i>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+            </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </mat-card-content>
+
+</mat-card>
+-->

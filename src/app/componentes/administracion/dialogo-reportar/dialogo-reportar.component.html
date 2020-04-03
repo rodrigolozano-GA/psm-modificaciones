@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Reportar folios seleccionados</h1>
+<div mat-dialog-content>
+    <div class="wrapper">
+        <mat-table #table matSort [dataSource]="dataSource">
+
+            <ng-container cdkColumnDef="folio">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="folioRow"> Folio </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="folioRow">
+                    <span class="mobile-label">Folio:</span>
+                    {{row.folio}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="cliente">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Cliente </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Cliente:</span>
+                    {{row.cliente}} {{row.sucursal}}
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+            </mat-row>
+        </mat-table>
+    </div>
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button matDialogClose color="primary" class="ml-auto">CANCELAR</button>
+    <button mat-raised-button (click)="reportar()" color="primary">REPORTAR</button>
+</div>

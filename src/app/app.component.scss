@@ -1,0 +1,10 @@
+.layout {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+
+    .body-render {
+        padding: 1rem;
+        overflow: auto;
+    }
+}

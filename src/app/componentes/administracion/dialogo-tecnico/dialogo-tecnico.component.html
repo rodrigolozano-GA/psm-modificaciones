@@ -1,0 +1,181 @@
+<h1 mat-dialog-title>Técnico {{nombre}} </h1>
+<div mat-dialog-content>
+
+    <div class="wrapper" [formGroup]="formInventario">
+
+        <mat-tab-group mat-stretch-tabs>
+            <mat-tab label="Información General">
+                <div class="sec-datos">
+                    <mat-form-field>
+                        <input matInput placeholder="Puesto" formControlName="puesto" readonly disabled>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput placeholder="Zona" formControlName="zona" readonly disabled>
+                    </mat-form-field>
+
+                    <mat-divider class="divider"></mat-divider>
+                    <div class="sec-ubicacion">
+
+                        <h1 mat-dialog-title>Ubicación </h1>
+
+                        <agm-map class="mapa" [latitude]="lat" [longitude]="lng">
+                            <agm-marker [latitude]="latMark" [longitude]="lngMark"></agm-marker>
+                        </agm-map>
+                    </div>
+
+                </div>
+            </mat-tab>
+            <mat-tab label="Inventario">
+                <mat-divider></mat-divider>
+                <div class="sec-inventario">
+
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Buscar" (keyup)="busqueda($event.target.value)" value="">
+                    </mat-form-field>
+
+                    <mat-table #tableInv="matSort" matSort [dataSource]="dataSource">
+
+                        <ng-container cdkColumnDef="nombre">
+                            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Equipo </mat-header-cell>
+                            <mat-cell *cdkCellDef="let row">
+                                <span class="mobile-label">Equipo:</span>
+                                {{row.equipo}}
+                            </mat-cell>
+                        </ng-container>
+
+
+                        <ng-container cdkColumnDef="cantidad">
+                            <mat-header-cell *cdkHeaderCellDef mat-sort-header class="cantidad-row"> Cantidad
+                            </mat-header-cell>
+                            <mat-cell *cdkCellDef="let row" class="cantidad-row">
+                                <span class="mobile-label">Cantidad:</span>
+                                {{row.cantidad}}
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+                        </mat-row>
+                    </mat-table>
+                    <mat-paginator #invPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+                </div>
+            </mat-tab>
+            <mat-tab label="Refacciones">
+                <mat-divider></mat-divider>
+                <br>
+                <div class="d-flex justify-content-end">
+                    <button *ngIf="editar" mat-raised-button color="primary" (click)="dialogoAgregarRefacciones()" class="ml-3">AGREGAR REFACCIONES</button>
+                </div>
+                <div class="sec-inventario">
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Buscar" (keyup)="busquedaRef($event.target.value)" value="">
+                    </mat-form-field>
+
+                    <mat-table #tableRef="matSort" matSort [dataSource]="dataSourceRefacciones">
+
+                        <ng-container cdkColumnDef="concepto">
+                            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Concepto </mat-header-cell>
+                            <mat-cell *cdkCellDef="let row">
+                                <span class="mobile-label">Concepto:</span>
+                                {{row.codigo}} - {{row.concepto}}
+                            </mat-cell>
+                        </ng-container>
+
+
+                        <ng-container cdkColumnDef="cantidad">
+                            <mat-header-cell *cdkHeaderCellDef mat-sort-header class="cantidad-row"> Cantidad
+                            </mat-header-cell>
+                            <mat-cell *cdkCellDef="let row" class="cantidad-row">
+                                <span class="mobile-label">Cantidad:</span>
+                                {{row.cantidad}}
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container cdkColumnDef="actions">
+                            <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+                            <mat-cell *cdkCellDef="let row" class="actionsRow">
+                                <span class="mobile-label">Acciones:</span>
+                                <button mat-icon-button color="warn" class="ml-auto" matTooltip="Quitar Refacción" (click)="deteleFrom(row)">
+                                    <i class="far fa-trash-alt action-icon"></i>
+                                </button>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *cdkHeaderRowDef="displayedColumnsRefa"></mat-header-row>
+                        <mat-row *cdkRowDef="let row; columns: displayedColumnsRefa">
+                        </mat-row>
+                    </mat-table>
+                    <mat-paginator #refPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+                </div>
+            </mat-tab>
+            <mat-tab label="Estado de Cuenta">
+                <div class="sec-actas">
+
+                  <mat-table #tableEstadoCuentas="matSort" matSort [dataSource]="dataEstadoCuentas">
+                      <ng-container cdkColumnDef="fecha">
+                          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Tipo </mat-header-cell>
+                          <mat-cell *cdkCellDef="let row">
+                              <span class="mobile-label">Fecha:</span>
+                              {{row.fecha}}
+                          </mat-cell>
+                      </ng-container>
+                      <ng-container cdkColumnDef="serie">
+                          <mat-header-cell *cdkHeaderCellDef mat-sort-header class=""> Serie </mat-header-cell>
+                          <mat-cell *cdkCellDef="let row" class="">
+                              <span class="mobile-label">Serie:</span>
+                              {{row.serie}}
+                          </mat-cell>
+                      </ng-container>
+                      <ng-container cdkColumnDef="folio">
+                          <mat-header-cell *cdkHeaderCellDef mat-sort-header class=""> Folio/Factura </mat-header-cell>
+                          <mat-cell *cdkCellDef="let row" class="">
+                              <span class="mobile-label">Folio/Factura:</span>
+                              {{row.folio}}
+                          </mat-cell>
+                      </ng-container>
+                      <ng-container cdkColumnDef="referencia">
+                          <mat-header-cell *cdkHeaderCellDef mat-sort-header class=""> Referencia </mat-header-cell>
+                          <mat-cell *cdkCellDef="let row" class="">
+                              <span class="mobile-label">Referencia:</span>
+                              {{row.referencia}}
+                          </mat-cell>
+                      </ng-container>
+                      <ng-container cdkColumnDef="iddocumento">
+                          <mat-header-cell *cdkHeaderCellDef mat-sort-header class=""> Iddocumento </mat-header-cell>
+                          <mat-cell *cdkCellDef="let row" class="">
+                              <span class="mobile-label">Iddocumento:</span>
+                              {{row.iddocumento}}
+                          </mat-cell>
+                      </ng-container>
+                      <ng-container cdkColumnDef="concepto">
+                          <mat-header-cell *cdkHeaderCellDef mat-sort-header class=""> Concepto </mat-header-cell>
+                          <mat-cell *cdkCellDef="let row" class="">
+                              <span class="mobile-label">Concepto:</span>
+                              {{row.concepto}}
+                          </mat-cell>
+                      </ng-container>
+                      <ng-container cdkColumnDef="total">
+                          <mat-header-cell *cdkHeaderCellDef mat-sort-header class=""> Total</mat-header-cell>
+                          <mat-cell *cdkCellDef="let row" class="">
+                              <span class="mobile-label">Total:</span>
+                              {{row.total}}
+                          </mat-cell>
+                      </ng-container>
+                      <mat-header-row *cdkHeaderRowDef="estadoCuentasColumn"></mat-header-row>
+                      <mat-row *cdkRowDef="let row; columns: estadoCuentasColumn "></mat-row>
+                  </mat-table>
+                  <mat-paginator #MatPaginatorEstadoCuentas [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                  </mat-paginator>
+
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button (click)="cerrar()" color="primary" class="ml-auto">CERRAR</button>
+    <button *ngIf="editar" mat-raised-button (click)="guardar()" color="primary">GUARDAR</button>
+</div>

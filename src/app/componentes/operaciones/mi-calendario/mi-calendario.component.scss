@@ -1,0 +1,31 @@
+h3 {
+  margin: 0 0 10px;
+}
+
+pre {
+  background-color: #f5f5f5;
+  padding: 15px;
+}
+
+.top-nav {
+  display: flex;
+  margin-bottom: 1rem;
+  flex-direction: row;
+
+  .titulo {
+    display: flex;
+    flex: 1;
+  }
+
+  .resumen {
+    display: flex;
+    flex: 1;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+}
+
+.link-nolink {
+  color: #000;
+  font-weight: bold;
+}

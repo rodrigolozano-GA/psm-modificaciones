@@ -1,0 +1,15 @@
+.itm-title {
+    font-weight: 500 !important;
+}
+
+.itm-datos {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+}
+
+.itm-cantidad {
+}
+
+.itm-deducible {
+    justify-self: self-end;
+}

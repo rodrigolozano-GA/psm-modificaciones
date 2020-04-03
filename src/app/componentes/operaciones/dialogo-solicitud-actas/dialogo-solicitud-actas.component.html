@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Solicitud de Actas</h1>
+<div mat-dialog-content>
+
+    <div class="wrapper" [formGroup]="formActas">
+
+        <mat-form-field>
+            <mat-select placeholder="Formato de Actas" name="item" formControlName="formato" (selectionChange)="obtAdvertencias()">
+                <mat-option *ngFor="let item of formatoActas" [value]="item.id">
+                    {{item.nombre}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="(generalGetter('formato').dirty || generalGetter('formato').touched) && generalGetter('formato').invalid && generalGetter('formato').errors.required">
+                Campo requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Cantidad" name="item" formControlName="cantidad">
+                <mat-option *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,25,50,100]" [value]="item">
+                    {{item}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="(generalGetter('cantidad').dirty || generalGetter('cantidad').touched) && generalGetter('cantidad').invalid && generalGetter('cantidad').errors.required">
+                Campo requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-divider>
+        </mat-divider>
+
+        <label mat-dialog-title class="lblAdvertensia">Advertencias</label>
+
+        <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let adver of adverList">{{adver}}</mat-list-item>
+        </mat-list>
+
+    </div>
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button mat-dialog-close color="primary" class="ml-auto">CANCELAR</button>
+    <button mat-raised-button (click)="solicitar()" color="primary">SOLICITAR</button>
+</div>

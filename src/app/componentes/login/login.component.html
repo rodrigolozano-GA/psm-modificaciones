@@ -1,0 +1,62 @@
+<div class="componente">
+
+    <div class="fix-b"></div>
+
+    <mat-card class="card-login">
+        <img src="assets/img/grupo-armstrong.png" alt="Logotipo Armstrong" class="img-login">
+
+        <ng-container *ngIf="User.id == 0; then UsuarioT; else PasswordT"></ng-container>
+
+        <ng-template #UsuarioT>
+            <div class="w-100 d-flex flex-column" [@inOut]="User.id ? 'out' : 'in'">
+                <mat-divider></mat-divider>
+                <mat-form-field class="w-100 mt-3">
+                    <input matInput placeholder="Usuario" value="" [(ngModel)]="User.nombre" [disabled]="loading">
+                    <span matSuffix>
+                        <mat-icon><i class="fas fa-user icon-input"></i></mat-icon>
+                    </span>
+                </mat-form-field>
+
+                <div class="d-flex w-100">
+
+                    <button mat-button color="primary" class="mr-auto" *ngIf="!loading">Recuperar contraseña</button>
+
+                    <button mat-raised-button color="primary" class="ml-auto" (click)="validarUsuario()"
+                        *ngIf="!loading">SIGUIENTE</button>
+                </div>
+
+
+                <mat-spinner diameter="50" class="loader" *ngIf="loading"></mat-spinner>
+            </div>
+        </ng-template>
+
+        <ng-template #PasswordT>
+
+            <div class="w-100 d-flex flex-column" [@inOut]="User.id ? 'in' : 'out'">
+                <mat-divider></mat-divider>
+                <mat-chip-list class="w-100 mail-chip mt-3">
+                    <mat-chip class="">{{User.nombre}} <mat-icon matChipRemove (click)="regresar()"><i
+                                class="far fa-times-circle d-flex"></i>
+                        </mat-icon>
+                    </mat-chip>
+                </mat-chip-list>
+
+                <mat-form-field class="w-100 mt-3">
+                    <input matInput type="password" placeholder="Contraseña" value="" [(ngModel)]="Pass">
+                    <span matSuffix>
+                        <mat-icon><i class="fas fa-lock-alt icon-input"></i></mat-icon>
+                    </span>
+                </mat-form-field>
+
+                <div class="d-flex w-100">
+                    <button mat-button color="primary" class="mr-auto">Recuperar contraseña</button>
+
+                    <button mat-raised-button class="ml-auto" color="primary" (click)="validarPass()">INGRESAR</button>
+                </div>
+            </div>
+
+        </ng-template>
+
+
+    </mat-card>
+</div>

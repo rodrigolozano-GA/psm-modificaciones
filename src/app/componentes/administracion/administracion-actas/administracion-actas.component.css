@@ -1,0 +1,23 @@
+.cdk-column-actions {
+  max-width: 5rem;
+}
+
+.cdk-column-acta_inicial,
+.cdk-column-acta_final,
+.cdk-column-comprobadas,
+.cdk-column-total {
+  max-width: 7rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.cdk-column-formato {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+/*# sourceMappingURL=administracion-actas.component.css.map */

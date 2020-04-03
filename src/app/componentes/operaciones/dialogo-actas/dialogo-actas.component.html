@@ -1,0 +1,57 @@
+<h1 mat-dialog-title>Selección de Actas</h1>
+<div mat-dialog-content>
+    <div class="wrapper" [formGroup]="generalForm">
+
+        <mat-form-field>
+            <mat-select placeholder="Técnico" formControlName="tecnico_id">
+                <mat-option *ngFor="let tecnico of tecnicosList" [value]="tecnico.id">
+                    {{tecnico.nombre}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="(generalGetter('tecnico_id').dirty || generalGetter('tecnico_id').touched) && generalGetter('tecnico_id').invalid && generalGetter('tecnico_id').errors.required">
+                Campo requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Formato" formControlName="formato_id">
+                <mat-option *ngFor="let formato of formatosList" [value]="formato.id">
+                    {{formato.nombre}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="(generalGetter('formato_id').dirty || generalGetter('formato_id').touched) && generalGetter('formato_id').invalid && generalGetter('formato_id').errors.required">
+                Campo requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="itm-servicio">
+            <mat-select placeholder="Acta" name="acta" formControlName="acta">
+                <mat-option *ngFor="let acta of actasList" [value]="acta.id_acta">
+                    {{acta.folio_actas}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="(generalGetter('acta').dirty || generalGetter('acta').touched) && generalGetter('acta').invalid && generalGetter('acta').errors.required">
+                Campo requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="itm-servicio">
+            <textarea matInput cdkAutosizeMaxRows="5" cdkAutosizeMinRows="5" cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize" placeholder="Servicio realizado"
+                formControlName="descripcion"></textarea>
+            <mat-error
+                *ngIf="(generalGetter('descripcion').dirty || generalGetter('descripcion').touched) && generalGetter('descripcion').invalid && generalGetter('descripcion').errors.required">
+                Campo requerido
+            </mat-error>
+        </mat-form-field>
+
+    </div>
+
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button matDialogClose color="primary" class="ml-auto">CANCELAR</button>
+    <button mat-raised-button (click)="guardar()" color="primary">GUARDAR</button>
+</div>

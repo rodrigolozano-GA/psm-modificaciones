@@ -1,0 +1,24 @@
+/* Theme for the ripple elements.*/
+/* stylelint-disable material/no-prefixes */
+/* stylelint-enable */
+.mat-list-base {
+  padding-top: 0;
+}
+
+.mat-list-base .btn-link {
+  height: 40px;
+}
+
+.mat-list-item.active {
+  background-color: rgba(43, 41, 126, 0.54) !important;
+  color: #FFF;
+}
+
+.mat-list-item.active .mat-icon-button {
+  color: #FFF;
+}
+
+.btn-link:hover, .btn-link:visited, .btn-link:active, .btn-link:focus {
+  text-decoration: none !important;
+}
+/*# sourceMappingURL=sidenav-link.component.css.map */

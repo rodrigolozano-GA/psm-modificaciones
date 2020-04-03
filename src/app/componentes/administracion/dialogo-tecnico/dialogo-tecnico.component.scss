@@ -1,0 +1,56 @@
+.mapa {
+    height: 100%;
+  }
+  
+  .sec-datos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1rem;
+    margin-top: 1rem;
+  
+    .divider {
+      grid-column: 1 / span 2;
+    }
+  }
+  
+  .sec-ubicacion {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 15rem;
+    margin: 1rem 0;
+    grid-column: 1 / span 2;
+  }
+  
+  .sec-inventario {
+    display: grid;
+    margin-top: 1rem;
+  
+    .inventario {
+      .itm-nombre {
+        flex: 3;
+      }
+  
+      .itm-cantidad {
+        flex: 1;
+      }
+    }
+  }
+  
+  .cantidad-row {
+    max-width: 8rem;
+  }
+  
+  .sec-actas {
+    display: grid;
+    grid-row-gap: 1rem;
+    padding-top: 1rem;
+  }
+  
+  .sec-cuenta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    margin-top: 1rem;
+  }
+  

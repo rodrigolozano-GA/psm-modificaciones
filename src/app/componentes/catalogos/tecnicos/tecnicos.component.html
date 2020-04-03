@@ -1,0 +1,55 @@
+<mat-card class="mat-elevation-z8">
+    <mat-card-header class="d-flex">
+        <mat-card-title>Catálogos de Técnicos</mat-card-title>
+        <button mat-icon-button color="primary" class="ml-auto" (click)="dialogoAgregar()" matTooltip="Agregar"> <i
+                class="far fa-plus-circle action-icon"></i></button>
+        <button mat-icon-button color="primary" (click)="exportAsExcel()" matTooltip="Descargar archivo"><i
+                class="far fa-file-download action-icon"></i></button>
+        <button mat-icon-button color="primary" matTooltip="Actualizar" (click)="ActualizarTabla()"><i
+                class="far fa-sync action-icon"></i></button>
+    </mat-card-header>
+    <mat-card-content class="">
+
+        <mat-form-field class="w-100">
+            <input matInput placeholder="Buscar" (keyup)="busqueda($event.target.value)" value="">
+        </mat-form-field>
+
+        <mat-table #table matSort [dataSource]="dataSource">
+
+            <ng-container cdkColumnDef="nombre">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Nombre técnico  </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Nombre técnico:</span>
+                    {{row.nombre}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="zona">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Zona</mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Zona:</span>
+                    {{row.zona}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="actions">
+                <mat-header-cell *cdkHeaderCellDef> </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Acciones:</span>
+                    <button mat-icon-button color="primary" class="ml-auto" (click)="dialogEditar(row)"><i
+                            class="far fa-pen action-icon"></i></button>
+                    <mat-slide-toggle [checked]="row.estatus ? 'true' : 'false'" color="primary" (change)="toggleEstatus(row)">
+                    </mat-slide-toggle>
+                    <!--[matTooltip]="row.estatus ? 'Activo': 'Desactivado'"-->
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+            </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </mat-card-content>
+
+</mat-card>

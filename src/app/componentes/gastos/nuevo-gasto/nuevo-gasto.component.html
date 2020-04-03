@@ -1,0 +1,311 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Nuevo Gasto</mat-card-title>
+    </mat-card-header>
+    <div class="wrapper" [formGroup]="gastoForm">
+
+        <div class="sec-folio">
+
+            <mat-form-field class="itm-folio">
+                <input matInput placeholder="Folio" [value]="hoy" [disabled]="true" formControlName="folio">
+            </mat-form-field>
+
+            <mat-form-field class="itm-tipo-gasto">
+
+                <mat-select placeholder="Tipo de gasto" formControlName="tipo_gasto">
+                    <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+
+                    <mat-option *ngFor="let gasto of tipoGastoGral" [value]="gasto.id">
+                        {{gasto.nombre}}
+                    </mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="(generalGetter('tipo_gasto').dirty || generalGetter('tipo_gasto').touched) && generalGetter('tipo_gasto').invalid && generalGetter('tipo_gasto').errors.required">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="itm-no-empleado">
+
+                <mat-select placeholder="Empleado" formControlName="n_empleado" (selectionChange)="selectEmpleado($event)" (click)="actualizaLista()">
+                    <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+                    <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Busca una Número de empleado'"
+                            [noEntriesFoundLabel]="'No se encontraron registros'" [formControl]="empleadoFilteringCtrl"
+                            [searching]="searching">
+                        </ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let empleado of filteredNEmpleadosList | async" [value]="empleado.id">
+                    {{empleado.nombre}}
+                    </mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="(generalGetter('n_empleado').dirty || generalGetter('n_empleado').touched) && generalGetter('n_empleado').invalid && generalGetter('n_empleado').errors.required">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="itm-nombre-empleado">
+
+                <input matInput placeholder="Nombre del empleado" formControlName="nombre_empleado">
+
+            </mat-form-field>
+
+            <div class="sec-ubicacion">
+
+               <agm-map class="mapa" [latitude]="lat" [longitude]="lng">
+                    <agm-marker [latitude]="latMark" [longitude]="lngMark"></agm-marker>
+                </agm-map>
+
+            </div>
+
+        </div>
+
+        <mat-divider class="p-relative">
+        </mat-divider>
+
+        <div class="sec-ods">
+            <h6 class="mt-3">OdeS</h6>
+            <mat-card class="card-servicios">
+                 <mat-form-field class="w-100 inp-codigo">
+                    <input matInput placeholder="Buscar" (keyup)="busqueda($event.target.value)" value="">
+                </mat-form-field>
+                <mat-table #tableTras [dataSource]="odesData" class="list lista-odes">
+                    <ng-container cdkColumnDef="select">
+                        <mat-header-cell *cdkHeaderCellDef class="selectRow"></mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="selectRow">
+                            <mat-checkbox color="primary" (click)="$event.stopPropagation()"
+                                (change)="$event ? selectionOdeS.toggle(row) : null"
+                                [checked]="selectionOdeS.isSelected(row)">
+                            </mat-checkbox>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container cdkColumnDef="noServicio">
+                        <mat-header-cell *cdkHeaderCellDef class="servicioRow"> # Servicio </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="servicioRow">
+                            <span class="mobile-label"> # Servicio:</span>
+                            {{row.folio}} </mat-cell>
+                    </ng-container>
+                    <ng-container cdkColumnDef="cliente">
+                        <mat-header-cell *cdkHeaderCellDef class="clienteRow"> Cliente </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="clienteRow">
+                            <span class="mobile-label" >Cliente:</span>
+                            {{row.cliente}} {{row.sucursal}} </mat-cell>
+                    </ng-container>
+                    <ng-container cdkColumnDef="tipoS">
+                        <mat-header-cell *cdkHeaderCellDef class="tipoRow"> Tipo Servicio </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="tipoRow">
+                            <span class="mobile-label">Tipo Servicio:</span>
+                            {{row.servicio}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- <ng-container cdkColumnDef="tipoE">
+                        <mat-header-cell *cdkHeaderCellDef class="precioURow"> Tipo Equipo </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="precioURow">
+                            <span class="mobile-label">Tipo Equipo:</span>
+                            {{row.equipo}}
+                        </mat-cell>
+                    </ng-container> -->
+
+                    <ng-container cdkColumnDef="estado">
+                        <mat-header-cell *cdkHeaderCellDef class="importeRow"> Estado </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="importeRow">
+                            <span class="mobile-label">Estado:</span>
+                            {{row.estado}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="municipio">
+                        <mat-header-cell *cdkHeaderCellDef class="importeRow"> Municipio </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="importeRow">
+                            <span class="mobile-label">Municipio:</span>
+                            {{row.municipio}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *cdkHeaderRowDef="odesColumns"></mat-header-row>
+                    <mat-row *cdkRowDef="let row; columns: odesColumns ">
+                    </mat-row>
+                </mat-table>
+            </mat-card>
+
+            <mat-form-field>
+                <textarea matInput cdkAutosizeMaxRows="3" cdkAutosizeMinRows="3" cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize" placeholder="Descripción del material" formControlName="descripcion"></textarea>
+            </mat-form-field>
+
+        </div>
+
+        <mat-divider class="p-relative">
+        </mat-divider>
+
+        <div class="sec-servicios">
+
+            <h6 class="mt-3">Lista de Productos</h6>
+
+            <button color="primary" class="btn-servicios ml-auto" mat-raised-button (click)="dialogoServicios()">Agregar
+                productos <mat-icon><i class="fas fa-plus action-icon action-icon-button"></i></mat-icon></button>
+
+            <mat-card class="mat-elevation-z8 mb-4 itm-lista p-0 card-servicios">
+
+                <mat-table #tableTras [dataSource]="dataSourceServ" class="list lista-servicios">
+
+                    <ng-container cdkColumnDef="codigo">
+                        <mat-header-cell *cdkHeaderCellDef class="codigoRow"> Código </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="codigoRow">
+                            <span class="mobile-label">Código:</span>
+                            {{row.codigo}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="concepto">
+                        <mat-header-cell *cdkHeaderCellDef> Concepto </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Concepto:</span>
+                            {{row.concepto}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="cantidad">
+                        <mat-header-cell *cdkHeaderCellDef class="cantidadRow"> Cantidad
+                        </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="cantidadRow">
+                            <span class="mobile-label">Cantidad:</span>
+                            {{row.cantidad}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="total">
+                        <mat-header-cell *cdkHeaderCellDef  class="cantidadRow"> Total </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="cantidadRow">
+
+                            <mat-form-field class="w-100" floatLabel="never">
+                                <input type="number" matInput placeholder="0.0" value="0.0"  (change)="agregarProd(row,$event.target.value)"  pattern="^0*[1-9][0-9]*([0-9]+)?" required>
+                            </mat-form-field>
+
+                        </mat-cell>
+                    </ng-container>
+                  
+                                     
+                    <ng-container cdkColumnDef="actions">
+                        <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="actionsRow">
+                            <span class="mobile-label">Acciones:</span>
+                            <button mat-icon-button color="warn" (click)="deteleFrom(row, 1)" class="ml-auto"><i
+                                    class="far fa-trash-alt action-icon"></i></button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *cdkHeaderRowDef="displayedColumnsServ"></mat-header-row>
+                    <mat-row *cdkRowDef="let row; columns: displayedColumnsServ ">
+                    </mat-row>
+                </mat-table>
+
+            </mat-card>
+
+        </div>
+
+        <mat-divider class="p-relative">
+        </mat-divider>
+
+        <div class="sec-conceptos">
+            <h6 class="mt-3">Concepto de Gastos</h6>
+
+            <div class="conceptos-inner">
+
+                <button color="primary" class="btn-servicios ml-auto" mat-raised-button
+                    (click)="dialogoNuevoConcepto('Agregar concepto')">Agregar
+                    conceptos <mat-icon><i class="fas fa-plus action-icon action-icon-button"></i></mat-icon></button>
+
+                <mat-card class="mat-elevation-z8 p-0 card-servicios">
+                    <mat-table #tableTras [dataSource]="conceptosDS" class="list lista-odes">
+
+                        <ng-container cdkColumnDef="concepto">
+                            <mat-header-cell *cdkHeaderCellDef class="conceptoRow"> Concepto </mat-header-cell>
+                            <mat-cell *cdkCellDef="let row" class="conceptoRow">
+                                <span class="mobile-label"> Concepto:</span>
+                                {{row.txtConcepto}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container cdkColumnDef="monto">
+                            <mat-header-cell *cdkHeaderCellDef> Monto </mat-header-cell>
+                            <mat-cell *cdkCellDef="let row">
+                                <span class="mobile-label">monto:</span>
+                                {{ row.Monto | currency}}
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container cdkColumnDef="gasto">
+                            <mat-header-cell *cdkHeaderCellDef class="topoRow"> Tipo Gasto </mat-header-cell>
+                            <mat-cell *cdkCellDef="let row" class="tipoRow">
+                                <span class="mobile-label">Tipo Gasto:</span>
+                                {{row.txtTipoGasto}}
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container cdkColumnDef="dividido">
+                            <mat-header-cell *cdkHeaderCellDef class="precioURow"> Folios Divididos </mat-header-cell>
+                            <mat-cell *cdkCellDef="let row" class="precioURow">
+                                <span class="mobile-label">Dividido:</span>
+                                <span *ngIf="!row.divididos">No dividido</span>
+                                <span *ngIf="row.divididos" class="link" (click)="dialogoDividirGasto(row)">Dividido
+                                    en {{row.divididos}}</span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container cdkColumnDef="actions">
+                            <mat-header-cell *cdkHeaderCellDef class="actionsRow"></mat-header-cell>
+                            <mat-cell *cdkCellDef="let row" class="actionsRow">
+
+                                <button mat-icon-button color="primary" class="ml-auto"
+                                    (click)="dialogoNuevoConcepto('Editar concepto', row, 1)">
+                                    <i class="far fa-pen action-icon"></i>
+                                </button>
+                                <button mat-icon-button color="warn" class="ml-auto" (click)="eliminarConcepto(row)">
+                                    <i class="far fa-trash-alt action-icon"></i>
+                                </button>
+                            </mat-cell>
+                            <mat-footer-cell *cdkFooterCellDef class="actionsRow">
+                            </mat-footer-cell>
+                        </ng-container>
+
+                        <mat-header-row *cdkHeaderRowDef="conceptosColumns"></mat-header-row>
+                        <mat-row *cdkRowDef="let row; columns: conceptosColumns ">
+                        </mat-row>
+                    </mat-table>
+                </mat-card>
+
+            </div>
+        </div>
+
+        <mat-divider class="p-relative">
+        </mat-divider>
+
+        <div class="d-flex">
+            <mat-form-field appearance="outline" class=" inp-concepto ml-auto">
+                <mat-label>Abono de Adeudo</mat-label>
+                <input matInput value="0" class="text-right" type="number" formControlName="abono_adeudo" min="0">
+                <span matPrefix>$&nbsp;</span>
+            </mat-form-field>
+        </div>
+
+        <div class="d-flex">
+            <mat-form-field appearance="outline" class=" inp-concepto ml-auto">
+                <mat-label>Total Adeudo</mat-label>
+                <input matInput value="" class="text-right" type="number"  formControlName="total_adeudo" min="0" readonly>
+                <span matPrefix>$&nbsp;</span>
+            </mat-form-field>
+        </div>
+
+        <div class="d-flex">
+            <mat-form-field appearance="outline" class=" inp-concepto ml-auto">
+                <mat-label>Total Depositado</mat-label>
+                <input matInput value="0" class="text-right" type="number"  formControlName="total_depositado" pattern="^\s*(?=.*[0-9])\d*(?:\.\d{0,2})?\s*" min="0" readonly>
+                <span matPrefix>$&nbsp;</span>
+            </mat-form-field>
+        </div>
+        <div class="d-flex">
+            <button mat-raised-button color="accent" class="ml-auto" (click)="actualizar()">ACTUALIZAR</button>
+            <button mat-raised-button color="primary" class="ml-3" (click)="guardarGasto()">GENERAR GASTO</button>
+        </div>
+    </div>
+</mat-card>

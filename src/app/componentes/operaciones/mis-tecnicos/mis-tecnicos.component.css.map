@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAC;EACR,SAAS,EAAE,IAAI;CAClB;;AAED,AAAA,MAAM,CAAC;EACH,SAAS,EAAE,KAAK;CACnB;;AAED,AAAA,qBAAqB,CAAC;EAClB,SAAS,EAAE,KAAK;CACnB",
+    "sources": [
+        "mis-tecnicos.component.scss"
+    ],
+    "names": [],
+    "file": "mis-tecnicos.component.css"
+}

@@ -1,0 +1,62 @@
+<mat-card class="mat-elevation-z8">
+    <mat-card-header class="d-flex">
+        <mat-card-title class="ml-0">Reportar Servicios a Comercial</mat-card-title>
+
+        <button mat-icon-button color="primary" class="ml-auto" matTooltip="Reportar seleccionados"
+            [disabled]="!selection.selected.length" (click)="dialogoReportar()"><i
+                class="far fa-bell action-icon"></i></button>
+        <button mat-icon-button color="primary" matTooltip="Descargar archivo" (click)="exportAsExcel()"><i
+                class="far fa-file-download action-icon"></i></button>
+        <button mat-icon-button color="primary" matTooltip="Actualizar" (click)="ActualizarTabla()"><i class="far fa-sync action-icon"></i></button>
+    </mat-card-header>
+    <mat-card-content class="">
+
+        <mat-form-field class="w-100">
+            <input matInput placeholder="Buscar" (keyup)="busqueda($event.target.value)" value="">
+        </mat-form-field>
+
+        <mat-table #table matSort [dataSource]="dataSource">
+
+            <ng-container cdkColumnDef="select">
+                <mat-header-cell *cdkHeaderCellDef class="selectRow"></mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="selectRow">
+                    <mat-checkbox color="primary" (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="folio">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="folioRow"> Folio </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="folioRow">
+                    <span class="mobile-label">Folio:</span>
+                    {{row.folio}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="cliente">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Cliente </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Cliente:</span>
+                    {{row.cliente}} {{row.sucursal}}</mat-cell>
+            </ng-container>
+
+            <!-- <ng-container cdkColumnDef="actions">
+                <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="actionsRow">
+                    <span class="mobile-label">Acciones:</span>
+                    <button mat-icon-button color="primary" class="ml-auto" matTooltip="Ver Gasto"
+                        (click)="dialogoGasto(row)">
+                        <i class="far fa-newspaper action-icon"></i>
+                    </button>
+                </mat-cell>
+            </ng-container> -->
+
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+            </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </mat-card-content>
+
+</mat-card>

@@ -1,0 +1,32 @@
+.itm-input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.itm-card-list {
+  margin: 1.2rem 1rem;
+}
+
+.itm-card-list .itm-actualizacion {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 1.2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding-bottom: 1rem;
+}
+
+.itm-card-list .itm-actualizacion .itm-input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.itm-card-list .itm-actualizacion .itm-btn {
+  margin-left: 1rem;
+}
+/*# sourceMappingURL=dialogo-historico.component.css.map */

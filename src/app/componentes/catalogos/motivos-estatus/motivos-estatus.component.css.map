@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "motivos-estatus.component.scss"
+    ],
+    "names": [],
+    "file": "motivos-estatus.component.css"
+}

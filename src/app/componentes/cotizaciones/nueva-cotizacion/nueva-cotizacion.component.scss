@@ -1,0 +1,249 @@
+.wrapper {
+  .sec-folio {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-column-gap: 1rem;
+    margin-bottom: 1rem;
+
+    .itm-folio {
+      grid-column-start: 4;
+    }
+
+    .itm-cliente {
+      grid-row-start: 2;
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+
+    .itm-sucursal {
+      grid-row-start: 2;
+      grid-column-start: 3;
+      grid-column-end: 5;
+    }
+  }
+
+  .sec-servicios {
+    padding-top: 0.1px;
+
+    .card-servicios {
+      height: 20rem;
+      overflow: hidden;
+      padding: 0;
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+      display: grid;
+      grid-template-rows: auto auto;
+
+      .inp-codigo {
+        padding: 1rem 1rem 0 1rem;
+      }
+
+      .list {
+        height: 100%;
+        overflow: auto;
+
+        .list-item {
+          padding: 0 1rem;
+          margin-top: 0.7rem;
+
+          &:first-child {
+            border-top: 1px solid rgba(0, 0, 0, 0.12);
+          }
+
+          &:not(:last-child) {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+          }
+        }
+      }
+
+      .inp-cantidad {
+        width: 5rem;
+      }
+    }
+  }
+
+  .sec-traslados {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto;
+    grid-column-gap: 1rem;
+    margin-top: 2rem;
+
+    .itm-km {
+      grid-column-start: 4;
+    }
+
+    .itm-origen {
+      grid-column-start: 1;
+      grid-row-start: 2;
+    }
+
+    .itm-destino {
+      grid-column-start: 2;
+      grid-row-start: 2;
+    }
+
+    .itm-distancia {
+      grid-column-start: 3;
+      grid-row-start: 2;
+    }
+
+    .itm-casetas {
+      grid-column-start: 4;
+      grid-row-start: 2;
+    }
+
+    .btn-traslado {
+      grid-column-start: 4;
+      grid-row-start: 3;
+      margin-top: 0.75rem;
+    }
+
+    .itm-lista {
+      grid-column-start: 1;
+      grid-column-end: 5;
+      grid-row-start: 5;
+      margin-top: 1rem;
+      height: 20rem;
+      overflow: hidden;
+
+      .lista-traslados {
+        height: 100%;
+        overflow: auto;
+      }
+    }
+  }
+
+  .sec-viaticos {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+
+    .sec-config {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-column-gap: 1rem;
+
+      @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+      }
+
+      .itm-alimentos {
+        grid-column-start: 3;
+
+        @media (max-width: 600px) {
+          grid-column-start: 1;
+        }
+      }
+
+      .itm-hospedaje {
+        grid-column-start: 4;
+
+        @media (max-width: 600px) {
+          grid-column-start: 1;
+          grid-row-start: 2;
+        }
+      }
+    }
+
+    .sec-datos {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      grid-column-gap: 1rem;
+
+      .itm-personas {
+      }
+
+      .itm-dias {
+      }
+
+      .itm-noches {
+      }
+
+      .itm-traslado {
+        grid-column-start: 4;
+        grid-column-end: 6;
+      }
+    }
+
+    .itm-lista {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row-start: 5;
+      margin-top: 1rem;
+      height: 20rem;
+      overflow: hidden;
+
+      .lista-viaticos {
+        height: 100%;
+        overflow: auto;
+      }
+    }
+  }
+
+  .inp-cantidad {
+    width: 3rem;
+  }
+}
+
+.actionsRow {
+  max-width: 2.5rem;
+}
+
+.codigoRow {
+  max-width: 8rem;
+}
+
+.cantidadRow {
+  max-width: 6rem;
+  text-align: center;
+  justify-content: center;
+}
+
+.importeRow {
+  max-width: 10rem;
+  justify-content: flex-end;
+}
+
+.numeroRow {
+  max-width: 5rem;
+  justify-content: center;
+}
+
+.numerogRow {
+  max-width: 6rem;
+  justify-content: center;
+}
+
+.cdk-column-importe {
+  max-width: 8rem;
+}
+
+.precioURow {
+  max-width: 10rem;
+  justify-content: flex-end;
+}
+
+.actionsRow {
+  max-width: 7rem;
+  justify-content: flex-end;
+}
+
+.center-alerta {
+  justify-self: center;
+  margin: 1rem 0;
+}
+
+.card-servicios,
+.card-traslados,
+.card-viaticos {
+  height: 20rem;
+  overflow: hidden;
+  padding: 0;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-rows: auto auto;
+}

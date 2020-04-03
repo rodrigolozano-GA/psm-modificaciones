@@ -1,0 +1,42 @@
+@import "../../../_variables.scss";
+
+.componente {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .fix-b {
+    background-color: $primary;
+    height: 35%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: -1;
+  }
+
+  .card-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 35vw;
+    padding: 3rem;
+
+    .img-login {
+      height: 7rem;
+      width: 100%;
+      margin-bottom: 3rem;
+      object-fit: contain;
+    }
+
+    .mail-chip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .loader {
+        align-self: center;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.itm-title {
+  font-weight: 500 !important;
+}
+
+.itm-datos {
+  display: -ms-grid !important;
+  display: grid !important;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+}
+
+.itm-deducible {
+  -ms-grid-column-align: self-end;
+      justify-self: self-end;
+}
+/*# sourceMappingURL=dialogo-gasto-conceptos.component.css.map */

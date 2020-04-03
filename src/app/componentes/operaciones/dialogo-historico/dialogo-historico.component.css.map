@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACT,IAAI,EAAE,CAAC;CACR;;AAED,AAAA,cAAc,CAAC;EACb,MAAM,EAAE,WAAW;CAiBpB;;AAlBD,AAGE,cAHY,CAGZ,kBAAkB,CAAC;EACjB,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,MAAM;EACnB,UAAU,EAAE,MAAM;EAClB,aAAa,EAAE,GAAG,CAAC,KAAK,CAAC,mBAAmB;EAC5C,cAAc,EAAE,IAAI;CASrB;;AAjBH,AAUI,cAVU,CAGZ,kBAAkB,CAOhB,UAAU,CAAC;EACT,IAAI,EAAE,CAAC;CACR;;AAZL,AAcI,cAdU,CAGZ,kBAAkB,CAWhB,QAAQ,CAAC;EACP,WAAW,EAAE,IAAI;CAClB",
+    "sources": [
+        "dialogo-historico.component.scss"
+    ],
+    "names": [],
+    "file": "dialogo-historico.component.css"
+}

@@ -1,0 +1,44 @@
+@import "../../../_variables.scss";
+
+.white-icons {
+  color: #fff !important;
+}
+
+.color-icons {
+  color: $primary !important;
+}
+
+.logo-navbar {
+  height: 80%;
+  width: auto;
+  object-fit: cover;
+  object-position: center;
+  background-color: #fff;
+  clip-path: circle(48% at 50.5% 50%);
+}
+
+.mat-list-base {
+  padding-top: 0;
+
+  .btn-link {
+    height: 40px;
+  }
+}
+
+.mat-list-item {
+  &.active {
+    background-color: rgba(43, 41, 126, 0.54) !important;
+    color: #fff;
+
+    .mat-icon-button {
+      color: #fff;
+    }
+  }
+}
+
+.btn-link:hover,
+.btn-link:visited,
+.btn-link:active,
+.btn-link:focus {
+  text-decoration: none !important;
+}

@@ -1,0 +1,22 @@
+<div class="top-nav">
+        <div class="titulo">
+          <button mat-icon-button color="primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+           (viewDateChange)="cambioVista($event)"><i class="far fa-chevron-left action-icon"></i></button>
+          <button mat-icon-button color="primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+           (viewDateChange)="cambioVista($event)"><i class="far fa-chevron-right action-icon"></i></button>
+          <h3>
+            {{ viewDate | calendarDate:(view + 'ViewTitle'):locale | titlecase }}
+          </h3>
+        </div>
+        <div class="resumen">
+          <span class="link-nolink">Servicios: {{ infoEncabezado.servicios }}</span>
+          <span class="link-nolink">Preventivos: {{ infoEncabezado.preventivos }}</span>
+          <span class="link-nolink">Correctivos: {{ infoEncabezado.correctivos }}</span>
+        </div>
+      </div>
+      <div [ngSwitch]="view">
+        <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [locale]="locale"
+          [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays" (dayClicked)="dayClicked($event.day)"
+          [activeDayIsOpen]="activeDayIsOpen" (eventClicked)="eventClicked($event)" (viewDateChange)="cambioVista($event)" [refresh]="refresh">
+        </mwl-calendar-month-view>
+      </div>

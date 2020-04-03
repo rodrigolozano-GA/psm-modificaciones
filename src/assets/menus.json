@@ -1,0 +1,187 @@
+{
+    "Success": true,
+    "Message": "Consulta Exitosa",
+    "Data": [
+        {
+            "IdUsuario": 1,
+            "NombreUsuario": "Rodrigo Lozano Fernandez",
+            "Correo": "rodrigolozanofernandez@grupoarmstrong.com",
+            "Password": "iFY/WxgOv5c=",
+            "Menus": [
+                {
+                    "Id": 55,
+                    "Nombre": "Dashboard",
+                    "Submenus": [
+                        {
+                            "Id": 284,
+                            "Nombre": "General"
+                        },
+                        {
+                            "Id": 285,
+                            "Nombre": "Operativo"
+                        },
+                        {
+                            "Id": 286,
+                            "Nombre": "Administrativo"
+                        }
+                    ]
+                },
+                {
+                    "Id": 56,
+                    "Nombre": "Catalogos",
+                    "Submenus": [
+                        {
+                            "Id": 292,
+                            "Nombre": "Tipos de Estatus"
+                        },
+                        {
+                            "Id": 293,
+                            "Nombre": "Estatus"
+                        },
+                        {
+                            "Id": 294,
+                            "Nombre": "Motivos de Estatus"
+                        },
+                        {
+                            "Id": 295,
+                            "Nombre": "Tipos de Documentos"
+                        },
+                        {
+                            "Id": 296,
+                            "Nombre": "Tipos de Servicios"
+                        },
+                        {
+                            "Id": 297,
+                            "Nombre": "Zonas"
+                        }
+                        ,
+                        {
+                            "Id": 298,
+                            "Nombre": "Medios"
+                        }
+                        ,
+                        {
+                            "Id": 299,
+                            "Nombre": "Equipos"
+                        }
+                        ,
+                        {
+                            "Id": 300,
+                            "Nombre": "Formato Actas"
+                        }
+                    ]
+                },
+                {
+                    "Id": 57,
+                    "Nombre": "Gastos",
+                    "Submenus": [
+                        {
+                            "Id": 301,
+                            "Nombre": "Nuevo Gasto"
+                        },
+                        {
+                            "Id": 302,
+                            "Nombre": "Seguimiento de Gastos"
+                        }
+                    ]
+                },
+                {
+                    "Id": 58,
+                    "Nombre": "Cotizaciones",
+                    "Submenus": [
+                        {
+                            "Id": 500,
+                            "Nombre": "Nueva Cotizacion"
+                        },
+                        {
+                            "Id": 502,
+                            "Nombre": "Seguimiento Cotizaciones"
+                        },
+                        {
+                            "Id": 501,
+                            "Nombre": "Reporte General"
+                        }
+                    ]
+                },
+                {
+                    "Id": 59,
+                    "Nombre": "Mesa de Control",
+                    "Submenus": [
+                        {
+                            "Id": 305,
+                            "Nombre": "Nuevo Servicio"
+                        },
+                        {
+                            "Id": 306,
+                            "Nombre": "Seguimiento Servicios"
+                        }
+                    ]
+                },
+                {
+                    "Id": 60,
+                    "Nombre": "Operaciones",
+                    "Submenus": [
+                        {
+                            "Id": 305,
+                            "Nombre": "Mis Servicios"
+                        },
+                        {
+                            "Id": 306,
+                            "Nombre": "Seguimiento Servicios"
+                        },
+                        {
+                            "Id": 307,
+                            "Nombre": "Mis Tecnicos"
+                        }
+                        ,
+                        {
+                            "Id": 308,
+                            "Nombre": "Armado de Actas"
+                        }
+                        ,
+                        {
+                            "Id": 309,
+                            "Nombre": "Mi Calendario"
+                        },
+                        {
+                            "Id":400,
+                            "Nombre":"Calendario General"
+                        }
+                        
+                    ]
+                },
+                {
+                    "Id": 61,
+                    "Nombre": "Administracion",
+                    "Submenus": [
+                        {
+                            "Id": 401,
+                            "Nombre": "Administracion Actas"
+                        },
+                        {
+                            "Id": 402,
+                            "Nombre": "Autorizar Solicitud Actas"
+                        },
+                        {
+                            "Id": 403,
+                            "Nombre": "Recepcion Actas Operacionales"
+                        }
+                        ,
+                        {
+                            "Id": 404,
+                            "Nombre": "Seguimiento Folios de Servicio"
+                        }
+                        ,
+                        {
+                            "Id": 405,
+                            "Nombre": "Seguimiento Folios de Servicio"
+                        }
+                    ]
+                        
+
+                }
+
+            ]
+        }
+    ]
+}

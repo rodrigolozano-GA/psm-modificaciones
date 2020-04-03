@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>
+
+  <div class="wrapper">
+    
+    <p>{{text}}</p>
+
+  </div>
+
+</div>
+<div mat-dialog-actions class="d-flex">
+  <button mat-button  color="primary" (click)="cancelar()" class="ml-auto">{{cancelAction}}</button>
+  <button mat-raised-button color="primary" (click)="aceptar()">{{okAction}}</button>
+</div>

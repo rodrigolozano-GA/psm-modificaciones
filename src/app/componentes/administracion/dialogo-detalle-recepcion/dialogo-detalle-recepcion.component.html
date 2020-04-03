@@ -1,0 +1,64 @@
+<h1 mat-dialog-title>Detalle del envio de Actas y Folios</h1>
+<div mat-dialog-content>
+
+    <div class="wrapper" [formGroup]="generalForm">
+
+        <mat-form-field>
+            <input matInput placeholder="Nombre de quien envia" formControlName="nombre" disabled>
+        </mat-form-field>
+
+        <div class="itm-folio-cantidad">
+            <mat-form-field class="itm-folio">
+                <input matInput placeholder="Folio del envio" formControlName="folio_envio" disabled>
+            </mat-form-field>
+
+            <mat-form-field class="itm-total">
+                <input matInput placeholder="Total de actas" formControlName="total" disabled>
+            </mat-form-field>
+        </div>
+
+        <mat-table #table matSort [dataSource]="dataSource">
+
+            <ng-container cdkColumnDef="select">
+                <mat-header-cell *cdkHeaderCellDef></mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <mat-checkbox color="primary" (change)="row.estatus = !row.estatus" [checked]="row.estatus"></mat-checkbox>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="folio">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Folios de Actas</mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Folios de Actas:</span>
+                    {{row.numacta}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="formato">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Formato</mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Formato:</span>
+                    {{row.formato_acta}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="sucursal">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Sucursal</mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Sucursal:</span>
+                    {{row.sucursal}}
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+            </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </div>
+
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button matDialogClose color="primary" class="ml-auto">CERRAR</button>
+    <button mat-raised-button color="primary" (click)="guardarActasDetalle()">GUARDAR</button>

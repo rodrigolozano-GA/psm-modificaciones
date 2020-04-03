@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,SAAS,EAAE,IAAI;CAClB",
+    "sources": [
+        "armado-actas.component.scss"
+    ],
+    "names": [],
+    "file": "armado-actas.component.css"
+}

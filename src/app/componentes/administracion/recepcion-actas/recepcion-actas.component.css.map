@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,mBAAmB,CAAC;EAClB,SAAS,EAAE,IAAI;CAChB",
+    "sources": [
+        "recepcion-actas.component.scss"
+    ],
+    "names": [],
+    "file": "recepcion-actas.component.css"
+}

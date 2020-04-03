@@ -1,0 +1,7 @@
+{
+    "/apis/*": {
+        "target": "http://172.16.1.35/",
+        "secure": false,
+        "changeOrigin":true
+    }
+}

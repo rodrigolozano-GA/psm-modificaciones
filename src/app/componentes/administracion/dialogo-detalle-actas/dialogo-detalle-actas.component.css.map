@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACT,WAAW,EAAE,MAAM;EACnB,eAAe,EAAE,MAAM;CACxB;;AAED,AAAA,gBAAgB,CAAC;EACf,SAAS,EAAE,IAAI;CAChB",
+    "sources": [
+        "dialogo-detalle-actas.component.scss"
+    ],
+    "names": [],
+    "file": "dialogo-detalle-actas.component.css"
+}

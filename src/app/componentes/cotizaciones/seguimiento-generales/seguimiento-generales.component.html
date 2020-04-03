@@ -1,0 +1,94 @@
+<mat-card class="mat-elevation-z8">
+    <mat-card-header class="d-flex">
+        <mat-card-title class="ml-0">Reporte de Cotizaciones Generales</mat-card-title>
+        <button mat-icon-button color="primary" class="ml-auto" [routerLink]="['/Cotizaciones/NuevaCotizacion']"
+            matTooltip="Agregar"> <i class="far fa-plus-circle action-icon"></i></button>
+        <button mat-icon-button color="primary" (click)="exportAsExcel()" matTooltip="Descargar archivo"><i
+                class="far fa-file-download action-icon"></i></button>
+        <button mat-icon-button color="primary" matTooltip="Actualizar" (click)="ActualizarTabla()"><i class="far fa-sync action-icon"></i></button>
+    </mat-card-header>
+    <mat-card-content class="">
+
+        <mat-form-field class="w-100">
+            <input matInput placeholder="Buscar" (keyup)="busqueda($event.target.value)" value="">
+        </mat-form-field>
+        
+        <mat-table #table matSort [dataSource]="dataSource">
+
+            <ng-container cdkColumnDef="numero">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="numeroRow"> N° </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="numeroRow">
+                    <span class="mobile-label">N°:</span>
+                    {{row.numero}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="folio">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="folioRow"> Folio </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="folioRow">
+                    <span class="mobile-label">Folio:</span>
+                    {{row.folio}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="fechaRegistro">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="fechaReg"> Fecha Registro </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="fechaReg">
+                    <span class="mobile-label">Fecha Registro</span>
+                    {{row.fechaRegistro}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="cliente">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="clienteRow"> Cliente </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="clienteRow">
+                    <span class="mobile-label">Cliente:</span>
+                    {{row.cliente}} - {{row.sucursal}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="tipoServicio">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="tipoServicio"> Tipo de Servicio </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="tipoServicio">
+                    <span class="mobile-label">Tipo de Servicio:</span>
+                    {{row.tipoServicio}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="estatus">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="estatusRow"> 
+
+                    <mat-form-field>
+                        <mat-select placeholder="Filtrar estatus por..." [(ngModel)]="selectedValue" (selectionChange)="selected()">
+                            <mat-option [value]="1">Todos</mat-option>
+                            <mat-option  [value]="32">Nuevo</mat-option>
+                            <mat-option  [value]="33">Cancelado</mat-option>
+                            <mat-option  [value]="35">No aprobado</mat-option>
+                        
+                        </mat-select>
+                    </mat-form-field>
+
+                </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="estatusRow">
+                    <span class="mobile-label">Estatus:</span>
+                {{vecsta[row.estatus_id]}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="actions">
+                <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="actionsRow">
+                    <span class="mobile-label">Acciones:</span>
+                    <!--[matTooltip]="row.estatus ? 'Activo': 'Desactivado'"-->
+                    <button mat-icon-button color="primary" class="ml-auto" matTooltip="Ver Cotización"
+                        (click)="dialogoVerCotizacion(row)">
+                        <i class="far fa-newspaper action-icon"></i>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+            </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </mat-card-content>
+
+</mat-card>

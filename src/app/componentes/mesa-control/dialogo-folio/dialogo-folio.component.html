@@ -1,0 +1,194 @@
+<h1 mat-dialog-title>Detalle de servicio</h1>
+<div mat-dialog-content>
+
+    <div class="wrapper">
+
+        <div class="sec-folio">
+
+            <h6 class="mt-3">Información general</h6>
+
+            <mat-form-field class="itm-folio">
+                <input matInput placeholder="Folio" [value]="hoy" disabled="true">
+            </mat-form-field>
+
+            <mat-form-field class="itm-fecha">
+                <input matInput [matDatepicker]="fProgramada" placeholder="Fecha Programada">
+                <mat-datepicker-toggle matSuffix [for]="fProgramada"></mat-datepicker-toggle>
+                <mat-datepicker #fProgramada></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="itm-input">
+                <mat-select placeholder="Estatus" name="estatus" [(ngModel)]="estatus">
+                    <mat-option *ngFor="let estatus of estatusList" [value]="estatus.id">
+                        {{estatus.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+
+        <mat-divider>
+        </mat-divider>
+
+        <div class="sec-datos">
+
+            <div class="itm-archivo">
+                <mat-form-field class="itm-input">
+                    <input matInput placeholder="Archivo de solicitud" [value]="fileName" readonly disabled
+                        [(ngModel)]="fileName">
+                </mat-form-field>
+            </div>
+
+            <mat-form-field>
+                <mat-select placeholder="Medio" name="medio" readonly disabled>
+                    <!-- <mat-option *ngFor="let medio of mediosList" [value]="medio.id">
+                        {{medio.nombre}}
+                    </mat-option> -->
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select placeholder="Cliente" readonly disabled>
+                    <!-- <mat-option *ngFor="let cliente of filteredClientes" [value]="cliente.id">
+                        {{cliente.nombre}}
+                    </mat-option> -->
+                </mat-select>
+            </mat-form-field>
+
+            <div class="itm-sucursal">
+                <mat-form-field class="itm-input">
+                    <mat-select placeholder="Sucursal" class="" readonly disabled>
+                        <!-- <mat-option *ngFor="let sucursal of filteredSucursales" [value]="sucursal.id">
+                            {{sucursal.nombre}}
+                        </mat-option> -->
+                    </mat-select>
+                </mat-form-field>
+
+                <button mat-mini-fab color="primary" class="itm-btn" (click)="dialogoSucursal()">
+                    <i class="fas fa-info fa-rem d-flex justify-content-center align-items-center h-100"></i>
+                </button>
+
+            </div>
+
+            <mat-form-field>
+                <mat-select placeholder="Tipo de equipo" name="equipo" readonly disabled>
+                    <!-- <mat-option *ngFor="let equipo of equiposList" [value]="equipo.id">
+                        {{equipo.nombre}}
+                    </mat-option> -->
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+
+                <mat-select placeholder="Tipo de servicio" readonly disabled>
+                    <!-- <mat-option *ngFor="let servicio of filteredServicios" [value]="servicio.id">
+                        {{servicio.nombre}}
+                    </mat-option> -->
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+
+                <mat-select placeholder="Coordinador" readonly disabled>
+                    <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+                    <!-- <mat-option *ngFor="let coordinador of filteredCoordinadores" [value]="coordinador">
+                        {{coordinador.nombre}}
+                    </mat-option> -->
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+                <input matInput placeholder="OT" value="" readonly disabled>
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+                <input matInput placeholder="Ticket" value="" readonly disabled>
+            </mat-form-field>
+
+        </div>
+
+        <mat-divider>
+        </mat-divider>
+
+        <div class="sec-servicios">
+
+            <h6 class="mt-3">Descripción de producto</h6>
+
+            <mat-card class="mat-elevation-z8 mb-4 itm-lista p-0">
+
+                <mat-table #tableTras [dataSource]="dataSourceServ" class="list lista-servicios">
+
+                    <ng-container cdkColumnDef="codigo">
+                        <mat-header-cell *cdkHeaderCellDef class="codigoRow"> Código </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="codigoRow">
+                            <span class="mobile-label">Código:</span>
+                            {{row.codigo}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="nombre">
+                        <mat-header-cell *cdkHeaderCellDef> Concepto </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">
+                            <span class="mobile-label">Concepto:</span>
+                            {{row.nombre}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="cantidad">
+                        <mat-header-cell *cdkHeaderCellDef class="cantidadRow"> Cantidad
+                        </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="cantidadRow">
+                            <span class="mobile-label">Cantidad:</span>
+                            {{row.cantidad}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="costo">
+                        <mat-header-cell *cdkHeaderCellDef class="precioURow"> P. Unitario
+                        </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="precioURow">
+                            <span class="mobile-label">P. Unitario:</span>
+                            ${{row.costo}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="importe">
+                        <mat-header-cell *cdkHeaderCellDef class="importeRow"> Importe
+                        </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" class="importeRow">
+                            <span class="mobile-label">Importe:</span>
+                            ${{row.costo * row.cantidad}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *cdkHeaderRowDef="displayedColumnsServ"></mat-header-row>
+                    <mat-row *cdkRowDef="let row; columns: displayedColumnsServ ">
+                    </mat-row>
+                </mat-table>
+
+            </mat-card>
+
+        </div>
+
+        <mat-divider>
+        </mat-divider>
+
+        <div class="sec-descripcion">
+
+            <mat-form-field>
+                <textarea matInput cdkAutosizeMaxRows="3" cdkAutosizeMinRows="3" cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize" placeholder="Descripción del problema" disabled></textarea>
+            </mat-form-field>
+
+            <mat-form-field>
+                <textarea matInput cdkAutosizeMaxRows="5" cdkAutosizeMinRows="5" cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize" placeholder="Observaciones" disabled></textarea>
+            </mat-form-field>
+
+        </div>
+
+    </div>
+
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button matDialogClose color="primary" class="ml-auto">CANCELAR</button>
+    <button mat-raised-button (click)="guardarFolio()" color="primary">GUARDAR</button>
+</div>

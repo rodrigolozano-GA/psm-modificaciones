@@ -1,0 +1,62 @@
+<mat-card class="mat-elevation-z8">
+    <mat-card-header class="d-flex">
+        <mat-card-title class="ml-0">Mis Técnicos</mat-card-title>
+
+        <button mat-icon-button color="primary" matTooltip="Descargar archivo excel" class="ml-auto"
+            (click)="exportAsExcel()"><i class="far fa-file-download action-icon"></i></button>
+        <button mat-icon-button color="primary" matTooltip="Actualizar" (click)="ActualizarTabla()"><i class="far fa-sync action-icon"></i></button>
+    </mat-card-header>
+    <mat-card-content class="">
+
+        <mat-form-field class="w-100">
+            <input matInput placeholder="Buscar" (keyup)="busqueda($event.target.value)" value="">
+        </mat-form-field>
+
+        <mat-table #table matSort [dataSource]="dataSource">
+
+            <ng-container cdkColumnDef="numero">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="noRow"> N° </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="noRow">
+                    <span class="mobile-label">N°:</span>
+                    {{row.consecutivo}}
+                </mat-cell>
+            </ng-container>
+
+
+            <ng-container cdkColumnDef="nEmpleado">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Número de empleado </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Número de empleado:</span>
+                    {{row.nempleado}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="nombre">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span class="mobile-label">Nombre:</span>
+                    {{row.nombre}}
+                </mat-cell>
+            </ng-container>
+
+
+            <ng-container cdkColumnDef="actions">
+                <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="actionsRow">
+                    <span class="mobile-label"></span>
+
+                    <button mat-icon-button color="primary" class="ml-auto" matTooltip="Ver Técnico"
+                        (click)="dialogoTecnico(row)">
+                        <i class="far fa-id-card-alt action-icon"></i></button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+            </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </mat-card-content>
+
+</mat-card>

@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>{{titulo}}</h1>
+<div mat-dialog-content>
+
+    <div class="wrapper">
+
+        <mat-form-field class="w-100">
+            <mat-select placeholder="Tipo de gasto" name="item" [(ngModel)]="TipoGasto" (selectionChange)="selectDeducible($event)">
+                <mat-option *ngFor="let item of tiposGastos" [value]="item.id">
+                    {{item.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+            <mat-select placeholder="Concepto" [(ngModel)]="Concepto">
+                <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+                <mat-option>
+                    <ngx-mat-select-search [placeholderLabel]="'Busca un Concepto'"
+                        [noEntriesFoundLabel]="'No se encontraron registros'" [formControl]="conceptosFilteringCtrl"
+                        [searching]="searching" (keyup)="LlenarFilto($event.target.value)">
+                    </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let concepto of filteredConceptos | async" [value]="concepto.id">
+                    {{concepto.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="d-flex">
+            <mat-form-field appearance="outline" class=" inp-concepto mr-auto">
+                <mat-label>Monto</mat-label>
+                <input matInput [(ngModel)]="MontoTotal" pattern="^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*" min="0" class="text-right" type="number" (blur)="MontoTotal = MontoTotal ? MontoTotal : 0" >
+                <span matPrefix>$&nbsp;</span>
+            </mat-form-field>
+            <button class="ml-auto" color="primary" mat-button (click)="dialogoDividir()">Dividir monto entre
+                folios</button>
+        </div>
+
+        <div class="d-flex text-right">
+            <span *ngIf="folios">Dividido entre {{ folios.length }} folios</span>
+        </div>
+    </div>
+
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-button color="primary" class="ml-auto" (click)="cancelarDatos()">CANCELAR</button>
+    <button mat-raised-button color="primary" (click)="guardarDatos()">GUARDAR</button>
+</div>

@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Conceptos asociados</h1>
+<div mat-dialog-content>
+
+    <div class="wrapper">
+
+        <mat-list>
+            <mat-list-item *ngIf="!listaDetalle.length">
+                <h3 class="itm-title" matLine>{{ mensageLista }}</h3>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+            <mat-list-item *ngFor="let item of listaDetalle">
+                <h3 class="itm-title" matLine>{{ item.nombre }}</h3>
+                <div matLine class="itm-datos">
+                    <label class="itm-cantidad">Cantidad: <span>{{ item.cantidad | currency }}</span></label>
+                    <label class="itm-deducible">{{ item.deducible }}</label>
+                </div>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+        </mat-list>
+
+    </div>
+
+</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-raised-button color="primary" class="ml-auto" matDialogClose>CERRAR</button>
+</div>

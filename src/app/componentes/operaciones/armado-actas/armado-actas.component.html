@@ -1,0 +1,78 @@
+<mat-card class="mat-elevation-z8">
+    <mat-card-header class="d-flex">
+        <mat-card-title class="ml-0">Armado de Actas</mat-card-title>
+
+        <button mat-icon-button color="primary" class="ml-auto" matTooltip="Eviar" [disabled]="!selection.selected.length"
+            (click)="dialogoEnviar()"><i class="far fa-paper-plane action-icon"></i></button>
+        <button mat-icon-button color="primary" matTooltip="Descargar archivo" (click)="exportAsExcel()"><i
+                class="far fa-file-download action-icon"></i></button>
+        <button mat-icon-button color="primary" matTooltip="Actualizar" (click)="ActualizarTabla()"><i class="far fa-sync action-icon"></i></button>
+    </mat-card-header>
+    <mat-card-content class="">
+
+        <mat-form-field class="w-100">
+            <input matInput placeholder="Buscar" (keyup)="busqueda($event.target.value)" value="">
+        </mat-form-field>
+
+        <mat-table #table matSort [dataSource]="dataSource">
+
+            <ng-container cdkColumnDef="select">
+                <mat-header-cell *cdkHeaderCellDef class="selectRow"></mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="selectRow">
+                    <mat-checkbox color="primary" (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="numacta">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="numactaRow"> Número Acta </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="numactaRow">
+                    <span class="mobile-label">Número Acta:</span>
+                    {{row.numacta}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="servicio">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="servicioRow"> Número de Servicio </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="servicioRow">
+                    <span class="mobile-label">Número de Servicio:</span>
+                    {{row.servicio}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="cliente">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="clientRowEncabezado"> Sucursal </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="clientRow">
+                    <span class="mobile-label">Sucursal:</span>
+                    {{row.cliente}} - {{row.numero_sucursal}} - {{row.sucursal}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="tipo">
+                <mat-header-cell *cdkHeaderCellDef mat-sort-header class="tipoRow"> Tipo </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="tipoRow">
+                    <span class="mobile-label">Tipo:</span>
+                    {{row.formato_acta}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- <ng-container cdkColumnDef="actions">
+                <mat-header-cell *cdkHeaderCellDef class="actionsRow"> </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="actionsRow">
+                    <span class="mobile-label">Acciones:</span>
+                    <button mat-icon-button color="primary" class="ml-auto" matTooltip="Ver Gasto"
+                        (click)="dialogoGasto()">
+                        <i class="far fa-file-alt action-icon"></i>
+                    </button>
+                </mat-cell>
+            </ng-container> -->
+
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns ">
+            </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+
+    </mat-card-content>
+
+</mat-card>
